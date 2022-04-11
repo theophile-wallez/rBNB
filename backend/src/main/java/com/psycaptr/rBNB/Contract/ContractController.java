@@ -8,23 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContractController {
 
     @GetMapping("/contract-by-id")
-    public Contract getContractById(
-            @RequestParam(value = "id") Long contractId
-    ) {
-        Contract contract = null;
+    public Contract getContractById(@RequestParam(value = "id") Long contractId) {
         try {
-            contract = ContractService.getContractById(contractId);
-        }
-        catch (Exception e) {
+            Contract contract = ContractService.getContractById(contractId);
+            return contract;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return contract;
     }
 
     @GetMapping("/contract-by-user-id")
-    public Contract getContractByUserId(
-            @RequestParam(value = "userId") Long userId
-    ) {
+    public Contract getContractByUserId(@RequestParam(value = "userId") Long userId) {
 
         return null;
     }

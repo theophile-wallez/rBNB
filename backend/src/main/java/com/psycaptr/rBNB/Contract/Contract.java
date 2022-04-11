@@ -13,7 +13,10 @@ public class Contract {
     private Property property;
     private Long id;
 
-    public Contract(User owner, User tenant, Calendar startingDay, Calendar endingDay,Property property, Long id) {
+    public Contract() {
+    }
+
+    public Contract(User owner, User tenant, Calendar startingDay, Calendar endingDay, Property property, Long id) {
         this.owner = owner;
         this.tenant = tenant;
         this.startingDay = startingDay;

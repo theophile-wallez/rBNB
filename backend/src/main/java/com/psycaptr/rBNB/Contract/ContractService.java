@@ -5,6 +5,8 @@ public class ContractService {
         // db call (sql)
         // handle db response
         // return response
-        return null;
+        Contract contrat1 = new Contract();
+        contrat1.setId(contractId);
+        return contrat1;
     }
 }
