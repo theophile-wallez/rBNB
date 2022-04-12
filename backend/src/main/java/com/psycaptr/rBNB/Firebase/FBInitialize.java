@@ -19,10 +19,8 @@ public class FBInitialize {
     @PostConstruct
     public void initialize() {
         try {
-            Resource resource = resourceLoader.getResource("classpath:rbnb-b3444-firebase-adminsdk-4i0vd-9972f561cd.json");
+            Resource resource = resourceLoader.getResource("classpath:firebaseServiceAccount.json");
             InputStream serviceAccount = resource.getInputStream();
-//            FileInputStream serviceAccount =
-//                    new FileInputStream("./rbnb-b3444-firebase-adminsdk-4i0vd-9972f561cd.json");
 
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
