@@ -1,7 +1,4 @@
-package com.psycaptr.rBNB.Contract;
-
-import com.psycaptr.rBNB.Property.Property;
-import com.psycaptr.rBNB.User.User;
+package com.psycaptr.rBNB.Models;
 
 import java.util.Calendar;
 

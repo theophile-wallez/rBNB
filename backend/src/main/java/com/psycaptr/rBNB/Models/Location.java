@@ -1,4 +1,4 @@
-package com.psycaptr.rBNB.Property;
+package com.psycaptr.rBNB.Models;
 
 public class Location {
     private String country;

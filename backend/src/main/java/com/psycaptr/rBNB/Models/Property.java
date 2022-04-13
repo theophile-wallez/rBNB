@@ -1,10 +1,8 @@
-package com.psycaptr.rBNB.Property;
-
-import com.psycaptr.rBNB.User.User;
+package com.psycaptr.rBNB.Models;
 
 public class Property {
-    private Long id;
-    private User owner;
+    private String id;
+    private String ownerId;
     private HousingType housingType;
     private Location location;
     private String description;
@@ -12,9 +10,9 @@ public class Property {
     private int squareFootage;
     private float pricePerDay;
 
-    public Property(Long id, User owner, HousingType housingType, Location location, String description, int bedAmount, int squareFootage, float pricePerDay) {
+    public Property(String id, String ownerId, HousingType housingType, Location location, String description, int bedAmount, int squareFootage, float pricePerDay) {
         this.id = id;
-        this.owner = owner;
+        this.ownerId = ownerId;
         this.housingType = housingType;
         this.location = location;
         this.description = description;
@@ -23,20 +21,33 @@ public class Property {
         this.pricePerDay = pricePerDay;
     }
 
-    public Long getId() {
+    public Property(String ownerId, Location location, int bedAmount, int squareFootage, float pricePerDay) {
+        this.ownerId = ownerId;
+        this.location = location;
+        this.bedAmount = bedAmount;
+        this.squareFootage = squareFootage;
+        this.pricePerDay = pricePerDay;
+        this.id = null;
+        this.housingType = HousingType.house; //default
+    }
+
+    public Property() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public User getOwner() {
-        return owner;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public HousingType getHousingType() {

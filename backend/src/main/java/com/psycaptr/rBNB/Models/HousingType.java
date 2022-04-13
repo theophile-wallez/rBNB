@@ -1,4 +1,4 @@
-package com.psycaptr.rBNB.Property;
+package com.psycaptr.rBNB.Models;
 
 public enum HousingType {
     flat,

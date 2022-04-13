@@ -1,5 +1,7 @@
-package com.psycaptr.rBNB.Contract;
+package com.psycaptr.rBNB.Controllers;
 
+import com.psycaptr.rBNB.Services.ContractService;
+import com.psycaptr.rBNB.Models.Contract;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,25 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ContractController {
 
+    /**
+     *
+     * @param contractId
+     * @return
+     */
     @GetMapping("/contract-by-id")
     public Contract getContractById(
             @RequestParam(value = "id") Long contractId
     ) {
-        Contract contract = null;
-        try {
-            contract = ContractService.getContractById(contractId);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return contract;
+        return ContractService.getContractById(contractId);
     }
 
     @GetMapping("/contract-by-user-id")
     public Contract getContractByUserId(
             @RequestParam(value = "userId") Long userId
     ) {
-
         return null;
     }
 }
