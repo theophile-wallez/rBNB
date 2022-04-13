@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ContractController {
 
-    /**
-     *
-     * @param contractId
-     * @return
-     */
     @GetMapping("/contract-by-id")
     public Contract getContractById(
             @RequestParam(value = "id") Long contractId

@@ -1,35 +1,28 @@
 package com.psycaptr.rBNB.Controllers;
 
-import com.psycaptr.rBNB.Models.Location;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.ExecutionException;
+
+@RequestMapping("api/property")
 @RestController
 public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
-    @GetMapping("/property-by-user-id")
-    public void addPropertyByUserId(
+    @PostMapping("/by-user-id")
+    public ResponseEntity<HttpStatus> addPropertyByUserId(
+            @RequestBody Property newProperty,
             @RequestParam(value = "id") String userId
-    ) {
-//        @RequestBody Property newProperty,
 
-        Property newProperty = new Property(
-                userId,
-                new Location("France", 93600,"avenue Jean-Jaurès",12),
-                2,
-                15,
-                90
-        );
-
-        try {
-            propertyService.addPropertyByUserId(newProperty, userId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    ) throws ExecutionException, InterruptedException {
+        return propertyService.addPropertyByUserId(newProperty, userId);
     }
 
 }

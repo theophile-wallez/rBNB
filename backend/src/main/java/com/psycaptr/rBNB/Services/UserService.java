@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -16,11 +17,30 @@ import java.util.concurrent.ExecutionException;
 public class UserService {
     Firestore db = FirestoreClient.getFirestore();
 
-    public ResponseEntity<User> createUser(User user) {
+    public ResponseEntity<User> createUser(User user) throws ExecutionException, InterruptedException {
+        if (isUserComplete(user) && isUserNew(user)){
+            return addUserToDb(user);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    private ResponseEntity<User> addUserToDb(User user) {
         String docId = db.collection("Users").document().getId();
         user.setId(docId);
         ApiFuture<WriteResult> collectionsApiFuture = db.collection("Users").document(docId).set(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    // user is new if its email address doesn't belong to another user
+    private boolean isUserNew(User user) throws ExecutionException, InterruptedException {
+        boolean isUserNew = getUserByEmail(user.getEmail()).hasBody();
+        return !isUserNew;
+    }
+
+    private boolean isUserComplete(User user) {
+        return !user.getFirstName().isEmpty()
+                && !user.getLastName().isEmpty()
+                && !user.getEmail().isEmpty();
     }
 
     public ResponseEntity<User> getUserById(String id) throws ExecutionException, InterruptedException {
@@ -50,9 +70,14 @@ public class UserService {
         CollectionReference users = db.collection("Users");
         Query query = users.whereEqualTo("email",email).limit(1);
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
-        DocumentSnapshot document = querySnapshot.get().getDocuments().get(0);
-        if(document.exists())
+        List<QueryDocumentSnapshot> documents = querySnapshot.get().getDocuments();
+        if (!documents.isEmpty())
+        {
+            DocumentSnapshot document = documents.get(0);
             return new ResponseEntity<>(document.toObject(User.class), HttpStatus.OK);
+
+        }
+//        if(documents.exists())
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
