@@ -1,5 +1,6 @@
 package com.psycaptr.rBNB.Controllers;
 
+import com.psycaptr.rBNB.Models.Location;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,18 @@ public class PropertyController {
 
     @PostMapping("/by-user-id")
     public ResponseEntity<HttpStatus> addPropertyByUserId(
-            @RequestBody Property newProperty,
+            @RequestBody Property property,
             @RequestParam(value = "id") String userId
 
     ) throws ExecutionException, InterruptedException {
-        return propertyService.addPropertyByUserId(newProperty, userId);
+//        Property property = new Property(
+//                userId,
+//                new Location("fr",92140,"laStreet",54),
+//                15,
+//                500,
+//                100000
+//        );
+        return propertyService.addPropertyByUserId(property, userId);
     }
 
 }

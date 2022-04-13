@@ -42,6 +42,10 @@ public class PropertyService {
         );
     }
 
+    public void deletePropertyById(String id){
+        ApiFuture<WriteResult> writeResult = db.collection("Properties").document(id).delete();
+    }
+
 
     private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
 //        DocumentReference user = db.collection("Users").document(userId);

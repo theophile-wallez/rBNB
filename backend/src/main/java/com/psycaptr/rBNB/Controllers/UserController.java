@@ -3,6 +3,7 @@ package com.psycaptr.rBNB.Controllers;
 import com.psycaptr.rBNB.Models.User;
 import com.psycaptr.rBNB.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,5 +33,10 @@ public class UserController {
     public ResponseEntity<User> getUserByEmail(@RequestParam(value = "email") String email)
             throws ExecutionException, InterruptedException {
         return userService.getUserByEmail(email);
+    }
+
+    @DeleteMapping("/by-id")
+    public ResponseEntity<String> deleteUserById(@RequestParam(value = "id") String id) throws ExecutionException, InterruptedException {
+        return userService.deleteUserById(id);
     }
 }

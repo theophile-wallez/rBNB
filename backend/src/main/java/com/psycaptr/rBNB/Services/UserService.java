@@ -3,6 +3,7 @@ package com.psycaptr.rBNB.Services;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Models.User;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class UserService {
             User user = document.toObject(User.class);
             assert user != null;
             user.setPassword(null);
-            return new ResponseEntity<>(document.toObject(User.class), HttpStatus.OK);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
@@ -75,11 +76,36 @@ public class UserService {
         {
             DocumentSnapshot document = documents.get(0);
             return new ResponseEntity<>(document.toObject(User.class), HttpStatus.OK);
-
         }
-//        if(documents.exists())
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
+
+    public ResponseEntity<String> deleteUserById(String id) throws ExecutionException, InterruptedException {
+        //get user
+        User user = getUserById(id).getBody();
+        //get properties id
+        if(user == null)
+            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+
+        if(!userHasContract(user)){
+            PropertyService propertyService = new PropertyService();
+            List<String> propertiesId = user.getPropertiesId();
+            for (String propertyId: propertiesId) {
+                propertyService.deletePropertyById(propertyId);
+            }
+            ApiFuture<WriteResult> writeResult = db.collection("Users").document(id).delete();
+            return new ResponseEntity<>("User successfully deleted",HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        //remove properties by id
+        //same for contract
+    }
+
+    public boolean userHasContract(User user){
+        return !user.getContractsId().isEmpty();
+    }
+
 
 
 
