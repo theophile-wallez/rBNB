@@ -11,14 +11,14 @@ public class ContractController {
 
     @GetMapping("/contract-by-id")
     public Contract getContractById(
-            @RequestParam(value = "id") Long contractId
+            @RequestParam(value = "id") String contractId
     ) {
         return ContractService.getContractById(contractId);
     }
 
     @GetMapping("/contract-by-user-id")
     public Contract getContractByUserId(
-            @RequestParam(value = "userId") Long userId
+            @RequestParam(value = "userId") String userId
     ) {
         return null;
     }

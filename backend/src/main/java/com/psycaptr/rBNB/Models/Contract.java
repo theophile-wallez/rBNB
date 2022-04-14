@@ -1,69 +1,74 @@
 package com.psycaptr.rBNB.Models;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Contract {
-    private User owner;
-    private User tenant;
-    private Calendar startingDay;
-    private Calendar endingDay;
-    private Property property;
-    private Long id;
+    private String id;
+    private String ownerId;
+    private String tenantId;
+    private LocalDate startingDay;
+    private LocalDate endingDay;
+    private String propertyId;
 
-    public Contract(User owner, User tenant, Calendar startingDay, Calendar endingDay,Property property, Long id) {
-        this.owner = owner;
-        this.tenant = tenant;
-        this.startingDay = startingDay;
-        this.endingDay = endingDay;
+    public Contract(String ownerId, String tenantId, LocalDate startingDay, LocalDate endingDay, String propertyId, String id) {
         this.id = id;
-        this.property = property;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public User getTenant() {
-        return tenant;
-    }
-
-    public void setTenant(User tenant) {
-        this.tenant = tenant;
-    }
-
-    public Calendar getStartingDay() {
-        return startingDay;
-    }
-
-    public void setStartingDay(Calendar startingDay) {
+        this.ownerId = ownerId;
+        this.tenantId = tenantId;
         this.startingDay = startingDay;
-    }
-
-    public Calendar getEndingDay() {
-        return endingDay;
-    }
-
-    public void setEndingDay(Calendar endingDay) {
         this.endingDay = endingDay;
+        this.propertyId = propertyId;
     }
 
-    public Long getId() {
+
+
+    public Contract() {
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Property getProperty() {
-        return property;
+    public String getOwnerId() {
+        return ownerId;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public LocalDate getStartingDay() {
+        return startingDay;
+    }
+
+    public void setStartingDay(LocalDate startingDay) {
+        this.startingDay = startingDay;
+    }
+
+    public LocalDate getEndingDay() {
+        return endingDay;
+    }
+
+    public void setEndingDay(LocalDate endingDay) {
+        this.endingDay = endingDay;
+    }
+
+    public String getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(String propertyId) {
+        this.propertyId = propertyId;
     }
 }
