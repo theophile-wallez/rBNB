@@ -1,0 +1,11 @@
+@import "../../variables.scss";
+nav {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 15em;
+  height: 100vh;
+  background-color: $color-background-over;
+  border-right: solid 1.5px $color-border;
+  box-sizing: border-box;
+}
