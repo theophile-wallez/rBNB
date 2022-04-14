@@ -9,15 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 @DependsOn("FBInitialize")
 public class ContractService {
-
     Firestore db = FirestoreClient.getFirestore();
-
-    public static Contract getContractById(Long contractId) {
+    public static Contract getContractById(String contractId) {
         // db call (sql)
         // handle db response
         // return response
         return null;
     }
-
-
 }

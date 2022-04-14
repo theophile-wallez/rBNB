@@ -36,10 +36,7 @@ public class PropertyService {
 
     private void addPropertyToUser(String userId, String propertyId) {
         DocumentReference user = db.collection("Users").document(userId);
-        ApiFuture<WriteResult> arrayUnion = user.update(
-                "propertiesId",
-                FieldValue.arrayUnion(propertyId)
-        );
+        user.update("propertiesId", FieldValue.arrayUnion(propertyId));
     }
 
     public void deletePropertyById(String id){
