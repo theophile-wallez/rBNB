@@ -13,9 +13,9 @@ $color-primary-deep-light: #efedff;
 $color-background: #f5f8fc;
 $color-background-over: #ffffff;
 
-$color-border: #ebecf2;
 $color-font-dark: #191e36;
-$color-font-mid: #626675;
+$color-font-mid-plus: #626675;
+$color-font-mid: #b3b6c4;
 $color-font-light: #dadde2;
 
 $color-green: #31c534;
@@ -24,3 +24,10 @@ $color-green-light: #ebf9ea;
 $color-yellow: #ffbc02;
 $color-yellow-dark: #a78c49;
 $color-yellow-light: #fbf0d8;
+
+$color-border: #ebecf2;
+$border: solid 1.5px $color-border;
+$border-radius: 0.8em;
+
+$box-shadow-soft: rgb(0 0 0 / 6%) 0px 1px 4px;
+$box-shadow: rgb(0 0 0 / 14%) 0px 1px 4px;

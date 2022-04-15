@@ -1,1 +1,35 @@
-<nav></nav>
+<nav>
+  <div class="logo-container">
+    <img src="../../assets/images/logo.png" alt="" />
+  </div>
+  <div class="link-container">
+    <div class="link" (click)="changePage('listing')">
+      <i
+        class="fa-solid fa-house"
+        [ngClass]="{ selected: helper.page === 'listing' }"
+      ></i>
+      <div
+        class="link-content"
+        [ngClass]="{ selected: helper.page === 'listing' }"
+      >
+        Listings
+      </div>
+      <div *ngIf="helper.page === 'listing'" class="selected-span"></div>
+    </div>
+
+    <div class="link" (click)="changePage('dashboard')">
+      <i
+        class="fa-solid fa-gauge-high"
+        [ngClass]="{ selected: helper.page === 'dashboard' }"
+      ></i>
+
+      <div
+        class="link-content"
+        [ngClass]="{ selected: helper.page === 'dashboard' }"
+      >
+        Dashboard
+      </div>
+      <div *ngIf="helper.page === 'dashboard'" class="selected-span"></div>
+    </div>
+  </div>
+</nav>

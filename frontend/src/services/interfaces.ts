@@ -26,6 +26,7 @@ export enum HousingType {
 
 export interface Location {
   country: string;
+  city: string;
   zipCode?: number;
   street: string;
   number: number;
