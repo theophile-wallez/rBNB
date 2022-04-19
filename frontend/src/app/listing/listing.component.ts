@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HousingType, Property } from 'src/services/interfaces';
 import { HelperService } from '../helper.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'listing',
@@ -10,135 +11,16 @@ import { HelperService } from '../helper.service';
 export class ListingComponent implements OnInit {
   searchQuery: string = '';
   placeholder: string = 'Search for company, provider, user etc.';
-  // ! Dev datas
-  properties: Property[] = [
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Aulnay-sous-Bois',
-        street: 'avenue Jean-Jaurès',
-        number: 12,
-      },
-      bedAmount: 2,
-      pricePerDay: 60,
-      squareFootage: 27,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue de Rennes',
-        number: 64,
-      },
-      bedAmount: 3,
-      pricePerDay: 130,
-      squareFootage: 42,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-    {
-      ownerId: 'kljaez',
-      housingType: HousingType.flat,
-      location: {
-        country: 'France',
-        city: 'Paris',
-        street: 'avenue Parmentier',
-        number: 27,
-      },
-      bedAmount: 2,
-      pricePerDay: 90,
-      squareFootage: 34,
-    },
-  ];
+  properties: Property[] = [];
 
-  constructor(private helper: HelperService) {}
+  constructor(public helper: HelperService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getProperties();
-    console.log(this.properties);
   }
 
-  getProperties() {
-    // fetch
+  async getProperties() {
+    let data = await fetch("http://localhost:8080/api/property/properties");
+    this.properties = await data.json();
   }
 }

@@ -9,27 +9,31 @@
 </div>
 <h1 class="title">Listings</h1>
 
-<div class="property-container">
-  <div class="property" *ngFor="let property of properties">
+<div class="property-container" *ngIf="properties !== []">
+  <div
+    class="property"
+    *ngFor="let property of properties"
+    (click)="helper.setSelectedProperty(property)"
+  >
     <div class="img-container">
       <img src="../../assets/images/photo2.jpg" draggable="false" />
     </div>
     <div class="content-container">
       <div class="title-container">
         <div class="property-title">
-          {{ property.location.number + " " + property.location.street }}
+          {{ property.location?.number + " " + property.location?.street }}
         </div>
         <div class="location-container">
           <i class="fa-regular fa-map"></i>
           <div class="location">
             {{
-              property.location.number +
+              property.location?.number +
                 " " +
-                property.location.street +
+                property.location?.street +
                 ", " +
-                property.location.city +
+                property.location?.city +
                 ", " +
-                property.location.country
+                property.location?.country
             }}
           </div>
         </div>
