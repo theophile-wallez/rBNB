@@ -1,12 +1,28 @@
 <section class="contract">
   <div class="property-infos">
     <div class="name-container">
-      <div class="property-name">6 Fremont Street</div>
+      <div class="property-name">
+        {{
+          helper.selectedProperty.location?.number +
+            " " +
+            helper.selectedProperty.location?.street
+        }}
+      </div>
       <div class="status">Active</div>
     </div>
     <div class="property-location">
       <i class="fa-regular fa-map"></i>
-      <div class="location">6 Fremont Street, Loyalton State, Boston</div>
+      <div class="location">
+        {{
+          helper.selectedProperty.location?.number +
+            " " +
+            helper.selectedProperty.location?.street +
+            ", " +
+            helper.selectedProperty.location?.city +
+            ", " +
+            helper.selectedProperty.location?.country
+        }}
+      </div>
     </div>
   </div>
   <div class="separator"></div>
