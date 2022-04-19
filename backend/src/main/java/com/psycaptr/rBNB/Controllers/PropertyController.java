@@ -1,14 +1,13 @@
 package com.psycaptr.rBNB.Controllers;
 
-import com.psycaptr.rBNB.Models.Location;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("api/property")
@@ -32,5 +31,12 @@ public class PropertyController {
 //        );
         return propertyService.addPropertyByUserId(property, userId);
     }
+
+
+    @GetMapping("/properties")
+    public List<Property> getAllProperties(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
+        return propertyService.getAllProperties(ownerId);
+    }
+
 
 }

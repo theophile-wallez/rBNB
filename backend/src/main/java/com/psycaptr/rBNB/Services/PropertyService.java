@@ -1,19 +1,20 @@
 package com.psycaptr.rBNB.Services;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.FieldValue;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.psycaptr.rBNB.Models.Property;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @DependsOn("FBInitialize")
@@ -43,6 +44,18 @@ public class PropertyService {
         ApiFuture<WriteResult> writeResult = db.collection("Properties").document(id).delete();
     }
 
+    public List<Property> getAllProperties(String ownerId) throws ExecutionException, InterruptedException {
+        List<Property> properties = new ArrayList<>();
+
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            properties.add(document.toObject(Property.class));
+        }
+        Stream<Property> propertyStream = properties.stream()
+                .filter(property -> !Objects.equals(property.getOwnerId(), ownerId));
+        return propertyStream.collect(Collectors.toList());
+    }
 
     private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
 //        DocumentReference user = db.collection("Users").document(userId);
