@@ -10,13 +10,13 @@ export interface User {
 
 export interface Property {
   id?: string;
-  ownerId: string;
+  ownerId?: string;
   housingType?: HousingType;
-  location: Location;
+  location?: Location;
   description?: string;
   bedAmount?: number;
   squareFootage?: number;
-  pricePerDay: number;
+  pricePerDay?: number;
 }
 
 export enum HousingType {
