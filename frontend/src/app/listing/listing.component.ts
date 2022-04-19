@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HousingType, Property } from 'src/services/interfaces';
 import { HelperService } from '../helper.service';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'listing',
@@ -13,14 +12,14 @@ export class ListingComponent implements OnInit {
   placeholder: string = 'Search for company, provider, user etc.';
   properties: Property[] = [];
 
-  constructor(public helper: HelperService, private http: HttpClient) {}
+  constructor(public helper: HelperService) {}
 
   ngOnInit(): void {
     this.getProperties();
   }
 
   async getProperties() {
-    let data = await fetch("http://localhost:8080/api/property/properties");
+    let data = await fetch('http://localhost:8080/api/property/properties');
     this.properties = await data.json();
   }
 }
