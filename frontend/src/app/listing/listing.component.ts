@@ -135,6 +135,7 @@ export class ListingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProperties();
+    console.log(this.properties);
   }
 
   getProperties() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'page-container',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
-  constructor() {}
+  constructor(public helper: HelperService) {}
 
   ngOnInit(): void {}
 }

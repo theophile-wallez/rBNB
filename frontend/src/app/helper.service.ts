@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class HelperService {
   constructor() {}
 
-  page: string = 'dashboard';
+  page: string = 'listing';
 
   changePage(pageName: string): void {
     this.page = pageName;

@@ -1,13 +1,18 @@
-<div class="input-container" [(ngModel)]="searchQuery">
+<div class="input-container">
   <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="text" [placeholder]="placeholder" class="search-bar" />
+  <input
+    type="text"
+    [placeholder]="placeholder"
+    [(ngModel)]="searchQuery"
+    class="search-bar"
+  />
 </div>
 <h1 class="title">Listings</h1>
 
 <div class="property-container">
   <div class="property" *ngFor="let property of properties">
     <div class="img-container">
-      <img src="../../assets/images/photo2.jpg" alt="" draggable="false" />
+      <img src="../../assets/images/photo2.jpg" draggable="false" />
     </div>
     <div class="content-container">
       <div class="title-container">
@@ -40,7 +45,6 @@
         <div class="info" *ngIf="property.bedAmount">
           <i class="info-icon fa-solid fa-bed"></i>
           <div class="info-content-container">
-            <div class="info-title">Beds</div>
             <div class="info-title">{{ "Beds" }}</div>
 
             <div class="info-value">{{ property.bedAmount }}</div>
