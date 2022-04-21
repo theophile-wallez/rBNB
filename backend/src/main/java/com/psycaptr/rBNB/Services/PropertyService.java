@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -56,6 +57,21 @@ public class PropertyService {
                 .filter(property -> !Objects.equals(property.getOwnerId(), ownerId));
         return propertyStream.collect(Collectors.toList());
     }
+
+//    public List<Property> getSearchCompliantProperties(String searchedString) throws ExecutionException, InterruptedException {
+//        List<Property> response = new ArrayList<>();
+//
+//        CollectionReference properties = db.collection("Properties");
+//        ApiFuture<QuerySnapshot> filteredProperties = properties
+//                .whereGreaterThanOrEqualTo("location.street",searchedString)
+//                .whereLessThanOrEqualTo("location.street",searchedString + "\uF7FF")
+//                .get();
+//        List<QueryDocumentSnapshot> documents = filteredProperties.get().getDocuments();
+//        for (QueryDocumentSnapshot document : documents) {
+//            response.add(document.toObject(Property.class));
+//        }
+//        return response;
+//    }
 
     private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
 //        DocumentReference user = db.collection("Users").document(userId);

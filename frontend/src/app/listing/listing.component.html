@@ -5,6 +5,7 @@
     [placeholder]="placeholder"
     [(ngModel)]="searchQuery"
     class="search-bar"
+    (ngModelChange)="getFilteredProperties()"
   />
 </div>
 <h1 class="title">Listings</h1>
@@ -12,7 +13,7 @@
 <div class="property-container" *ngIf="properties !== []">
   <div
     class="property"
-    *ngFor="let property of properties"
+    *ngFor="let property of filteredProperties"
     (click)="helper.setSelectedProperty(property)"
   >
     <div class="img-container">

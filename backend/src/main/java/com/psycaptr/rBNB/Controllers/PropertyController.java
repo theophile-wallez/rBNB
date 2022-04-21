@@ -38,5 +38,12 @@ public class PropertyController {
         return propertyService.getAllProperties(ownerId);
     }
 
+//    @GetMapping("/search")
+//    public List<Property> getSearchCompliantProperties(@RequestParam String query) throws ExecutionException, InterruptedException {
+//        //System.out.println(searchedString);
+//        return propertyService.getSearchCompliantProperties(query);
+//
+//    }
+
 
 }
