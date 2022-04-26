@@ -34,8 +34,8 @@ public class UserService {
 
     // user is new if its email address doesn't belong to another user
     private boolean isUserNew(User user) throws ExecutionException, InterruptedException {
-        boolean isUserNew = getUserByEmail(user.getEmail()).hasBody();
-        return !isUserNew;
+        boolean doesUserExists = getUserByEmail(user.getEmail()).hasBody();
+        return !doesUserExists;
     }
 
     private boolean isUserComplete(User user) {

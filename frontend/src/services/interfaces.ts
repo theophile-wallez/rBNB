@@ -1,10 +1,11 @@
 export interface User {
   id?: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
   propertiesId?: string[];
   contractsId?: string[];
+  password?: string;
   rawPassword?: string;
 }
 

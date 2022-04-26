@@ -1,5 +1,6 @@
 package com.psycaptr.rBNB.Models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.psycaptr.rBNB.Services.AuthService;
 
 import java.security.NoSuchAlgorithmException;
@@ -33,11 +34,12 @@ public class User {
         this.email = email;
     }
 
-    public User(String firstName, String lastName, String email, String rawPassword) throws InvalidKeySpecException, NoSuchAlgorithmException {
+    @JsonCreator
+    public User(String firstName, String lastName, String email, String rawPassword) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = new Password();
+        generateHashedPassword(rawPassword);
     }
 
     public User() {
@@ -83,7 +85,7 @@ public class User {
         this.password = password;
     }
 
-    public void setRawPassword(String rawPassword) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
+    public void generateHashedPassword(String rawPassword) throws InvalidKeySpecException, NoSuchAlgorithmException, SQLException {
         AuthService authService = new AuthService();
         this.password = authService.newHashPassword(rawPassword);
     }

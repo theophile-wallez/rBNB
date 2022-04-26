@@ -1,6 +1,7 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Auth, User } from 'src/services/interfaces';
+import { User } from 'src/services/interfaces';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'create-user',
@@ -8,7 +9,7 @@ import { Auth, User } from 'src/services/interfaces';
   styleUrls: ['./create-user.component.scss'],
 })
 export class CreateUserComponent implements OnInit {
-  constructor() {}
+  constructor(private helper: HelperService) {}
 
   ngOnInit(): void {}
 
@@ -16,12 +17,7 @@ export class CreateUserComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    rawPassword: 'Hello',
-  };
-
-  auth: Auth = {
-    email: 'theophile.wall@gmail.com',
-    password: 'Hello',
+    rawPassword: '',
   };
 
   async createUser() {
@@ -33,20 +29,13 @@ export class CreateUserComponent implements OnInit {
       },
       body: JSON.stringify(this.user),
     });
-    let content = await response.json();
-    console.log('content: ', content);
-  }
 
-  async connect() {
-    let response = await fetch(environment.URL + '/auth', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(this.auth),
-    });
-    let content = await response.json();
-    console.log('content: ', content);
+    //TODO : a gérer dans une autre methode avec valeur de retour de createUser
+
+    if (response.ok) {
+      let user = await response.json();
+      this.helper.setCurrentUser(user);
+      console.log('content: ', user);
+    }
   }
 }

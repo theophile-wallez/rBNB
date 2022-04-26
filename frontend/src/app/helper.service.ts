@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Property } from 'src/services/interfaces';
+import { Property, User } from 'src/services/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ export class HelperService {
   page: string = 'listing';
   selectedProperty: Property = {};
   isPopupOpen: boolean = false;
+  currentUser: User = {};
 
   changePage(pageName: string): void {
     this.page = pageName;
@@ -21,5 +22,8 @@ export class HelperService {
   }
   clearSelectedProperty() {
     this.selectedProperty = {};
+  }
+  setCurrentUser(user: User) {
+    this.currentUser = user;
   }
 }

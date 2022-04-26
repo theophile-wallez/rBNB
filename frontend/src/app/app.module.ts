@@ -12,6 +12,7 @@ import { ListingComponent } from './listing/listing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
 import { NewContractComponent } from './new-contract/new-contract.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NewContractComponent } from './new-contract/new-contract.component';
     DashboardComponent,
     PopupComponent,
     NewContractComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

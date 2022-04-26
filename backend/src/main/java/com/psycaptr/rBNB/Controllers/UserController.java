@@ -22,7 +22,6 @@ public class UserController {
         return userService.createUser(user);
     }
 
-
     @GetMapping("/by-id")
     public ResponseEntity<User> getUserById(@RequestParam(value = "id") String id)
             throws ExecutionException, InterruptedException {
