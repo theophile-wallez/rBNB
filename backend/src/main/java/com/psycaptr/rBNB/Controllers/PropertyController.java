@@ -22,13 +22,6 @@ public class PropertyController {
             @RequestParam(value = "id") String userId
 
     ) throws ExecutionException, InterruptedException {
-//        Property property = new Property(
-//                userId,
-//                new Location("fr",92140,"laStreet",54),
-//                15,
-//                500,
-//                100000
-//        );
         return propertyService.addPropertyByUserId(property, userId);
     }
 

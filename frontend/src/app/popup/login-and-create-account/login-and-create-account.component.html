@@ -1,0 +1,113 @@
+<div class="logo-container">
+  <img src="../../assets/images/logo.png" alt="" />
+</div>
+<div class="container">
+  <div class="title">Welcome to <span> Airbnb</span></div>
+  <div class="sub-title">Sign in to continue</div>
+  <form class="form">
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        [(ngModel)]="auth.email"
+        [ngClass]="{ invalid: !email.valid }"
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        #email="ngModel"
+        required
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+
+      <input
+        [(ngModel)]="auth.password"
+        [ngClass]="{ invalid: !password.valid }"
+        type="password"
+        name="password"
+        #password="ngModel"
+        placeholder="Password"
+        required
+      />
+    </div>
+
+    <button class="button" (click)="userLogin()">Sign In</button>
+  </form>
+</div>
+<div class="separator-container">
+  <div class="separator"></div>
+  <div class="text">OR</div>
+  <div class="separator"></div>
+</div>
+<div class="container">
+  <div class="title">Create a new account</div>
+  <div class="sub-title">Let's Get Started</div>
+  <form class="form">
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+
+      <input
+        [(ngModel)]="newUser.firstName"
+        [ngClass]="{ invalid: !firstName.valid }"
+        #firstName="ngModel"
+        name="firstName"
+        type="text"
+        placeholder="First Name"
+        required
+      />
+    </div>
+
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+      <input
+        [(ngModel)]="newUser.lastName"
+        [ngClass]="{ invalid: !lastName.valid }"
+        #lastName="ngModel"
+        name="lastName"
+        type="text"
+        placeholder="Last Name"
+        required
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        [(ngModel)]="newUser.email"
+        [ngClass]="{ invalid: !emailNew.valid }"
+        #emailNew="ngModel"
+        name="emailNew"
+        type="email"
+        placeholder="Your Email"
+        required
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+      <input
+        [(ngModel)]="newUser.rawPassword"
+        [ngClass]="{ invalid: !rawPassword.valid }"
+        #rawPassword="ngModel"
+        name="rawPassword"
+        type="password"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+
+      <input
+        [(ngModel)]="newUser.rawPassword"
+        [ngClass]="{ invalid: !passwordCheck.valid }"
+        [pattern]="newUser.rawPassword"
+        #passwordCheck="ngModel"
+        name="passwordCheck"
+        type="password"
+        placeholder="Password Again"
+        required
+      />
+    </div>
+
+    <button (click)="createUser()">Sign Up</button>
+  </form>
+</div>
