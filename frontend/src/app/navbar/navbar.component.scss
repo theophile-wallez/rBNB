@@ -1,0 +1,77 @@
+@import "../../variables.scss";
+nav {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 15em;
+  height: 100vh;
+  background-color: $color-background-over;
+  border-right: solid 1.5px $color-border;
+  box-sizing: border-box;
+
+  .logo-container {
+    width: 100%;
+    display: flex;
+    height: 6em;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 2em;
+    cursor: pointer;
+
+    img {
+      height: 100%;
+    }
+  }
+
+  .link-container {
+    width: 100%;
+    .link {
+      height: 3em;
+      margin-bottom: 1em;
+      display: flex;
+      align-items: center;
+      position: relative;
+      cursor: pointer;
+      line-height: normal;
+
+      i {
+        color: $color-font-mid;
+        font-size: 1.3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1.5em;
+        margin-right: 1.5em;
+        &.selected {
+          color: $color-primary;
+        }
+      }
+      .link-content {
+        color: $color-font-mid;
+        font-size: 1em;
+        list-style: none;
+        font-family: sans-serif;
+        font-weight: 600;
+        transition: all 0.2s;
+
+        &.selected {
+          color: $color-font-dark;
+        }
+      }
+      .selected-span {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        right: 0;
+        height: 70%;
+        width: 4px;
+        background-color: $color-primary;
+        border-bottom-left-radius: 0.3em;
+        border-top-left-radius: 0.3em;
+      }
+    }
+  }
+}

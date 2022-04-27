@@ -1,0 +1,17 @@
+@import "../../variables.scss";
+
+.popup {
+  box-sizing: border-box;
+  background-color: $color-background-over;
+  width: 25em;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
+  // border-left: $border;
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 2em 2em;
+  font-family: $font;
+}
