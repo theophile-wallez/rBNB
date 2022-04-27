@@ -26,10 +26,17 @@ public class PropertyController {
     }
 
 
-    @GetMapping("/properties")
+    @GetMapping()
     public List<Property> getAllProperties(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getAllProperties(ownerId);
     }
+
+    @GetMapping("/by-user-id")
+    public ResponseEntity<List<Property>> getPropertiesByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
+        return propertyService.getPropertiesByUserId(ownerId);
+    }
+
+
 
 //    @GetMapping("/search")
 //    public List<Property> getSearchCompliantProperties(@RequestParam String query) throws ExecutionException, InterruptedException {

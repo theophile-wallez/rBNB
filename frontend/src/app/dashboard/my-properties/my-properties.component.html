@@ -1,0 +1,53 @@
+<div class="property-container" *ngIf="properties !== []">
+  <div class="property" *ngFor="let property of properties">
+    <!-- (click)="helper.setSelectedProperty(property)" -->
+    <div class="img-container">
+      <img src="../../assets/images/photo2.jpg" draggable="false" />
+    </div> 
+    <div class="content-container">
+      <div class="title-container">
+        <div class="property-title">
+          {{ property.location?.number + " " + property.location?.street }}
+        </div>
+        <div class="location-container">
+          <i class="fa-regular fa-map"></i>
+          <div class="location">
+            {{
+              property.location?.number +
+                " " +
+                property.location?.street +
+                ", " +
+                property.location?.city +
+                ", " +
+                property.location?.country
+            }}
+          </div>
+        </div>
+      </div>
+      <div class="infos-container">
+        <div class="info" *ngIf="property.pricePerDay">
+          <i class="info-icon fa-solid fa-euro-sign"></i>
+          <div class="info-content-container">
+            <div class="info-title">Price per day</div>
+            <div class="info-value">{{ property.pricePerDay }}</div>
+          </div>
+        </div>
+        <div class="info" *ngIf="property.bedAmount">
+          <i class="info-icon fa-solid fa-bed"></i>
+          <div class="info-content-container">
+            <div class="info-title">{{ "Beds" }}</div>
+
+            <div class="info-value">{{ property.bedAmount }}</div>
+          </div>
+        </div>
+        <div class="info" *ngIf="property.squareFootage">
+          <i class="info-icon fa-regular fa-clone"></i>
+          <div class="info-content-container">
+            <div class="info-title">Square footage</div>
+            <div class="info-value">{{ property.squareFootage }} m²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

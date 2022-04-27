@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
 import { NewContractComponent } from './new-contract/new-contract.component';
 import { LoginAndCreateAccountComponent } from './popup/login-and-create-account/login-and-create-account.component';
+import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoginAndCreateAccountComponent } from './popup/login-and-create-account
     PopupComponent,
     NewContractComponent,
     LoginAndCreateAccountComponent,
+    MyPropertiesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

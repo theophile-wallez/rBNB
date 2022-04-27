@@ -1,0 +1,189 @@
+@import "../../../variables.scss";
+
+.input-container {
+  width: 100%;
+  height: 5em;
+  margin: 0;
+  position: relative;
+
+  i {
+    position: absolute;
+    font-size: 1.2em;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-font-mid;
+    left: 1.5em;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    background-color: $color-background-over;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-soft;
+    box-sizing: border-box;
+    padding-left: 3.5em;
+    font-size: 1.2em;
+    line-height: 1;
+
+    color: $color-font-mid;
+
+    &::placeholder {
+      color: $color-font-mid;
+      font-size: 1em;
+      opacity: 1;
+    }
+    &::-webkit-input-placeholder {
+      color: $color-font-mid;
+      font-size: 1em;
+      line-height: normal;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.title {
+  color: $color-font-dark;
+  font-family: sans-serif;
+  font-size: 1.5em;
+  margin: 0;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  user-select: none;
+}
+
+.property-container {
+  width: 100%;
+}
+
+$property-height: 14em;
+$property-padding: 2em;
+$content-size: calc($property-height - 2 * $property-padding);
+.property {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  height: $property-height;
+  padding: $property-padding;
+  margin-bottom: 2em;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: $color-background-over;
+  box-shadow: $box-shadow-soft;
+  border-radius: $border-radius;
+  gap: 2em;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  // ! test
+
+  // outline: solid 3.5px $color-primary-light;
+  // border: solid 2px $color-primary;
+
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+  .img-container {
+    height: $content-size;
+    width: calc($content-size + 2em);
+    overflow: hidden;
+    border-radius: 0.5em;
+    background-color: $color-background;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      height: 100%;
+    }
+  }
+  .content-container {
+    height: $content-size;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-family: sans-serif;
+
+    // background-color: $color-background;
+    .title-container {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .property-title {
+        color: $color-font-dark;
+        padding: 0;
+        height: 50%;
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+      .location-container {
+        height: 50%;
+
+        display: flex;
+        i {
+          color: $color-font-mid;
+        }
+        .location {
+          margin-left: 0.5em;
+          font-size: 0.8em;
+          color: $color-font-mid;
+        }
+      }
+    }
+
+    .infos-container {
+      display: flex;
+      width: 100%;
+      height: 40%;
+
+      .info {
+        height: 100%;
+        display: flex;
+        margin-right: 3em;
+        .info-icon {
+          color: $color-font-mid;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 0.8em;
+          font-size: 1.7em;
+        }
+        .info-content-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          .info-title {
+            font-size: 1em;
+            color: $color-font-mid;
+          }
+          .info-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: $color-font-mid-plus;
+          }
+        }
+      }
+    }
+  }
+}

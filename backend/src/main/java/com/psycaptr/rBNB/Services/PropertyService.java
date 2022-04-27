@@ -57,6 +57,27 @@ public class PropertyService {
         return propertyStream.collect(Collectors.toList());
     }
 
+    public ResponseEntity<List<Property>> getPropertiesByUserId(String ownerId) throws ExecutionException, InterruptedException {
+        if(ownerId.equals("")) {
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+        }
+
+        List<Property> properties = new ArrayList<>();
+
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("ownerId",ownerId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(!documents.isEmpty()) {
+            for (QueryDocumentSnapshot document : documents) {
+                properties.add(document.toObject(Property.class));
+            }
+            return new ResponseEntity<>(properties,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+    }
+
+
+
+
 //    public List<Property> getSearchCompliantProperties(String searchedString) throws ExecutionException, InterruptedException {
 //        List<Property> response = new ArrayList<>();
 //

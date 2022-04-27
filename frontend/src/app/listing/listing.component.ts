@@ -23,7 +23,7 @@ export class ListingComponent implements OnInit {
   }
 
   async getProperties() {
-    let data = await fetch('http://localhost:8080/api/property/properties');
+    let data = await fetch(environment.URL+'/property');
     this.properties = await data.json();
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }
