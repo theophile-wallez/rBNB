@@ -25,7 +25,6 @@ public class PropertyController {
         return propertyService.addPropertyByUserId(property, userId);
     }
 
-
     @GetMapping()
     public List<Property> getAllProperties(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getAllProperties(ownerId);
@@ -34,6 +33,14 @@ public class PropertyController {
     @GetMapping("/by-user-id")
     public ResponseEntity<List<Property>> getPropertiesByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getPropertiesByUserId(ownerId);
+    }
+
+    @GetMapping("/is-listed")
+    public ResponseEntity<HttpStatus> updateIsListed(
+            @RequestParam String propertyId,
+            @RequestParam boolean isListed
+    ) throws ExecutionException, InterruptedException {
+        return propertyService.updateIsListed(propertyId,isListed);
     }
 
 

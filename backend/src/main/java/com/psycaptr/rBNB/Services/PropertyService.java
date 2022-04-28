@@ -24,7 +24,7 @@ public class PropertyService {
     public ResponseEntity<HttpStatus> addPropertyByUserId(Property property, String userId) throws ExecutionException, InterruptedException {
         property.setOwnerId(userId);
         String propertyId = addPropertyToDB(property);
-        addPropertyToUser(userId, propertyId);
+        addPropertyIdToUser(userId, propertyId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -35,7 +35,7 @@ public class PropertyService {
         return propertyId;
     }
 
-    private void addPropertyToUser(String userId, String propertyId) {
+    private void addPropertyIdToUser(String userId, String propertyId) {
         DocumentReference user = db.collection("Users").document(userId);
         user.update("propertiesId", FieldValue.arrayUnion(propertyId));
     }
@@ -99,5 +99,10 @@ public class PropertyService {
 //        ApiFuture<WriteResult> arrayRm = user.update(
 //                "propertiesId",
 //                FieldValue.arrayRemove(propertyId));
+
+    public ResponseEntity<HttpStatus> updateIsListed(String propertyId, boolean isListed) throws ExecutionException, InterruptedException {
+        DocumentReference documentReference = db.collection("Properties").document(propertyId);
+        documentReference.update("isListed",isListed);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
