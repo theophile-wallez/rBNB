@@ -92,13 +92,13 @@ public class PropertyService {
 //        }
 //        return response;
 //    }
-
-    private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
+//private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
 //        DocumentReference user = db.collection("Users").document(userId);
 //
 //        ApiFuture<WriteResult> arrayRm = user.update(
 //                "propertiesId",
 //                FieldValue.arrayRemove(propertyId));
+//    }
 
     public ResponseEntity<HttpStatus> updateIsListed(String propertyId, boolean isListed) throws ExecutionException, InterruptedException {
         DocumentReference documentReference = db.collection("Properties").document(propertyId);
