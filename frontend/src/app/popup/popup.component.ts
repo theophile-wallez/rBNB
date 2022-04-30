@@ -7,13 +7,13 @@ import { HelperService } from '../helper.service';
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss'],
   animations: [
-    trigger('myInsertRemoveTrigger', [
+    trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateX(25em)' }),
-        animate('200ms', style({ transform: 'translateX(0em)' })),
+        animate('150ms ease-out', style({ transform: 'translateX(0em)' })),
       ]),
       transition(':leave', [
-        animate('200ms', style({ transform: 'translateX(25em)' })),
+        animate('100ms', style({ transform: 'translateX(25em)' })),
       ]),
     ]),
   ],
