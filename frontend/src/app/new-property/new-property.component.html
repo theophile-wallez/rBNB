@@ -1,0 +1,121 @@
+<h1 class="title">Rent out your property</h1>
+
+<form [formGroup]="myForm" action="" (ngSubmit)="postProperty()">
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Housing Type</mat-label>
+      <mat-select formControlName="housingType">
+        <mat-option value="house">House</mat-option>
+        <!-- <mat-option value="Studio">Studio</mat-option>
+        <mat-option value="Apartment">Apartment</mat-option> -->
+        <mat-option value="flat">Flat</mat-option>
+      </mat-select>
+      <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+      <mat-hint>House, Studio, Apartment, etc.</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="location" formGroupName="location">
+    <mat-form-field appearance="standard">
+      <mat-label>Country</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        formControlName="country"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Nouvelle-Calédonie</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Zip Code</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        formControlName="zipCode"
+        type="number"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>98800</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Street Number</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        formControlName="number"
+        type="number"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>9</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Street</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        formControlName="street"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Gervoliwhatisthishit</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Description</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        formControlName="description"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Ex: Super appart avec vue sur la rue du Sah</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="standard">
+      <mat-label>Bed Amount</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        type="number"
+        formControlName="bedAmount"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Ex: 4</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="standard">
+      <mat-label>Square Footage</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        type="number"
+        formControlName="squareFootage"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Ex: 39 m^2</mat-hint>
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="standard">
+      <mat-label>Price per day (euros)</mat-label>
+      <input
+        required
+        matInput
+        placeholder="Placeholder"
+        type="number"
+        formControlName="pricePerDay"
+      />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Ex: 35 euros</mat-hint>
+    </mat-form-field>
+  </div>
+  <br />
+  <div class="button">
+    <button mat-raised-button type="submit">Publish</button>
+  </div>
+</form>

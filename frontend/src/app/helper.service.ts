@@ -8,7 +8,7 @@ import { Property, User } from 'src/services/interfaces';
 export class HelperService {
   constructor() {}
 
-  page: string = 'listing';
+  page: string = 'dashboard';
 
   selectedProperty: Property = {};
   isPopupOpen: boolean = false;

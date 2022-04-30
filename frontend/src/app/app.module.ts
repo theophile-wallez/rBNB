@@ -15,6 +15,14 @@ import { NewContractComponent } from './new-contract/new-contract.component';
 import { LoginAndCreateAccountComponent } from './popup/login-and-create-account/login-and-create-account.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewPropertyComponent } from './new-property/new-property.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewContractComponent,
     LoginAndCreateAccountComponent,
     MyPropertiesComponent,
+    NewPropertyComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +44,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-  ],
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRippleModule,
+    MatIconModule,
+    MatSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

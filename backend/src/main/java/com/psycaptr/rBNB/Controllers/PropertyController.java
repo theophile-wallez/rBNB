@@ -18,7 +18,7 @@ public class PropertyController {
 
     @PostMapping("/by-user-id")
     public ResponseEntity<HttpStatus> addPropertyByUserId(
-            @RequestBody Property property,
+                @RequestBody Property property,
             @RequestParam(value = "id") String userId
 
     ) throws ExecutionException, InterruptedException {
