@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +14,7 @@ import { PopupComponent } from './popup/popup.component';
 import { NewContractComponent } from './new-contract/new-contract.component';
 import { LoginAndCreateAccountComponent } from './popup/login-and-create-account/login-and-create-account.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,15 @@ import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.c
     LoginAndCreateAccountComponent,
     MyPropertiesComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

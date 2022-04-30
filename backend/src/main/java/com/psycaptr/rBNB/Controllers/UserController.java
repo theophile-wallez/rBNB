@@ -3,7 +3,6 @@ package com.psycaptr.rBNB.Controllers;
 import com.psycaptr.rBNB.Models.User;
 import com.psycaptr.rBNB.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    public ResponseEntity<User> createUser(@RequestBody User user)
+    public <T> ResponseEntity createUser(@RequestBody User user)
             throws ExecutionException, InterruptedException {
         return userService.createUser(user);
     }

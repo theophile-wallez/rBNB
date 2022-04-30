@@ -18,11 +18,16 @@ import java.util.concurrent.ExecutionException;
 public class UserService {
     Firestore db = FirestoreClient.getFirestore();
 
-    public ResponseEntity<User> createUser(User user) throws ExecutionException, InterruptedException {
-        if (isUserComplete(user) && isUserNew(user)){
-            return addUserToDb(user);
+    public ResponseEntity createUser(User user) throws ExecutionException, InterruptedException {
+        if(isUserComplete(user)) {
+            if(isUserNew(user)) {
+                return addUserToDb(user);
+            }
+            return new ResponseEntity("This email address is already used.",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity("The form is incomplete.",HttpStatus.BAD_REQUEST);
+//        return new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+
     }
 
     private ResponseEntity<User> addUserToDb(User user) {

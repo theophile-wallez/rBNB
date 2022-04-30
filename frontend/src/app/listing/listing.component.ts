@@ -23,7 +23,7 @@ export class ListingComponent implements OnInit {
   }
 
   async getProperties() {
-    let data = await fetch(environment.URL+'/property');
+    let data = await fetch(environment.URL + '/property');
     this.properties = await data.json();
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }
@@ -43,5 +43,10 @@ export class ListingComponent implements OnInit {
         .includes(this.searchQuery.toLocaleLowerCase())
     );
     console.log('this.filteredProperties', this.filteredProperties);
+  }
+
+  setSelectedProperty(selectedProperty: Property) {
+    console.log('selectedProperty: ', selectedProperty);
+    this.helper.setSelectedProperty(selectedProperty);
   }
 }

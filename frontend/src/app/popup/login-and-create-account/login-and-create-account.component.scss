@@ -87,26 +87,40 @@
           color: $color-font-mid-plus;
         }
         &.invalid {
-          outline: solid 1.5px red;
+          outline: solid 1.5px $color-error;
         }
       }
     }
 
-    button {
-      box-sizing: border-box;
+    .btn-container {
+      width: 100%;
+      height: 2.8em;
       margin: 0;
       margin-top: 1em;
-      width: 100%;
-      height: 3em;
-      background-color: $color-primary;
-      color: $color-background-over;
-      border-radius: 0.3em;
-      border: none;
-      font-weight: 600;
-      cursor: pointer;
-      &:disabled {
+      position: relative;
+      .message {
+        position: absolute;
+        top: -1.3em;
+        left: 0;
+        width: 100%;
+        color: $color-error;
+      }
+      button {
+        box-sizing: border-box;
+        margin: 0;
+        width: 100%;
+        height: 100%;
         background-color: $color-primary;
-        cursor: auto;
+        color: $color-background-over;
+        border-radius: 0.3em;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:disabled {
+          background-color: $color-font-mid;
+          cursor: auto;
+        }
       }
     }
   }

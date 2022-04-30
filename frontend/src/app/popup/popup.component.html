@@ -1,4 +1,14 @@
-<section class="popup">
-  <!-- <new-contract></new-contract> -->
-  <!-- <login-and-create-account></login-and-create-account> -->
+<section class="popup" *ngIf="popupState.isOpen" @myInsertRemoveTrigger>
+  <div class="popup-relative">
+    <div class="close-popup" (click)="closePopup()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+
+    <new-contract
+      *ngIf="popupState.selectedPage === 'newContract'"
+    ></new-contract>
+    <login-and-create-account
+      *ngIf="popupState.selectedPage === 'signIn'"
+    ></login-and-create-account>
+  </div>
 </section>

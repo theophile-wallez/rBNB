@@ -8,6 +8,5 @@ import { HelperService } from '../helper.service';
 })
 export class PageComponent implements OnInit {
   constructor(public helper: HelperService) {}
-
   ngOnInit(): void {}
 }

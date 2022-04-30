@@ -4,34 +4,41 @@
 <div class="container">
   <div class="title">Welcome to <span> Airbnb</span></div>
   <div class="sub-title">Sign in to continue</div>
-  <form class="form">
+  <form class="form" [formGroup]="signIn" (ngSubmit)="signInSubmit()">
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
       <input
-        [(ngModel)]="auth.email"
-        [ngClass]="{ invalid: !email.valid }"
-        type="email"
-        name="email"
-        placeholder="Your Email"
-        #email="ngModel"
         required
+        formControlName="email"
+        [ngClass]="{
+          invalid: signInEmail?.invalid && signInEmail?.touched
+        }"
+        type="email"
+        placeholder="Your Email"
       />
     </div>
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
 
       <input
-        [(ngModel)]="auth.password"
-        [ngClass]="{ invalid: !password.valid }"
-        type="password"
-        name="password"
-        #password="ngModel"
-        placeholder="Password"
         required
+        formControlName="password"
+        [ngClass]="{
+          invalid: signInPassword?.invalid && signInPassword?.touched
+        }"
+        type="password"
+        placeholder="Your Password"
+        autocomplete
       />
     </div>
-
-    <button class="button" (click)="userLogin()">Sign In</button>
+    <div class="btn-container">
+      <div class="message">
+        {{ messageSignIn }}
+      </div>
+      <button class="button" type="submit" [disabled]="signIn.invalid">
+        Sign In
+      </button>
+    </div>
   </form>
 </div>
 <div class="separator-container">
@@ -39,75 +46,79 @@
   <div class="text">OR</div>
   <div class="separator"></div>
 </div>
+
 <div class="container">
   <div class="title">Create a new account</div>
   <div class="sub-title">Let's Get Started</div>
-  <form class="form">
+  <form class="form" [formGroup]="signUp" (ngSubmit)="signUpSubmit()">
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-user"></i></div>
-
       <input
-        [(ngModel)]="newUser.firstName"
-        [ngClass]="{ invalid: !firstName.valid }"
-        #firstName="ngModel"
-        name="firstName"
+        required
+        formControlName="firstName"
         type="text"
         placeholder="First Name"
-        required
+        [ngClass]="{
+          invalid: signUpFirstName?.invalid && signUpFirstName?.touched
+        }"
       />
     </div>
 
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-user"></i></div>
       <input
-        [(ngModel)]="newUser.lastName"
-        [ngClass]="{ invalid: !lastName.valid }"
-        #lastName="ngModel"
-        name="lastName"
+        required
+        formControlName="lastName"
         type="text"
         placeholder="Last Name"
-        required
+        [ngClass]="{
+          invalid: signUpLastName?.invalid && signUpLastName?.touched
+        }"
       />
     </div>
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
       <input
-        [(ngModel)]="newUser.email"
-        [ngClass]="{ invalid: !emailNew.valid }"
-        #emailNew="ngModel"
-        name="emailNew"
+        required
+        formControlName="email"
         type="email"
         placeholder="Your Email"
-        required
+        [ngClass]="{ invalid: signUpEmail?.invalid && signUpEmail?.touched }"
       />
     </div>
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
       <input
-        [(ngModel)]="newUser.rawPassword"
-        [ngClass]="{ invalid: !rawPassword.valid }"
-        #rawPassword="ngModel"
-        name="rawPassword"
+        required
+        formControlName="rawPassword"
         type="password"
         placeholder="Password"
-        required
+        [ngClass]="{
+          invalid: signUpPassword?.invalid && signUpPassword?.touched
+        }"
+        autocomplete
       />
     </div>
     <div class="input-container">
       <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
-
       <input
-        [(ngModel)]="newUser.rawPassword"
-        [ngClass]="{ invalid: !passwordCheck.valid }"
-        [pattern]="newUser.rawPassword"
-        #passwordCheck="ngModel"
-        name="passwordCheck"
-        type="password"
-        placeholder="Password Again"
         required
+        formControlName="passwordConfirm"
+        type="password"
+        placeholder="Confirm your Password"
+        [ngClass]="{
+          invalid:
+            (signUpPasswordConfirm?.invalid || signUpPasswordConfirm?.errors) &&
+            signUpPasswordConfirm?.touched
+        }"
+        autocomplete
       />
     </div>
-
-    <button (click)="createUser()">Sign Up</button>
+    <div class="btn-container">
+      <div class="message">
+        {{ messageSignUp }}
+      </div>
+      <button [disabled]="signUp.invalid" type="submit">Sign Up</button>
+    </div>
   </form>
 </div>

@@ -22,19 +22,20 @@ import java.util.concurrent.ExecutionException;
 @Service
 @DependsOn("FBInitialize")
 public class AuthService {
-    public ResponseEntity<User> authCheck(Auth auth)
+    public <T> ResponseEntity authCheck(Auth auth)
             throws ExecutionException, InterruptedException, InvalidKeySpecException, NoSuchAlgorithmException {
+        String message = "Incorrect email or password.";
         UserService userService = new UserService();
         User user = userService.getUserByEmail(auth.getEmail()).getBody();
         if (user != null) {
             String potentialHash = hashPassword(auth.getPassword(), user.getPassword().getSalt());
             if (potentialHash.equals(user.getPassword().getHash())) {
                 user.setPassword(null);
-                return new ResponseEntity<>(user, HttpStatus.OK);
+                return ResponseEntity.ok(user);
             }
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(message, HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(message, HttpStatus.FORBIDDEN);
     }
 
 
