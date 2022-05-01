@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
-import { ConnectOrUserInfosComponent } from './navbar/connect-or-user-infos/connect-or-user-infos.component';
+import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +38,7 @@ import { ConnectOrUserInfosComponent } from './navbar/connect-or-user-infos/conn
     MyPropertiesComponent,
     NewPropertyComponent,
     AlertNotificationComponent,
-    ConnectOrUserInfosComponent,
+    ConnectAdvertismentComponent,
   ],
   imports: [
     BrowserModule,
