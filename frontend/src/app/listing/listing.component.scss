@@ -88,11 +88,6 @@ $content-size: calc($property-height - 2 * $property-padding);
   cursor: pointer;
   transition: all 0.2s;
 
-  // ! test
-
-  // outline: solid 3.5px $color-primary-light;
-  // border: solid 2px $color-primary;
-
   &:hover {
     box-shadow: $box-shadow;
   }
