@@ -21,8 +21,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 
+import { MessagePopupComponent } from './message-popup/message-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import {MatSelectModule} from '@angular/material/select';
     LoginAndCreateAccountComponent,
     MyPropertiesComponent,
     NewPropertyComponent,
+    MessagePopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,8 +51,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatInputModule,
     MatRippleModule,
     MatIconModule,
-    MatSelectModule
-    ],
+    MatSelectModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
