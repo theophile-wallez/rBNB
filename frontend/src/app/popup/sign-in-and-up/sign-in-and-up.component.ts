@@ -74,6 +74,12 @@ export class SignInAndUpComponent implements OnInit {
       if (response.ok) {
         let user = await response.json();
         this.helper.setCurrentUser(user);
+        this.helper.closePopup();
+
+        this.helper.createNewAlert(
+          false,
+          'Hello ' + user.firstName + ", you've successfully logged in!"
+        );
       } else {
         this.helper.createNewAlert(true, await response.text());
       }
@@ -88,8 +94,14 @@ export class SignInAndUpComponent implements OnInit {
       if (response.ok) {
         let user: User = await response.json();
         this.helper.setCurrentUser(user);
+        this.helper.closePopup();
+        this.helper.createNewAlert(
+          false,
+          'Hello ' +
+            user.firstName +
+            ", you've successfully created your account!"
+        );
       } else {
-        // this.messageSignUp = await response.text();
         this.helper.createNewAlert(true, await response.text());
       }
     }
