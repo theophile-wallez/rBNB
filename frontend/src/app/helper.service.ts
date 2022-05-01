@@ -8,7 +8,8 @@ import { Alert, Property, User } from 'src/services/interfaces';
 export class HelperService {
   constructor() {}
 
-  page: string = 'dashboard';
+  //! à retirer
+  page: string = 'listing';
 
   selectedProperty: Property = {};
   isPopupOpen: boolean = false;
@@ -33,7 +34,7 @@ export class HelperService {
   emitPopupState(popupState: any) {
     this.popupObservable.next(popupState);
   }
-
+  //! surement plus utilisé, à check
   changePage(pageName: string): void {
     this.page = pageName;
   }
