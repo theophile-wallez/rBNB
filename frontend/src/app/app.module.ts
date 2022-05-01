@@ -15,6 +15,7 @@ import { NewContractComponent } from './new-contract/new-contract.component';
 import { LoginAndCreateAccountComponent } from './popup/login-and-create-account/login-and-create-account.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MessagePopupComponent } from './message-popup/message-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NewContractComponent,
     LoginAndCreateAccountComponent,
     MyPropertiesComponent,
+    MessagePopupComponent,
   ],
   imports: [
     BrowserModule,

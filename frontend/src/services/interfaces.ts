@@ -46,3 +46,8 @@ export interface Auth {
   email: string;
   password: string;
 }
+
+export interface Alert {
+  isError?: boolean;
+  content?: string;
+}

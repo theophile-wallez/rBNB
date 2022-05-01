@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Property, User } from 'src/services/interfaces';
+import { Alert, Property, User } from 'src/services/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -71,5 +71,28 @@ export class HelperService {
       selectedPage: this.defaultPopupPage,
     };
     this.emitPopupState(popupState);
+  }
+
+  // alert-popup
+
+  timeOut: any = undefined;
+  public alertObservable = new Subject<Alert>();
+  emitAlert(alert: Alert) {
+    if (this.timeOut !== undefined) {
+      clearTimeout(this.timeOut);
+    }
+    this.alertObservable.next(alert);
+    this.timeOut = setTimeout(() => {
+      this.alertObservable.next({});
+      this.timeOut = undefined;
+    }, 8000);
+  }
+
+  createNewAlert(isError: boolean, content: string) {
+    let newAlert: Alert = {
+      isError: isError,
+      content: content,
+    };
+    this.emitAlert(newAlert);
   }
 }

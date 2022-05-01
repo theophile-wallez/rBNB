@@ -75,7 +75,7 @@ export class LoginAndCreateAccountComponent implements OnInit {
         let user = await response.json();
         this.helper.setCurrentUser(user);
       } else {
-        this.messageSignIn = await response.text();
+        this.helper.createNewAlert(true, await response.text());
       }
     }
   }
@@ -89,7 +89,8 @@ export class LoginAndCreateAccountComponent implements OnInit {
         let user: User = await response.json();
         this.helper.setCurrentUser(user);
       } else {
-        this.messageSignUp = await response.text();
+        // this.messageSignUp = await response.text();
+        this.helper.createNewAlert(true, await response.text());
       }
     }
   }

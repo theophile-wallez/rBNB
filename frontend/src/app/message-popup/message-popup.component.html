@@ -1,0 +1,17 @@
+<div class="popup-container" *ngIf="alert.content" @slideInOut>
+  <div class="popup">
+    <div class="message-icon">
+      <i *ngIf="!alert.isError" class="fa-regular fa-circle-check"></i>
+      <i
+        *ngIf="alert.isError"
+        class="fa-solid fa-triangle-exclamation isError"
+      ></i>
+    </div>
+    <div class="message">
+      {{ alert.content }}
+    </div>
+    <div class="close-popup" (click)="closeAlert()">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+  </div>
+</div>

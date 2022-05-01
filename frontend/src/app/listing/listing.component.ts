@@ -42,11 +42,9 @@ export class ListingComponent implements OnInit {
         .toLocaleLowerCase()
         .includes(this.searchQuery.toLocaleLowerCase())
     );
-    console.log('this.filteredProperties', this.filteredProperties);
   }
 
   setSelectedProperty(selectedProperty: Property) {
-    console.log('selectedProperty: ', selectedProperty);
     this.helper.setSelectedProperty(selectedProperty);
   }
 }

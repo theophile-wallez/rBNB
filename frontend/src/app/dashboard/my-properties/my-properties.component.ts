@@ -5,23 +5,22 @@ import { Property } from 'src/services/interfaces';
 @Component({
   selector: 'my-properties',
   templateUrl: './my-properties.component.html',
-  styleUrls: ['./my-properties.component.scss']
+  styleUrls: ['./my-properties.component.scss'],
 })
 export class MyPropertiesComponent implements OnInit {
-
   properties: Property[] = [];
-  devData: string = "HXgxoEgzDsBtXDJazHF7";
+  devData: string = 'HXgxoEgzDsBtXDJazHF7';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.getPropertiesByUserId();
   }
 
   async getPropertiesByUserId() {
-    let data = await fetch(environment.URL+'/property/by-user-id?ownerId='+this.devData);
+    let data = await fetch(
+      environment.URL + '/property/by-user-id?ownerId=' + this.devData
+    );
     this.properties = await data.json();
-    console.log(this.properties);
   }
-
 }
