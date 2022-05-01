@@ -25,6 +25,9 @@ export class ListingComponent implements OnInit {
   async getProperties() {
     let data = await fetch(environment.URL + '/property');
     this.properties = await data.json();
+    this.properties.forEach((property) => {
+      property.isSelected = false;
+    });
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }
 
@@ -46,5 +49,12 @@ export class ListingComponent implements OnInit {
 
   setSelectedProperty(selectedProperty: Property) {
     this.helper.setSelectedProperty(selectedProperty);
+    console.log(this.helper.selectedProperty);
+  }
+
+  unSelectAllProperties() {
+    this.filteredProperties.forEach((property) => {
+      property.isSelected = false;
+    });
   }
 }

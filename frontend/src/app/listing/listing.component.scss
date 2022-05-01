@@ -86,11 +86,16 @@ $content-size: calc($property-height - 2 * $property-padding);
   border-radius: $border-radius;
   gap: 2em;
   cursor: pointer;
-  transition: all 0.2s;
-
+  // transition: all 0.2s;
   &:hover {
     box-shadow: $box-shadow;
   }
+
+  &.isSelected {
+    outline: solid 2.5px $color-primary;
+    box-shadow: $color-primary-light 0px 0px 0px 6px;
+  }
+
   .img-container {
     height: $content-size;
     width: calc($content-size + 2em);

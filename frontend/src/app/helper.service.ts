@@ -72,6 +72,7 @@ export class HelperService {
       selectedPage: this.defaultPopupPage,
     };
     this.emitPopupState(popupState);
+    this.selectedProperty = {};
   }
 
   // alert-popup
