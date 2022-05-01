@@ -32,5 +32,8 @@
       <div *ngIf="router.url === '/dashboard'" class="selected-span"></div>
     </div>
   </div>
-  <connect-advertisment></connect-advertisment>
+  <connect-advertisment
+    *ngIf="helper.currentUser.id === undefined"
+  ></connect-advertisment>
+  <user-infos *ngIf="helper.currentUser.id !== undefined"></user-infos>
 </nav>

@@ -26,6 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
+import { UserInfosComponent } from './navbar/user-infos/user-infos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/conn
     NewPropertyComponent,
     AlertNotificationComponent,
     ConnectAdvertismentComponent,
+    UserInfosComponent,
   ],
   imports: [
     BrowserModule,
