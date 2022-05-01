@@ -61,7 +61,7 @@ public class UserService {
             user.setPassword(null);
             return new ResponseEntity<>(user, HttpStatus.OK);
         }
-        return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     /**

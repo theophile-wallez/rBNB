@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
@@ -55,7 +56,7 @@ import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/conn
     MatIconModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
