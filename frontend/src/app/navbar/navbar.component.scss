@@ -3,7 +3,7 @@ nav {
   position: relative;
   margin: 0;
   padding: 0;
-  width: 15em;
+  width: 17em;
   height: 100vh;
   background-color: $color-background-over;
   border-right: solid 1.5px $color-border;
@@ -27,6 +27,7 @@ nav {
   }
 
   .link-container {
+    margin-top: 1em;
     width: 100%;
     .link {
       height: 3em;
@@ -39,7 +40,7 @@ nav {
 
       i {
         color: $color-font-mid;
-        font-size: 1.3em;
+        font-size: 1.5em;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -51,7 +52,7 @@ nav {
       }
       .link-content {
         color: $color-font-mid;
-        font-size: 1em;
+        font-size: 1.1em;
         list-style: none;
         font-family: sans-serif;
         font-weight: 600;

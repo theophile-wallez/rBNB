@@ -16,8 +16,4 @@ export class NavbarComponent implements OnInit {
     this.helper.closePopup();
     this.router.navigate([path]);
   }
-
-  devAlertTest() {
-    this.helper.createNewAlert(true, 'Incorrect email or password.');
-  }
 }
