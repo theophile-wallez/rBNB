@@ -1,0 +1,12 @@
+@import "../../../variables.scss";
+
+.container {
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 2em;
+  left: 1em;
+  right: 1em;
+  background-color: $color-primary-deep-light;
+  height: 15em;
+  width: 100%;
+}
