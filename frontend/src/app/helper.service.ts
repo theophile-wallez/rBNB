@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { Alert, Property, User } from 'src/services/interfaces';
@@ -7,7 +8,7 @@ import { Alert, Property, User } from 'src/services/interfaces';
   providedIn: 'root',
 })
 export class HelperService {
-  constructor(private cookie: CookieService) {}
+  constructor(private cookie: CookieService, public router: Router) {}
 
   //! à retirer
   page: string = 'listing';
@@ -27,6 +28,8 @@ export class HelperService {
   disconnectUser() {
     this.currentUser = {};
     this.cookie.delete('userId');
+    this.router.navigate(['']);
+    this.closePopup();
     this.createNewAlert(false, "You're now logged out");
   }
 
