@@ -24,6 +24,12 @@ export class HelperService {
     this.cookie.set('userId', user.id ?? 'none');
   }
 
+  disconnectUser() {
+    this.currentUser = {};
+    this.cookie.delete('userId');
+    this.createNewAlert(false, "You're now logged out");
+  }
+
   //? Popup management
 
   defaultPopupPage: string = 'signIn';
@@ -98,6 +104,10 @@ export class HelperService {
       isError: isError,
       content: content,
     };
+    console.log('newAlert: ', newAlert);
     this.emitAlert(newAlert);
   }
+
+  //? Click handler
+  documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>();
 }

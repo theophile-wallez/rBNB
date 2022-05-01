@@ -109,6 +109,7 @@ $content-size: calc($property-height - 2 * $property-padding);
     justify-content: center;
     img {
       height: 100%;
+      user-select: none;
     }
   }
   .content-container {

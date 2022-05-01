@@ -18,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping()
-    public <T> ResponseEntity authCheck(@RequestBody Auth auth)
+    public ResponseEntity<?> authCheck(@RequestBody Auth auth)
             throws ExecutionException, InterruptedException, InvalidKeySpecException, NoSuchAlgorithmException {
         return authService.authCheck(auth);
     }

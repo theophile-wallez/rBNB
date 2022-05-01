@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/services/interfaces';
@@ -13,7 +13,10 @@ export class AppComponent implements OnInit {
   title = 'rBNB-client';
 
   constructor(private cookie: CookieService, private helper: HelperService) {}
-
+  @HostListener('document:click', ['$event'])
+  documentClick(event: any): void {
+    this.helper.documentClickedTarget.next(event.target);
+  }
   ngOnInit() {
     this.readCookie();
   }

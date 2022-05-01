@@ -1,12 +1,19 @@
 <div class="container">
   <div class="relative-container">
-    <div class="picture-container">
-      <img src="../../assets/images/face.png" draggable="false" />
+    <div class="infos-bubble" (click)="openPopup()">
+      <div class="picture-container">
+        <img src="../../assets/images/face.png" draggable="false" />
+      </div>
+      <div class="infos-container">
+        <div class="names">{{ helper.currentUser.firstName }}</div>
+        <div class="email">Go to my profil</div>
+      </div>
+      <div class="dots">···</div>
     </div>
-    <div class="infos-container">
-      <div class="names">Théophile</div>
-      <div class="email">Go to my profil</div>
+    <div class="popup" #popup [@openClose]="isPopupOpen ? 'open' : 'closed'">
+      <!-- [hidden]="!isPopupOpen" -->
+      <div class="link">My profil</div>
+      <div class="link" (click)="disconnectUser()">Disconnect</div>
     </div>
-    <div class="dots">···</div>
   </div>
 </div>

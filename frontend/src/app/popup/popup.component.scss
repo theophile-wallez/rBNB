@@ -11,6 +11,7 @@
   border-top-left-radius: $border-radius;
   border-bottom-left-radius: $border-radius;
   box-shadow: $box-shadow;
+  z-index: 10;
 
   .popup-relative {
     box-sizing: border-box;
