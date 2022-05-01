@@ -12,11 +12,11 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/services/interfaces';
 
 @Component({
-  selector: 'login-and-create-account',
-  templateUrl: './login-and-create-account.component.html',
-  styleUrls: ['./login-and-create-account.component.scss'],
+  selector: 'sign-in-and-up',
+  templateUrl: './sign-in-and-up.component.html',
+  styleUrls: ['./sign-in-and-up.component.scss'],
 })
-export class LoginAndCreateAccountComponent implements OnInit {
+export class SignInAndUpComponent implements OnInit {
   signIn!: FormGroup;
   signUp!: FormGroup;
   messageSignIn: string = '';

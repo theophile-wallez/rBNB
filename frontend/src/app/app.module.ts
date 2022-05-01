@@ -12,7 +12,7 @@ import { ListingComponent } from './listing/listing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
 import { NewContractComponent } from './new-contract/new-contract.component';
-import { LoginAndCreateAccountComponent } from './popup/login-and-create-account/login-and-create-account.component';
+import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewPropertyComponent } from './new-property/new-property.component';
@@ -34,7 +34,7 @@ import { ConnectOrUserInfosComponent } from './navbar/connect-or-user-infos/conn
     DashboardComponent,
     PopupComponent,
     NewContractComponent,
-    LoginAndCreateAccountComponent,
+    SignInAndUpComponent,
     MyPropertiesComponent,
     NewPropertyComponent,
     MessagePopupComponent,
