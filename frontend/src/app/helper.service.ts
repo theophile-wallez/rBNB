@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Subject } from 'rxjs';
 import { Alert, Property, User } from 'src/services/interfaces';
 
@@ -6,7 +7,7 @@ import { Alert, Property, User } from 'src/services/interfaces';
   providedIn: 'root',
 })
 export class HelperService {
-  constructor() {}
+  constructor(private cookie: CookieService) {}
 
   //! à retirer
   page: string = 'listing';
@@ -17,8 +18,10 @@ export class HelperService {
   //? User management
   currentUser: User = {};
 
+  //TODO stocker cookies ici
   setCurrentUser(user: User) {
     this.currentUser = user;
+    this.cookie.set('userId', user.id ?? 'none');
   }
 
   //? Popup management
