@@ -4,9 +4,9 @@ import { Alert } from 'src/services/interfaces';
 import { HelperService } from '../helper.service';
 
 @Component({
-  selector: 'message-popup',
-  templateUrl: './message-popup.component.html',
-  styleUrls: ['./message-popup.component.scss'],
+  selector: 'alert-notification',
+  templateUrl: './alert-notification.component.html',
+  styleUrls: ['./alert-notification.component.scss'],
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
@@ -19,7 +19,7 @@ import { HelperService } from '../helper.service';
     ]),
   ],
 })
-export class MessagePopupComponent implements OnInit {
+export class AlertNotificationComponent implements OnInit {
   constructor(private helper: HelperService) {}
   alert: any = {};
   ngOnInit(): void {

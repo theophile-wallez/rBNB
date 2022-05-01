@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MessagePopupComponent } from './message-popup.component';
+import { AlertNotificationComponent } from './alert-notification.component';
 
 describe('MessagePopupComponent', () => {
-  let component: MessagePopupComponent;
-  let fixture: ComponentFixture<MessagePopupComponent>;
+  let component: AlertNotificationComponent;
+  let fixture: ComponentFixture<AlertNotificationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MessagePopupComponent ]
-    })
-    .compileComponents();
+      declarations: [AlertNotificationComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MessagePopupComponent);
+    fixture = TestBed.createComponent(AlertNotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

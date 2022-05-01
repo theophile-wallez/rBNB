@@ -23,7 +23,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 
-import { MessagePopupComponent } from './message-popup/message-popup.component';
+import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
 import { ConnectOrUserInfosComponent } from './navbar/connect-or-user-infos/connect-or-user-infos.component';
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { ConnectOrUserInfosComponent } from './navbar/connect-or-user-infos/conn
     SignInAndUpComponent,
     MyPropertiesComponent,
     NewPropertyComponent,
-    MessagePopupComponent,
+    AlertNotificationComponent,
     ConnectOrUserInfosComponent,
   ],
   imports: [

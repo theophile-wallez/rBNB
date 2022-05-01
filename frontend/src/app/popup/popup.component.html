@@ -4,9 +4,8 @@
       <i class="fa-solid fa-xmark"></i>
     </div>
 
-    <new-contract
-      *ngIf="popupState.selectedPage === 'newContract'"
-    ></new-contract>
+    <new-contract *ngIf="popupState.selectedPage === 'newContract'">
+    </new-contract>
     <sign-in-and-up
       *ngIf="popupState.selectedPage === 'signIn'"
     ></sign-in-and-up>
