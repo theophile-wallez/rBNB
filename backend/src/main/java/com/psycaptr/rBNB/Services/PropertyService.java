@@ -47,7 +47,8 @@ public class PropertyService {
     public List<Property> getAllProperties(String ownerId) throws ExecutionException, InterruptedException {
         List<Property> properties = new ArrayList<>();
 
-        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("isListed",true).get();
+//        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         for (QueryDocumentSnapshot document : documents) {
             properties.add(document.toObject(Property.class));

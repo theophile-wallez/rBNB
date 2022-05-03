@@ -99,11 +99,11 @@ public class Property {
         this.pricePerDay = pricePerDay;
     }
 
-    public boolean isListed() {
+    public boolean getIsListed() {
         return isListed;
     }
 
-    public void setListed(boolean listed) {
+    public void setIsListed(boolean listed) {
         isListed = listed;
     }
 }
