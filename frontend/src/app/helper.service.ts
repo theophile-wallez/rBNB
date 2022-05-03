@@ -10,16 +10,12 @@ import { Alert, Property, User } from 'src/services/interfaces';
 export class HelperService {
   constructor(private cookie: CookieService, public router: Router) {}
 
-  //! à retirer
-  page: string = 'listing';
-
   selectedProperty: Property = {};
   isPopupOpen: boolean = false;
 
   //? User management
   currentUser: User = {};
 
-  //TODO stocker cookies ici
   setCurrentUser(user: User) {
     this.currentUser = user;
     this.cookie.set('userId', user.id ?? 'none');
@@ -45,10 +41,6 @@ export class HelperService {
 
   emitPopupState(popupState: any) {
     this.popupObservable.next(popupState);
-  }
-  //! surement plus utilisé, à check
-  changePage(pageName: string): void {
-    this.page = pageName;
   }
 
   setSelectedProperty(property: Property) {
