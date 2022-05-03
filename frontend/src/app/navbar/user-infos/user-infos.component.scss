@@ -71,16 +71,25 @@ $container-height: 4em;
         rgb(101 119 134 / 15%) 0px 0px 3px 1px;
       border-radius: 1em;
       overflow: hidden;
-      .link {
+      .link-container {
         width: 100%;
         height: 4em;
         display: flex;
-        align-items: center;
         box-sizing: border-box;
-        padding-left: 2em;
-        font-family: Helvetica, sans-serif;
+        padding-left: 1em;
+        align-items: center;
+        color: $color-font-mid-plus;
         &:hover {
           background-color: #f6f9f9;
+        }
+        i {
+          font-size: 1.3em;
+        }
+        .link {
+          width: 100%;
+          margin-left: 1em;
+          font-size: 1.1em;
+          font-family: Helvetica, sans-serif;
         }
       }
     }

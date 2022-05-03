@@ -6,15 +6,19 @@
       </div>
       <div class="infos-container">
         <div class="names">{{ helper.currentUser.firstName }}</div>
-        <!-- <div class="email">Go to my profil</div> -->
         <div class="email">Account Settings</div>
       </div>
       <div class="dots">···</div>
     </div>
     <div class="popup" #popup [@openClose]="isPopupOpen ? 'open' : 'closed'">
-      <!-- [hidden]="!isPopupOpen" -->
-      <div class="link">Profil settings</div>
-      <div class="link" (click)="disconnectUser()">Disconnect</div>
+      <div class="link-container">
+        <i class="fa-solid fa-gear"></i>
+        <div class="link">Profil settings</div>
+      </div>
+      <div class="link-container">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <div class="link" (click)="disconnectUser()">Disconnect</div>
+      </div>
     </div>
   </div>
 </div>
