@@ -28,36 +28,43 @@
   <div class="separator"></div>
   <div class="owner-container"></div>
   <div class="dates-container">
-    <div class="date-container">
+    <div
+      class="date-container"
+      (click)="setSelectedDate('checkInDate')"
+      [ngClass]="{ selectedDate: selectedDate === 'checkInDate' }"
+    >
       <div class="date-name">Check-in</div>
       <div class="date">
-        {{
-          firstDate.getDate() +
-            " " +
-            firstDate.toLocaleString("en-us", { month: "long" }) +
-            " " +
-            firstDate.getFullYear()
-        }}
+        {{ getDateToString(checkInDate) }}
       </div>
     </div>
     <i class="fa-solid fa-angle-right"></i>
-    <div class="date-container">
-      <div class="date-name">Check-in</div>
+    <div
+      class="date-container"
+      (click)="setSelectedDate('checkOutDate')"
+      [ngClass]="{ selectedDate: selectedDate === 'checkOutDate' }"
+    >
+      <div class="date-name">Check-out</div>
       <div class="date">
-        {{
-          firstDate.getDate() +
-            " " +
-            firstDate.toLocaleString("en-us", { month: "long" }) +
-            " " +
-            firstDate.getFullYear()
-        }}
+        {{ getDateToString(checkOutDate) }}
       </div>
     </div>
     <mat-card class="calendar-card firstDate">
       <mat-calendar
-        [(selected)]="firstDate"
-        (selectedChange)="consoleDate()"
+        *ngIf="selectedDate === 'checkInDate'"
+        [(selected)]="checkInDate"
+        (selectedChange)="updateCheckOutDate()"
+        [minDate]="minDate"
+      ></mat-calendar>
+      <mat-calendar
+        *ngIf="selectedDate === 'checkOutDate'"
+        [(selected)]="checkOutDate"
+        (selectedChange)="setGapBetweenDates()"
+        [minDate]="addDaysToDate(checkInDate, 1)"
       ></mat-calendar>
     </mat-card>
   </div>
+  <!-- <div class="price-container">
+    {{ getEstimatedPrice() }}
+  </div> -->
 </section>
