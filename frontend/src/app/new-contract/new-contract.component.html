@@ -27,4 +27,37 @@
   </div>
   <div class="separator"></div>
   <div class="owner-container"></div>
+  <div class="dates-container">
+    <div class="date-container">
+      <div class="date-name">Check-in</div>
+      <div class="date">
+        {{
+          firstDate.getDate() +
+            " " +
+            firstDate.toLocaleString("en-us", { month: "long" }) +
+            " " +
+            firstDate.getFullYear()
+        }}
+      </div>
+    </div>
+    <i class="fa-solid fa-angle-right"></i>
+    <div class="date-container">
+      <div class="date-name">Check-in</div>
+      <div class="date">
+        {{
+          firstDate.getDate() +
+            " " +
+            firstDate.toLocaleString("en-us", { month: "long" }) +
+            " " +
+            firstDate.getFullYear()
+        }}
+      </div>
+    </div>
+    <mat-card class="calendar-card firstDate">
+      <mat-calendar
+        [(selected)]="firstDate"
+        (selectedChange)="consoleDate()"
+      ></mat-calendar>
+    </mat-card>
+  </div>
 </section>

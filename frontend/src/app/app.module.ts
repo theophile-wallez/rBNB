@@ -16,17 +16,23 @@ import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.comp
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewPropertyComponent } from './new-property/new-property.component';
+
+import { CookieService } from 'ngx-cookie-service';
+
+import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
+import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
+import { UserInfosComponent } from './navbar/user-infos/user-infos.component';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { CookieService } from 'ngx-cookie-service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatNativeDateModule } from '@angular/material/core';
 
-import { AlertNotificationComponent } from './alert-notification/alert-notification.component';
-import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
-import { UserInfosComponent } from './navbar/user-infos/user-infos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +63,9 @@ import { UserInfosComponent } from './navbar/user-infos/user-infos.component';
     MatRippleModule,
     MatIconModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

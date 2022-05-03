@@ -4,13 +4,15 @@ import { HelperService } from '../helper.service';
 @Component({
   selector: 'new-contract',
   templateUrl: './new-contract.component.html',
-  styleUrls: ['./new-contract.component.scss']
+  styleUrls: ['./new-contract.component.scss'],
 })
 export class NewContractComponent implements OnInit {
+  constructor(public helper: HelperService) {}
+  firstDate: Date = new Date();
 
-  constructor(public helper: HelperService) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  consoleDate() {
+    console.log('firstDate: ', this.firstDate);
   }
-
 }

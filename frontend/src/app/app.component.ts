@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
     this.helper.documentClickedTarget.next(event.target);
   }
   ngOnInit() {
+    //!
+    this.helper.setPopupPage('newContract');
     this.readCookie();
   }
 
