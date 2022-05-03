@@ -10,9 +10,6 @@ import { Alert, Property, User } from 'src/services/interfaces';
 export class HelperService {
   constructor(private cookie: CookieService, public router: Router) {}
 
-  selectedProperty: Property = {};
-  isPopupOpen: boolean = false;
-
   //? User management
   currentUser: User = {};
 
@@ -29,8 +26,11 @@ export class HelperService {
     this.createNewAlert(false, "You're now logged out");
   }
 
-  //? Popup management
+  isUserLogged(): boolean {
+    return this.currentUser.id !== undefined;
+  }
 
+  //? Popup management
   defaultPopupPage: string = 'signIn';
   popupState: any = {
     isOpen: false,
@@ -41,24 +41,6 @@ export class HelperService {
 
   emitPopupState(popupState: any) {
     this.popupObservable.next(popupState);
-  }
-
-  setSelectedProperty(property: Property) {
-    if (this.isUserLogged()) {
-      this.selectedProperty = property;
-      this.setPopupPage('newContract');
-    } else {
-      this.setPopupPage('signIn');
-    }
-  }
-
-  //! pas sûr que ce soit utile
-  clearSelectedProperty() {
-    this.selectedProperty = {};
-  }
-
-  isUserLogged(): boolean {
-    return this.currentUser.id !== undefined;
   }
 
   setPopupPage(page: string): void {
@@ -76,6 +58,22 @@ export class HelperService {
       selectedPage: this.defaultPopupPage,
     };
     this.emitPopupState(popupState);
+    this.selectedProperty = {};
+  }
+
+  selectedProperty: Property = {};
+
+  setSelectedProperty(property: Property) {
+    if (this.isUserLogged()) {
+      this.selectedProperty = property;
+      this.setPopupPage('newContract');
+    } else {
+      this.setPopupPage('signIn');
+    }
+  }
+
+  //! pas sûr que ce soit utile
+  clearSelectedProperty() {
     this.selectedProperty = {};
   }
 
