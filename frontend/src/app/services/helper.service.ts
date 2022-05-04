@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { Alert, Property, User } from 'src/services/interfaces';
+import { Alert, Property, User } from 'src/app/services/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',

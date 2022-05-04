@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
-import { User } from 'src/services/interfaces';
+import { User } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from './services/helper.service';
 import { WebService } from './services/web.service';
 
