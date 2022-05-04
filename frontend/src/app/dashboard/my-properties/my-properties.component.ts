@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HelperService } from 'src/app/helper.service';
+import { WebService } from 'src/app/services/web.service';
 import { environment } from 'src/environments/environment';
 import { Property } from 'src/services/interfaces';
 
@@ -8,19 +10,26 @@ import { Property } from 'src/services/interfaces';
   styleUrls: ['./my-properties.component.scss'],
 })
 export class MyPropertiesComponent implements OnInit {
-  properties: Property[] = [];
-  devData: string = 'HXgxoEgzDsBtXDJazHF7';
+  constructor(private helper: HelperService, private webService: WebService) {}
 
-  constructor() {}
+  properties: Property[] = [];
 
   ngOnInit(): void {
     this.getPropertiesByUserId();
   }
 
   async getPropertiesByUserId() {
-    let data = await fetch(
-      environment.URL + '/property/by-user-id?ownerId=' + this.devData
-    );
-    this.properties = await data.json();
+    let userId = this.helper.currentUser.id;
+    if (userId) {
+      let response = await this.webService.getPropertiesByUserId(userId);
+      if (response.ok) {
+        this.properties = await response.json();
+        return;
+      }
+      this.helper.createNewAlert(
+        true,
+        "Sorry, your properties couln't be retrieved."
+      );
+    }
   }
 }

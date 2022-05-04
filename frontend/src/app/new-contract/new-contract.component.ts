@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { Property, User } from 'src/services/interfaces';
+import { Property } from 'src/services/interfaces';
 import { HelperService } from '../helper.service';
+import { WebService } from '../services/web.service';
 
 @Component({
   selector: 'new-contract',
@@ -9,7 +9,7 @@ import { HelperService } from '../helper.service';
   styleUrls: ['./new-contract.component.scss'],
 })
 export class NewContractComponent implements OnInit {
-  constructor(public helper: HelperService) {}
+  constructor(public helper: HelperService, private webService: WebService) {}
   property: Property = {};
   owner: any = {};
   selectedDate: string = 'checkInDate';
@@ -23,14 +23,10 @@ export class NewContractComponent implements OnInit {
   // ? car ngOnInit() n'est trigger QUE pour la première property choisie
   ngOnInit(): void {
     this.checkOutDate = this.addDaysToDate(new Date(), this.gapBetweenDates);
-    console.log('init');
-    // this.owner = this.getOwnerByPropertyId();
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
       this.property = property;
-      console.log('property: ', property);
       if (property.ownerId) {
         this.getOwnerByOwnerId(property.ownerId);
-        console.log('this.owner: ', this.owner);
       }
     });
   }
@@ -81,7 +77,7 @@ export class NewContractComponent implements OnInit {
   // ? OWNER HANDLING
 
   async getOwnerByOwnerId(ownerId: string) {
-    let response = await this.getUserById(ownerId);
+    let response = await this.webService.getUserById(ownerId);
     if (response.ok) {
       this.owner = await response.json();
       return;
@@ -90,9 +86,5 @@ export class NewContractComponent implements OnInit {
       true,
       "Sorry, we couln't find the owner's infos."
     );
-  }
-
-  getUserById(userId: string): Promise<Response> {
-    return fetch(environment.URL + '/user/by-id?id=' + userId);
   }
 }

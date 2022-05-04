@@ -8,7 +8,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { HelperService } from 'src/app/helper.service';
-import { environment } from 'src/environments/environment';
+import { WebService } from 'src/app/services/web.service';
 import { User } from 'src/services/interfaces';
 
 @Component({
@@ -22,7 +22,11 @@ export class SignInAndUpComponent implements OnInit {
   messageSignIn: string = '';
   messageSignUp: string = '';
 
-  constructor(private helper: HelperService, private fb: FormBuilder) {}
+  constructor(
+    private helper: HelperService,
+    private fb: FormBuilder,
+    private webService: WebService
+  ) {}
 
   ngOnInit(): void {
     this.signIn = this.fb.group({
@@ -67,10 +71,7 @@ export class SignInAndUpComponent implements OnInit {
 
   async signInSubmit() {
     if (this.signIn.valid) {
-      let response = await this.postSignInAndOutForms(
-        '/auth',
-        this.signIn.value
-      );
+      let response = await this.webService.postSignInForms(this.signIn.value);
       if (response.ok) {
         let user = await response.json();
         this.helper.setCurrentUser(user);
@@ -90,7 +91,7 @@ export class SignInAndUpComponent implements OnInit {
     if (this.signUp.valid) {
       let dataToSent: any = JSON.parse(JSON.stringify(this.signUp.value));
       delete dataToSent['passwordConfirm'];
-      let response = await this.postSignInAndOutForms('/user', dataToSent);
+      let response = await this.webService.postSignOutForms(dataToSent);
       if (response.ok) {
         let user: User = await response.json();
         this.helper.setCurrentUser(user);
@@ -105,17 +106,6 @@ export class SignInAndUpComponent implements OnInit {
         this.helper.createNewAlert(true, await response.text());
       }
     }
-  }
-
-  async postSignInAndOutForms(endpoint: string, data: any): Promise<Response> {
-    return fetch(environment.URL + endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
   }
 
   checkPasswords: ValidatorFn = (

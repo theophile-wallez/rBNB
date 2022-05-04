@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HousingType, Property } from 'src/services/interfaces';
+import { Property } from 'src/services/interfaces';
 import { HelperService } from '../helper.service';
+import { WebService } from '../services/web.service';
 
 @Component({
   selector: 'listing',
@@ -16,31 +14,24 @@ export class ListingComponent implements OnInit {
   properties: Property[] = [];
   filteredProperties: Property[] = [];
   selectedProperty!: Property;
-  constructor(public helper: HelperService) {}
+  constructor(public helper: HelperService, private webService: WebService) {}
 
   ngOnInit(): void {
-    this.getProperties();
+    this.handleProperties();
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
       this.selectedProperty = property;
     });
   }
 
-  async getProperties() {
-    let data = await fetch(environment.URL + '/property');
-    this.properties = await data.json();
+  async handleProperties() {
+    //TODO Set userId as a HTTP parameter if user is connected
+    let response = await this.webService.getAllProperties();
+    this.properties = await response.json();
     this.properties.forEach((property) => {
       property.isSelected = false;
     });
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }
-
-  //TODO (optional) : mixer avec bloc commenté pour etre propre
-
-  // async getFilteredProperties() {
-  //   let url = environment.URL + '/property/search?query=' + this.searchQuery;
-  //   let data = await fetch(url);
-  //   this.properties = await data.json();
-  // }
 
   getFilteredProperties() {
     this.filteredProperties = this.properties.filter((property) =>
