@@ -63,10 +63,10 @@ export class NewPropertyComponent implements OnInit {
     let property: any = JSON.parse(JSON.stringify(this.myForm.value));
     property = this.cleanPropertyBeforeSubmit(property);
     console.log(property);
-    // let userId: string | undefined = this.helper.currentUser.id;
-    // if (userId) {
-    //   this.webService.postPropertyByUserId(property, userId);
-    // }
+    let userId: string | undefined = this.helper.currentUser.id;
+    if (userId) {
+      this.webService.postPropertyByUserId(property, userId);
+    }
   }
 
   get zipCode() {
