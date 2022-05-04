@@ -1,8 +1,16 @@
+import { Country } from '@angular-material-extensions/select-country';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Property } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from '../../services/helper.service';
 import { WebService } from '../../services/web.service';
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'new-property',
@@ -11,7 +19,7 @@ import { WebService } from '../../services/web.service';
 })
 export class NewPropertyComponent implements OnInit {
   myForm!: FormGroup;
-  devId: string = '5kigfXW11ZTZzTOXOEH3';
+
   constructor(
     private fb: FormBuilder,
     private helper: HelperService,
@@ -20,29 +28,66 @@ export class NewPropertyComponent implements OnInit {
 
   ngOnInit() {
     const location = this.fb.group({
-      country: '',
-      zipCode: '',
-      number: '',
-      street: '',
+      country: ['', [Validators.required]],
+      zipCode: ['', [Validators.required]],
+      number: ['', [Validators.required]],
+      streetType: ['Street', [Validators.required]],
+      street: ['', [Validators.required]],
     });
 
     this.myForm = this.fb.group({
-      housingType: '',
+      housingType: ['house', [Validators.required]],
       location: location,
       description: '',
-      bedAmount: '',
-      squareFootage: '',
-      pricePerDay: '',
+      bedAmount: ['', [Validators.required]],
+      squareFootage: ['', [Validators.required]],
+      pricePerDay: ['', [Validators.required]],
     });
 
-    this.myForm.valueChanges.subscribe(console.log);
+    // this.myForm.valueChanges.subscribe(console.log);
+    this.myForm.valueChanges.subscribe(() => {
+      console.log(this.myForm.get('location')?.get('zipCode'));
+    });
+  }
+
+  cleanPropertyBeforeSubmit(property: any): any {
+    property.location['country'] = property.location?.country['name'];
+    property.location['street'] =
+      property.location['street'] + ' ' + property.location['streetType'];
+    delete property.location['streetType'];
+    property['isListed'] = true;
+    return property;
   }
 
   createNewProperty() {
-    let property: Property = this.myForm.value;
-    let userId: string | undefined = this.helper.currentUser.id;
-    if (userId) {
-      this.webService.postPropertyByUserId(property, userId);
-    }
+    let property: any = JSON.parse(JSON.stringify(this.myForm.value));
+    property = this.cleanPropertyBeforeSubmit(property);
+    console.log(property);
+    // let userId: string | undefined = this.helper.currentUser.id;
+    // if (userId) {
+    //   this.webService.postPropertyByUserId(property, userId);
+    // }
   }
+
+  get zipCode() {
+    return this.myForm.get('location')?.get('zipCode');
+  }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
+  // get zipCode() {
+  //   return this.myForm.get('location')?.get('zipCode');
+  // }
 }
