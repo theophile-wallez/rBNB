@@ -29,7 +29,7 @@ export class NewContractComponent implements OnInit {
       this.property = property;
       console.log('property: ', property);
       if (property.ownerId) {
-        this.owner = this.getOwnerByOwnerId(property.ownerId);
+        this.getOwnerByOwnerId(property.ownerId);
         console.log('this.owner: ', this.owner);
       }
     });
@@ -83,10 +83,10 @@ export class NewContractComponent implements OnInit {
   async getOwnerByOwnerId(ownerId: string) {
     let response = await this.getUserById(ownerId);
     if (response.ok) {
-      return await response.json();
+      this.owner = await response.json();
+      return;
     }
     this.helper.createNewAlert(true, "Can't find owner.");
-    return {};
   }
 
   getUserById(userId: string): Promise<Response> {
