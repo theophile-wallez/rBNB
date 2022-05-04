@@ -2,11 +2,7 @@
   <div class="property-infos">
     <div class="name-container">
       <div class="property-name">
-        {{
-          helper.selectedProperty.location?.number +
-            " " +
-            helper.selectedProperty.location?.street
-        }}
+        {{ property?.location?.number + " " + property?.location?.street }}
       </div>
       <div class="status">Active</div>
     </div>
@@ -14,19 +10,31 @@
       <i class="fa-regular fa-map"></i>
       <div class="location">
         {{
-          helper.selectedProperty.location?.number +
+          property?.location?.number +
             " " +
-            helper.selectedProperty.location?.street +
+            property?.location?.street +
             ", " +
-            helper.selectedProperty.location?.city +
+            property?.location?.city +
             ", " +
-            helper.selectedProperty.location?.country
+            property?.location?.country
         }}
       </div>
     </div>
   </div>
   <div class="separator"></div>
-  <div class="owner-container"></div>
+  <div class="container">
+    <div class="relative-container">
+      <div class="infos-bubble">
+        <div class="picture-container">
+          <img src="../../assets/images/face.png" draggable="false" />
+        </div>
+        <div class="infos-container">
+          <div class="names">{{ owner?.firstName }}</div>
+          <div class="email">{{ owner?.email }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="dates-container">
     <div
       class="date-container"
@@ -49,22 +57,26 @@
         {{ getDateToString(checkOutDate) }}
       </div>
     </div>
-    <mat-card class="calendar-card firstDate">
-      <mat-calendar
-        *ngIf="selectedDate === 'checkInDate'"
-        [(selected)]="checkInDate"
-        (selectedChange)="updateCheckOutDate()"
-        [minDate]="minDate"
-      ></mat-calendar>
-      <mat-calendar
-        *ngIf="selectedDate === 'checkOutDate'"
-        [(selected)]="checkOutDate"
-        (selectedChange)="setGapBetweenDates()"
-        [minDate]="addDaysToDate(checkInDate, 1)"
-      ></mat-calendar>
-    </mat-card>
   </div>
+  <mat-card class="calendar-card firstDate">
+    <mat-calendar
+      *ngIf="selectedDate === 'checkInDate'"
+      [(selected)]="checkInDate"
+      (selectedChange)="updateCheckOutDate()"
+      [minDate]="minDate"
+    ></mat-calendar>
+    <mat-calendar
+      *ngIf="selectedDate === 'checkOutDate'"
+      [(selected)]="checkOutDate"
+      (selectedChange)="setGapBetweenDates()"
+      [minDate]="addDaysToDate(checkInDate, 1)"
+    ></mat-calendar>
+  </mat-card>
   <!-- <div class="price-container">
     {{ getEstimatedPrice() }}
   </div> -->
+  <div class="submit-container">
+    <div class="left-container">hello</div>
+    <div class="btn btn-contract">Rent now</div>
+  </div>
 </section>

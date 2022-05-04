@@ -60,26 +60,7 @@
         margin-bottom: 1.4em;
       }
       .btn-sign-in {
-        background-color: $color-primary;
-        padding: 0.5em 1em;
-        border-radius: 1em;
-        color: $color-background-over;
-        width: max-content;
         margin-bottom: 1em;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s;
-        transform: scale(1);
-        user-select: none;
-        &:hover {
-          $scale: 1.04;
-          //? https://stackoverflow.com/a/52768926/15813444
-          -webkit-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
-          -moz-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
-          -o-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
-          -ms-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
-          transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
-        }
       }
       .character-img-container {
         position: absolute;

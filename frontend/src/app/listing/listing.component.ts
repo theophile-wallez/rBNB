@@ -15,11 +15,14 @@ export class ListingComponent implements OnInit {
   placeholder: string = 'Search for company, provider, user etc.';
   properties: Property[] = [];
   filteredProperties: Property[] = [];
-
+  selectedProperty!: Property;
   constructor(public helper: HelperService) {}
 
   ngOnInit(): void {
     this.getProperties();
+    this.helper.selectedPropertyObservable.subscribe((property: Property) => {
+      this.selectedProperty = property;
+    });
   }
 
   async getProperties() {
@@ -49,7 +52,6 @@ export class ListingComponent implements OnInit {
 
   setSelectedProperty(selectedProperty: Property) {
     this.helper.setSelectedProperty(selectedProperty);
-    console.log(this.helper.selectedProperty);
   }
 
   unSelectAllProperties() {

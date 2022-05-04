@@ -16,7 +16,7 @@
     *ngFor="let property of filteredProperties"
     (click)="setSelectedProperty(property)"
     [ngClass]="{
-      isSelected: property.id == helper.selectedProperty.id
+      isSelected: property.id == selectedProperty?.id
     }"
   >
     <div class="img-container">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Alert, Property, User } from 'src/services/interfaces';
 
 @Injectable({
@@ -58,23 +58,29 @@ export class HelperService {
       selectedPage: this.defaultPopupPage,
     };
     this.emitPopupState(popupState);
-    this.selectedProperty = {};
+    this.resetSelectedProperty();
   }
 
-  selectedProperty: Property = {};
+  // selectedProperty: Property = {};
+
+  public selectedPropertyBehavior = new BehaviorSubject<Property>({});
+  selectedPropertyObservable = this.selectedPropertyBehavior.asObservable();
+
+  emitSelectedProperty(property: Property) {
+    this.selectedPropertyBehavior.next(property);
+  }
+
+  resetSelectedProperty() {
+    this.emitSelectedProperty({});
+  }
 
   setSelectedProperty(property: Property) {
     if (this.isUserLogged()) {
-      this.selectedProperty = property;
+      this.emitSelectedProperty(property);
       this.setPopupPage('newContract');
     } else {
       this.setPopupPage('signIn');
     }
-  }
-
-  //! pas sûr que ce soit utile
-  clearSelectedProperty() {
-    this.selectedProperty = {};
   }
 
   // alert-popup
