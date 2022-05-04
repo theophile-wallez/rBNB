@@ -1,10 +1,11 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css);
-// @font-face {
-//   font-family: font-normal;
-//   src: url("assets/fonts/chirp/chirp-normal.ttf");
-// }
+@font-face {
+  font-family: chirp-normal;
+  src: url("assets/fonts/chirp-normal.ttf");
+}
 
-// $font-normal: font-normal;
+$font: chirp-normal;
+// $font: sans-serif;
 
 //? Colors https://dribbble.com/shots/7390999/attachments/272510?mode=media
 $color-primary: #2d1cc4;
@@ -20,6 +21,8 @@ $color-font-light: #dadde2;
 
 $color-green: #31c534;
 $color-green-light: #ebf9ea;
+
+$color-error: #ff6b81;
 
 $color-yellow: #ffbc02;
 $color-yellow-dark: #a78c49;
@@ -38,4 +41,24 @@ $box-shadow: rgb(0 0 0 / 14%) 0px 1px 4px;
   background-color: $color-border;
 }
 
-$font: sans-serif;
+.btn {
+  background-color: $color-primary;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  color: $color-background-over;
+  width: max-content;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform: scale(1);
+  user-select: none;
+  &:hover {
+    $scale: 1.04;
+    //? https://stackoverflow.com/a/52768926/15813444
+    -webkit-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
+    -moz-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
+    -o-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
+    -ms-transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
+    transform: scale($scale) translate3d(0, 0, 0) perspective(1px);
+  }
+}

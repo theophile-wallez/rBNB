@@ -1,7 +1,6 @@
 package com.psycaptr.rBNB.Controllers;
 
 import com.psycaptr.rBNB.Models.Auth;
-import com.psycaptr.rBNB.Models.User;
 import com.psycaptr.rBNB.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +18,7 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping()
-    public ResponseEntity<User> authCheck(@RequestBody Auth auth)
+    public ResponseEntity<?> authCheck(@RequestBody Auth auth)
             throws ExecutionException, InterruptedException, InvalidKeySpecException, NoSuchAlgorithmException {
         return authService.authCheck(auth);
     }

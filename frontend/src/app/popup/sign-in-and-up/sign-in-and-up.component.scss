@@ -1,0 +1,127 @@
+@import "../../../variables.scss";
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 2em;
+  margin-bottom: 1em;
+}
+
+.separator-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .text {
+    margin: 0em 1em;
+    color: $color-font-mid;
+    user-select: none;
+  }
+}
+
+.container {
+  margin-bottom: 2em;
+  width: 100%;
+  padding: 0em 1em;
+  box-sizing: border-box;
+
+  &:last-child {
+    margin-top: 2em;
+  }
+
+  .title {
+    font-size: 1.7em;
+    width: 100%;
+    text-align: center;
+    user-select: none;
+    span {
+      font-weight: 600;
+      font-style: oblique;
+    }
+  }
+
+  .sub-title {
+    margin-top: 0.5em;
+    width: 100%;
+    text-align: center;
+    color: $color-font-mid;
+    font-size: 0.9em;
+    user-select: none;
+  }
+  .form {
+    margin-top: 1.7em;
+
+    .input-container {
+      margin: 0;
+      width: 100%;
+      position: relative;
+      height: 2.5em;
+      margin-bottom: 0.6em;
+
+      .input-icon {
+        position: absolute;
+        left: 1.2em;
+        height: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $color-font-mid-plus;
+      }
+
+      input {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding-left: 3.3em;
+        border: none;
+        outline: solid 1px $color-border;
+        border-radius: 0.4em;
+        font-size: 1em;
+        color: $color-font-mid-plus;
+        &:focus {
+          outline: none;
+          outline: solid 1.5px $color-primary-light;
+        }
+        &::placeholder {
+          color: $color-font-mid-plus;
+        }
+        &.invalid {
+          outline: solid 1.5px $color-error;
+        }
+      }
+    }
+
+    .btn-container {
+      width: 100%;
+      height: 2.8em;
+      margin: 0;
+      margin-top: 1em;
+      position: relative;
+      .message {
+        position: absolute;
+        top: -1.3em;
+        left: 0;
+        width: 100%;
+        color: $color-error;
+      }
+      button {
+        box-sizing: border-box;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $color-primary;
+        color: $color-background-over;
+        border-radius: 0.3em;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:disabled {
+          background-color: $color-font-mid;
+          cursor: auto;
+        }
+      }
+    }
+  }
+}

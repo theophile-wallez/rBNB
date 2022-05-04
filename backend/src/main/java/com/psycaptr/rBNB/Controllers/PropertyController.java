@@ -18,25 +18,32 @@ public class PropertyController {
 
     @PostMapping("/by-user-id")
     public ResponseEntity<HttpStatus> addPropertyByUserId(
-            @RequestBody Property property,
+                @RequestBody Property property,
             @RequestParam(value = "id") String userId
 
     ) throws ExecutionException, InterruptedException {
-//        Property property = new Property(
-//                userId,
-//                new Location("fr",92140,"laStreet",54),
-//                15,
-//                500,
-//                100000
-//        );
         return propertyService.addPropertyByUserId(property, userId);
     }
 
-
-    @GetMapping("/properties")
+    @GetMapping()
     public List<Property> getAllProperties(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getAllProperties(ownerId);
     }
+
+    @GetMapping("/by-user-id")
+    public ResponseEntity<List<Property>> getPropertiesByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
+        return propertyService.getPropertiesByUserId(ownerId);
+    }
+
+    @GetMapping("/is-listed")
+    public ResponseEntity<HttpStatus> updateIsListed(
+            @RequestParam String propertyId,
+            @RequestParam boolean isListed
+    ) throws ExecutionException, InterruptedException {
+        return propertyService.updateIsListed(propertyId,isListed);
+    }
+
+
 
 //    @GetMapping("/search")
 //    public List<Property> getSearchCompliantProperties(@RequestParam String query) throws ExecutionException, InterruptedException {

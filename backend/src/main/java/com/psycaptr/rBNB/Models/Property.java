@@ -9,6 +9,7 @@ public class Property {
     private int bedAmount;
     private int squareFootage;
     private float pricePerDay;
+    private boolean isListed;
 
     public Property(String id, String ownerId, HousingType housingType, Location location, String description, int bedAmount, int squareFootage, float pricePerDay) {
         this.id = id;
@@ -96,5 +97,13 @@ public class Property {
 
     public void setPricePerDay(float pricePerDay) {
         this.pricePerDay = pricePerDay;
+    }
+
+    public boolean getIsListed() {
+        return isListed;
+    }
+
+    public void setIsListed(boolean listed) {
+        isListed = listed;
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from '../helper.service';
+import { HelperService } from '../services/helper.service';
 
 @Component({
   selector: 'page-container',
@@ -8,6 +8,5 @@ import { HelperService } from '../helper.service';
 })
 export class PageComponent implements OnInit {
   constructor(public helper: HelperService) {}
-
   ngOnInit(): void {}
 }

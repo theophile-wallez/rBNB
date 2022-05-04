@@ -14,7 +14,10 @@
   <div
     class="property"
     *ngFor="let property of filteredProperties"
-    (click)="helper.setSelectedProperty(property)"
+    (click)="setSelectedProperty(property)"
+    [ngClass]="{
+      isSelected: property.id == selectedProperty?.id
+    }"
   >
     <div class="img-container">
       <img src="../../assets/images/photo2.jpg" draggable="false" />

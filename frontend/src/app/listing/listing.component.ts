@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { HousingType, Property } from 'src/services/interfaces';
-import { HelperService } from '../helper.service';
+import { Property } from 'src/app/services/interfaces/interfaces';
+import { HelperService } from '../services/helper.service';
+import { WebService } from '../services/web.service';
 
 @Component({
   selector: 'listing',
@@ -15,26 +13,25 @@ export class ListingComponent implements OnInit {
   placeholder: string = 'Search for company, provider, user etc.';
   properties: Property[] = [];
   filteredProperties: Property[] = [];
-
-  constructor(public helper: HelperService) {}
+  selectedProperty!: Property;
+  constructor(public helper: HelperService, private webService: WebService) {}
 
   ngOnInit(): void {
-    this.getProperties();
+    this.handleProperties();
+    this.helper.selectedPropertyObservable.subscribe((property: Property) => {
+      this.selectedProperty = property;
+    });
   }
 
-  async getProperties() {
-    let data = await fetch('http://localhost:8080/api/property/properties');
-    this.properties = await data.json();
+  async handleProperties() {
+    //TODO Set userId as a HTTP parameter if user is connected
+    let response = await this.webService.getAllProperties();
+    this.properties = await response.json();
+    this.properties.forEach((property) => {
+      property.isSelected = false;
+    });
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }
-
-  //TODO (optional) : mixer avec bloc commenté pour etre propre
-
-  // async getFilteredProperties() {
-  //   let url = environment.URL + '/property/search?query=' + this.searchQuery;
-  //   let data = await fetch(url);
-  //   this.properties = await data.json();
-  // }
 
   getFilteredProperties() {
     this.filteredProperties = this.properties.filter((property) =>
@@ -42,6 +39,15 @@ export class ListingComponent implements OnInit {
         .toLocaleLowerCase()
         .includes(this.searchQuery.toLocaleLowerCase())
     );
-    console.log('this.filteredProperties', this.filteredProperties);
+  }
+
+  setSelectedProperty(selectedProperty: Property) {
+    this.helper.setSelectedProperty(selectedProperty);
+  }
+
+  unSelectAllProperties() {
+    this.filteredProperties.forEach((property) => {
+      property.isSelected = false;
+    });
   }
 }

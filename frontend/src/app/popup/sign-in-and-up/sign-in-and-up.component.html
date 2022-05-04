@@ -1,0 +1,124 @@
+<div class="logo-container">
+  <img src="../../assets/images/logo.png" alt="" />
+</div>
+<div class="container">
+  <div class="title">Welcome to <span> Airbnb</span></div>
+  <div class="sub-title">Sign in to continue</div>
+  <form class="form" [formGroup]="signIn" (ngSubmit)="signInSubmit()">
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        required
+        formControlName="email"
+        [ngClass]="{
+          invalid: signInEmail?.invalid && signInEmail?.touched
+        }"
+        type="email"
+        placeholder="Your Email"
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+
+      <input
+        required
+        formControlName="password"
+        [ngClass]="{
+          invalid: signInPassword?.invalid && signInPassword?.touched
+        }"
+        type="password"
+        placeholder="Your Password"
+        autocomplete
+      />
+    </div>
+    <div class="btn-container">
+      <div class="message">
+        {{ messageSignIn }}
+      </div>
+      <button class="button" type="submit" [disabled]="signIn.invalid">
+        Sign In
+      </button>
+    </div>
+  </form>
+</div>
+<div class="separator-container">
+  <div class="separator"></div>
+  <div class="text">OR</div>
+  <div class="separator"></div>
+</div>
+
+<div class="container">
+  <div class="title">Create a new account</div>
+  <div class="sub-title">Let's Get Started</div>
+  <form class="form" [formGroup]="signUp" (ngSubmit)="signUpSubmit()">
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+      <input
+        required
+        formControlName="firstName"
+        type="text"
+        placeholder="First Name"
+        [ngClass]="{
+          invalid: signUpFirstName?.invalid && signUpFirstName?.touched
+        }"
+      />
+    </div>
+
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+      <input
+        required
+        formControlName="lastName"
+        type="text"
+        placeholder="Last Name"
+        [ngClass]="{
+          invalid: signUpLastName?.invalid && signUpLastName?.touched
+        }"
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        required
+        formControlName="email"
+        type="email"
+        placeholder="Your Email"
+        [ngClass]="{ invalid: signUpEmail?.invalid && signUpEmail?.touched }"
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+      <input
+        required
+        formControlName="rawPassword"
+        type="password"
+        placeholder="Password"
+        [ngClass]="{
+          invalid: signUpPassword?.invalid && signUpPassword?.touched
+        }"
+        autocomplete
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+      <input
+        required
+        formControlName="passwordConfirm"
+        type="password"
+        placeholder="Confirm your Password"
+        [ngClass]="{
+          invalid:
+            (signUpPasswordConfirm?.invalid || signUpPasswordConfirm?.errors) &&
+            signUpPasswordConfirm?.touched
+        }"
+        autocomplete
+      />
+    </div>
+    <div class="btn-container">
+      <div class="message">
+        {{ messageSignUp }}
+      </div>
+      <button [disabled]="signUp.invalid" type="submit">Sign Up</button>
+    </div>
+  </form>
+</div>

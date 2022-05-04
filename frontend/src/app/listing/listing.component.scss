@@ -55,6 +55,7 @@
   color: $color-font-dark;
   font-family: sans-serif;
   font-size: 1.5em;
+  font-weight: 600;
   margin: 0;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -65,8 +66,8 @@
   width: 100%;
 }
 
-$property-height: 14em;
-$property-padding: 2em;
+$property-height: 12em;
+$property-padding: 1.3em;
 $content-size: calc($property-height - 2 * $property-padding);
 .property {
   overflow: hidden;
@@ -85,16 +86,16 @@ $content-size: calc($property-height - 2 * $property-padding);
   border-radius: $border-radius;
   gap: 2em;
   cursor: pointer;
-  transition: all 0.2s;
-
-  // ! test
-
-  // outline: solid 3.5px $color-primary-light;
-  // border: solid 2px $color-primary;
-
+  // transition: all 0.2s;
   &:hover {
     box-shadow: $box-shadow;
   }
+
+  &.isSelected {
+    outline: solid 2.5px $color-primary;
+    box-shadow: $color-primary-light 0px 0px 0px 6px;
+  }
+
   .img-container {
     height: $content-size;
     width: calc($content-size + 2em);
@@ -108,6 +109,7 @@ $content-size: calc($property-height - 2 * $property-padding);
     justify-content: center;
     img {
       height: 100%;
+      user-select: none;
     }
   }
   .content-container {
@@ -133,8 +135,8 @@ $content-size: calc($property-height - 2 * $property-padding);
         color: $color-font-dark;
         padding: 0;
         height: 50%;
-        font-size: 1.2em;
-        font-weight: 600;
+        font-size: 1.3em;
+        font-weight: 900;
       }
       .location-container {
         height: 50%;

@@ -18,6 +18,7 @@ export interface Property {
   bedAmount?: number;
   squareFootage?: number;
   pricePerDay?: number;
+  isSelected?: boolean; //? for frontend behavior nly
 }
 
 export enum HousingType {
@@ -45,4 +46,9 @@ export interface Contract {
 export interface Auth {
   email: string;
   password: string;
+}
+
+export interface Alert {
+  isError?: boolean;
+  content?: string;
 }

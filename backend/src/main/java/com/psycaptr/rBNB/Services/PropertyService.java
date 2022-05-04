@@ -24,7 +24,7 @@ public class PropertyService {
     public ResponseEntity<HttpStatus> addPropertyByUserId(Property property, String userId) throws ExecutionException, InterruptedException {
         property.setOwnerId(userId);
         String propertyId = addPropertyToDB(property);
-        addPropertyToUser(userId, propertyId);
+        addPropertyIdToUser(userId, propertyId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -35,7 +35,7 @@ public class PropertyService {
         return propertyId;
     }
 
-    private void addPropertyToUser(String userId, String propertyId) {
+    private void addPropertyIdToUser(String userId, String propertyId) {
         DocumentReference user = db.collection("Users").document(userId);
         user.update("propertiesId", FieldValue.arrayUnion(propertyId));
     }
@@ -47,7 +47,8 @@ public class PropertyService {
     public List<Property> getAllProperties(String ownerId) throws ExecutionException, InterruptedException {
         List<Property> properties = new ArrayList<>();
 
-        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("isListed",true).get();
+//        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         for (QueryDocumentSnapshot document : documents) {
             properties.add(document.toObject(Property.class));
@@ -56,6 +57,27 @@ public class PropertyService {
                 .filter(property -> !Objects.equals(property.getOwnerId(), ownerId));
         return propertyStream.collect(Collectors.toList());
     }
+
+    public ResponseEntity<List<Property>> getPropertiesByUserId(String ownerId) throws ExecutionException, InterruptedException {
+        if(ownerId.equals("")) {
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+        }
+
+        List<Property> properties = new ArrayList<>();
+
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("ownerId",ownerId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(!documents.isEmpty()) {
+            for (QueryDocumentSnapshot document : documents) {
+                properties.add(document.toObject(Property.class));
+            }
+            return new ResponseEntity<>(properties,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+    }
+
+
+
 
 //    public List<Property> getSearchCompliantProperties(String searchedString) throws ExecutionException, InterruptedException {
 //        List<Property> response = new ArrayList<>();
@@ -71,12 +93,17 @@ public class PropertyService {
 //        }
 //        return response;
 //    }
-
-    private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
+//private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
 //        DocumentReference user = db.collection("Users").document(userId);
 //
 //        ApiFuture<WriteResult> arrayRm = user.update(
 //                "propertiesId",
 //                FieldValue.arrayRemove(propertyId));
+//    }
+
+    public ResponseEntity<HttpStatus> updateIsListed(String propertyId, boolean isListed) throws ExecutionException, InterruptedException {
+        DocumentReference documentReference = db.collection("Properties").document(propertyId);
+        documentReference.update("isListed",isListed);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

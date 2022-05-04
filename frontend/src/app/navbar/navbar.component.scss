@@ -1,10 +1,11 @@
 @import "../../variables.scss";
 nav {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  width: 15em;
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 16em;
+
   background-color: $color-background-over;
   border-right: solid 1.5px $color-border;
   box-sizing: border-box;
@@ -27,6 +28,7 @@ nav {
   }
 
   .link-container {
+    margin-top: 1em;
     width: 100%;
     .link {
       height: 3em;
@@ -36,6 +38,7 @@ nav {
       position: relative;
       cursor: pointer;
       line-height: normal;
+      user-select: none;
 
       i {
         color: $color-font-mid;

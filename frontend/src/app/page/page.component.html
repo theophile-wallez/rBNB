@@ -1,6 +1,5 @@
 <div class="page">
-  <listing *ngIf="helper.page === 'listing'"></listing>
-  <dashboard *ngIf="helper.page === 'dashboard'"></dashboard>
+  <router-outlet></router-outlet>
 </div>
 <popup></popup>
-<!-- <popup *ngIf="helper.isPopupOpen"></popup> -->
+<alert-notification></alert-notification>

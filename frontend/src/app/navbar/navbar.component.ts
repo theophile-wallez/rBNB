@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from '../helper.service';
+import { Router } from '@angular/router';
+import { HelperService } from '../services/helper.service';
 
 @Component({
   selector: 'navbar',
@@ -7,11 +8,12 @@ import { HelperService } from '../helper.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(public helper: HelperService) {}
+  constructor(public helper: HelperService, public router: Router) {}
 
   ngOnInit(): void {}
 
-  changePage(pageName: string): void {
-    this.helper.changePage(pageName);
+  changeRoute(path: string): void {
+    this.helper.closePopup();
+    this.router.navigate([path]);
   }
 }

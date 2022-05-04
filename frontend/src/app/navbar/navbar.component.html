@@ -1,35 +1,39 @@
 <nav>
-  <div class="logo-container">
-    <img src="../../assets/images/logo.png" alt="" />
+  <div class="logo-container" (click)="changeRoute('/listing')">
+    <img src="../../assets/images/logo.png" draggable="false" />
   </div>
   <div class="link-container">
-    <div class="link" (click)="changePage('listing')">
+    <div class="link" (click)="changeRoute('/listing')">
       <i
         class="fa-solid fa-house"
-        [ngClass]="{ selected: helper.page === 'listing' }"
+        [ngClass]="{ selected: router.url === '/listing' }"
       ></i>
       <div
         class="link-content"
-        [ngClass]="{ selected: helper.page === 'listing' }"
+        [ngClass]="{ selected: router.url === '/listing' }"
       >
         Listings
       </div>
-      <div *ngIf="helper.page === 'listing'" class="selected-span"></div>
+      <div *ngIf="router.url === '/listing'" class="selected-span"></div>
     </div>
 
-    <div class="link" (click)="changePage('dashboard')">
+    <div class="link" (click)="changeRoute('/dashboard')">
       <i
         class="fa-solid fa-gauge-high"
-        [ngClass]="{ selected: helper.page === 'dashboard' }"
+        [ngClass]="{ selected: router.url === '/dashboard' }"
       ></i>
 
       <div
         class="link-content"
-        [ngClass]="{ selected: helper.page === 'dashboard' }"
+        [ngClass]="{ selected: router.url === '/dashboard' }"
       >
         Dashboard
       </div>
-      <div *ngIf="helper.page === 'dashboard'" class="selected-span"></div>
+      <div *ngIf="router.url === '/dashboard'" class="selected-span"></div>
     </div>
   </div>
+  <connect-advertisment
+    *ngIf="helper.currentUser.id === undefined"
+  ></connect-advertisment>
+  <user-infos *ngIf="helper.currentUser.id !== undefined"></user-infos>
 </nav>

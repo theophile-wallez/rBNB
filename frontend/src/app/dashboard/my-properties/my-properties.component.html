@@ -1,0 +1,6 @@
+<div class="title">My properties</div>
+<div class="property-container" *ngIf="properties !== []">
+  <div class="property" *ngFor="let property of properties">
+    {{ property | json }}
+  </div>
+</div>

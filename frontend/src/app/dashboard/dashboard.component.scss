@@ -1,0 +1,26 @@
+@import "../../variables.scss";
+
+.global-container {
+  width: 100%;
+  .container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+    .card-container {
+      flex-shrink: 0;
+      width: 50%;
+      height: 20em;
+      background-color: $color-background-over;
+      background-color: $color-background-over;
+      box-shadow: $box-shadow-soft;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: all 0.2s;
+      &:hover {
+        box-shadow: $box-shadow;
+      }
+    }
+  }
+}
