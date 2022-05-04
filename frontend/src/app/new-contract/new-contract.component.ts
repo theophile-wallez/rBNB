@@ -86,7 +86,10 @@ export class NewContractComponent implements OnInit {
       this.owner = await response.json();
       return;
     }
-    this.helper.createNewAlert(true, "Can't find owner.");
+    this.helper.createNewAlert(
+      true,
+      "Sorry, we couln't find the owner's infos."
+    );
   }
 
   getUserById(userId: string): Promise<Response> {
