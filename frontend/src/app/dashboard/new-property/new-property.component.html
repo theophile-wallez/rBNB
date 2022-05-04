@@ -22,18 +22,22 @@
       <mat-label>Zip Code</mat-label>
       <input required matInput formControlName="zipCode" type="number" />
       <mat-icon matSuffix *ngIf="!zipCode?.invalid && zipCode?.touched"
-        >verified_user</mat-icon
+        >check</mat-icon
       >
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Street Number</mat-label>
       <input required matInput formControlName="number" type="number" />
-      <mat-icon matSuffix>verified_user</mat-icon>
+      <mat-icon matSuffix *ngIf="!number?.invalid && number?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Street</mat-label>
       <input required matInput formControlName="street" />
-      <mat-icon matSuffix>verified_user</mat-icon>
+      <mat-icon matSuffix *ngIf="!street?.invalid && street?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Street-Type</mat-label>
@@ -47,25 +51,32 @@
     <mat-form-field appearance="standard">
       <mat-label>Description</mat-label>
       <input matInput formControlName="description" />
-      <mat-icon matSuffix>verified_user</mat-icon>
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Bed Amount</mat-label>
       <input required matInput type="number" formControlName="bedAmount" />
-      <mat-icon matSuffix>verified_user</mat-icon>
+      <mat-icon matSuffix *ngIf="!bedAmount?.invalid && bedAmount?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Square Footage</mat-label>
       <input required matInput type="number" formControlName="squareFootage" />
-      <mat-icon matSuffix>verified_user</mat-icon>
+      <mat-icon
+        matSuffix
+        *ngIf="!squareFootage?.invalid && squareFootage?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Price per day (euros)</mat-label>
       <input required matInput type="number" formControlName="pricePerDay" />
-      <mat-icon matSuffix>verified_user</mat-icon>
+      <mat-icon matSuffix *ngIf="!pricePerDay?.invalid && pricePerDay?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
   </div>
   <br />

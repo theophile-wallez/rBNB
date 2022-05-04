@@ -72,22 +72,22 @@ export class NewPropertyComponent implements OnInit {
   get zipCode() {
     return this.myForm.get('location')?.get('zipCode');
   }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
-  // get zipCode() {
-  //   return this.myForm.get('location')?.get('zipCode');
-  // }
+  get number() {
+    return this.myForm.get('location')?.get('number');
+  }
+  get street() {
+    return this.myForm.get('location')?.get('street');
+  }
+  get streetType() {
+    return this.myForm.get('location')?.get('streetType');
+  }
+  get bedAmount() {
+    return this.myForm.get('bedAmount');
+  }
+  get squareFootage() {
+    return this.myForm.get('squareFootage');
+  }
+  get pricePerDay() {
+    return this.myForm?.get('pricePerDay');
+  }
 }
