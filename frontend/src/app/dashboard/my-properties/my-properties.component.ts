@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/helper.service';
+import { HelperService } from 'src/app/services/helper.service';
 import { WebService } from 'src/app/services/web.service';
 import { environment } from 'src/environments/environment';
 import { Property } from 'src/services/interfaces';

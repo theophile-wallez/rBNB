@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Property } from 'src/services/interfaces';
-import { HelperService } from '../helper.service';
+import { HelperService } from '../services/helper.service';
 import { WebService } from '../services/web.service';
 
 @Component({

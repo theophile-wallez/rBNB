@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/helper.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'connect-advertisment',
