@@ -3,6 +3,7 @@ package com.psycaptr.rBNB.Controllers;
 import com.psycaptr.rBNB.Services.ContractService;
 import com.psycaptr.rBNB.Models.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +36,14 @@ public class ContractController {
 
     ) throws ExecutionException, InterruptedException {
         return contractService.createNewContract(contract);
+    }
+
+    // TODO: Should be an update
+    @GetMapping("/is-accepted")
+    public ResponseEntity<?> updateIsAccepted(
+            @RequestParam String contractId,
+            @RequestParam String ownerId
+    ) throws ExecutionException, InterruptedException {
+        return contractService.updateIsAccepted(contractId, ownerId);
     }
 }
