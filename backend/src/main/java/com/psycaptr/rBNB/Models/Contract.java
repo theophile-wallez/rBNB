@@ -1,16 +1,14 @@
 package com.psycaptr.rBNB.Models;
 
-import java.time.LocalDate;
-
 public class Contract {
     private String id;
     private String ownerId;
     private String tenantId;
-    private LocalDate startingDay;
-    private LocalDate endingDay;
+    private String startingDay;
+    private String endingDay;
     private String propertyId;
 
-    public Contract(String ownerId, String tenantId, LocalDate startingDay, LocalDate endingDay, String propertyId, String id) {
+    public Contract(String ownerId, String tenantId, String startingDay, String endingDay, String propertyId, String id) {
         this.id = id;
         this.ownerId = ownerId;
         this.tenantId = tenantId;
@@ -48,19 +46,19 @@ public class Contract {
         this.tenantId = tenantId;
     }
 
-    public LocalDate getStartingDay() {
+    public String getStartingDay() {
         return startingDay;
     }
 
-    public void setStartingDay(LocalDate startingDay) {
+    public void setStartingDay(String startingDay) {
         this.startingDay = startingDay;
     }
 
-    public LocalDate getEndingDay() {
+    public String getEndingDay() {
         return endingDay;
     }
 
-    public void setEndingDay(LocalDate endingDay) {
+    public void setEndingDay(String endingDay) {
         this.endingDay = endingDay;
     }
 

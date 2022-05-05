@@ -60,7 +60,7 @@ public class PropertyService {
 
     public ResponseEntity<List<Property>> getPropertiesByUserId(String ownerId) throws ExecutionException, InterruptedException {
         if(ownerId.equals("")) {
-            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
         }
 
         List<Property> properties = new ArrayList<>();
@@ -74,6 +74,15 @@ public class PropertyService {
             return new ResponseEntity<>(properties,HttpStatus.OK);
         }
         return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+    }
+
+    public ResponseEntity<Integer> getPropertiesAmountByUserId(String ownerId) throws ExecutionException, InterruptedException {
+        if(ownerId.equals("")) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("ownerId",ownerId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        return ResponseEntity.ok(documents.size());
     }
 
 
