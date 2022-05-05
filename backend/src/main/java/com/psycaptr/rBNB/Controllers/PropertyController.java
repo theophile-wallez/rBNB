@@ -35,6 +35,11 @@ public class PropertyController {
         return propertyService.getPropertiesByUserId(ownerId);
     }
 
+    @GetMapping("/amount-by-user-id")
+    public ResponseEntity<Integer> getPropertyAmountByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
+        return propertyService.getPropertiesAmountByUserId(ownerId);
+    }
+
     @GetMapping("/is-listed")
     public ResponseEntity<HttpStatus> updateIsListed(
             @RequestParam String propertyId,

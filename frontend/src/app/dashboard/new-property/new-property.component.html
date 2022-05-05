@@ -6,60 +6,83 @@
       <mat-label>Housing Type</mat-label>
       <mat-select formControlName="housingType" required>
         <mat-option value="house">House</mat-option>
-
         <mat-option value="flat">Flat</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div class="location" formGroupName="location">
-    <mat-form-field appearance="standard">
-      <mat-label>Country</mat-label>
-      <input required matInput formControlName="country" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    </mat-form-field>
+    <mat-select-country
+      appearance="standard"
+      label="Country *"
+      class="className"
+      formControlName="country"
+    >
+    </mat-select-country>
     <mat-form-field appearance="standard">
       <mat-label>Zip Code</mat-label>
       <input required matInput formControlName="zipCode" type="number" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon matSuffix *ngIf="!zipCode?.invalid && zipCode?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Street Number</mat-label>
       <input required matInput formControlName="number" type="number" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon matSuffix *ngIf="!number?.invalid && number?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <mat-form-field appearance="standard">
       <mat-label>Street</mat-label>
       <input required matInput formControlName="street" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon matSuffix *ngIf="!street?.invalid && street?.touched"
+        >check</mat-icon
+      >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+      <mat-label>Street-Type</mat-label>
+      <mat-select formControlName="streetType" required>
+        <mat-option value="Street">Street</mat-option>
+        <mat-option value="Avenue">Avenue</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field appearance="standard">
       <mat-label>Description</mat-label>
-      <input required matInput formControlName="description" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <input matInput formControlName="description" />
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Bed Amount</mat-label>
       <input required matInput type="number" formControlName="bedAmount" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon matSuffix *ngIf="!bedAmount?.invalid && bedAmount?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Square Footage</mat-label>
       <input required matInput type="number" formControlName="squareFootage" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon
+        matSuffix
+        *ngIf="!squareFootage?.invalid && squareFootage?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
     <br />
     <mat-form-field appearance="standard">
       <mat-label>Price per day (euros)</mat-label>
       <input required matInput type="number" formControlName="pricePerDay" />
-      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-icon matSuffix *ngIf="!pricePerDay?.invalid && pricePerDay?.touched"
+        >check</mat-icon
+      >
     </mat-form-field>
   </div>
   <br />
   <div class="button">
-    <button mat-raised-button type="submit">Publish</button>
+    <button [disabled]="myForm.invalid" mat-raised-button type="submit">
+      Publish
+    </button>
   </div>
 </form>

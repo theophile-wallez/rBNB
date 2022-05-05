@@ -6,13 +6,21 @@
   align-items: center;
 }
 
-.location .mat-form-field {
+.location mat-form-field {
   display: inline-block;
   vertical-align: middle;
 }
 
-.location .mat-form-field {
+.location mat-form-field {
   margin-right: 20px;
+}
+
+.location mat-select-country {
+  margin-right: 20px;
+}
+
+mat-icon {
+  color: rgb(1, 254, 1);
 }
 
 .title {
