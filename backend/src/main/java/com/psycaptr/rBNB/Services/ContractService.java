@@ -4,30 +4,56 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.psycaptr.rBNB.Models.Contract;
+import com.psycaptr.rBNB.Models.Property;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 @Service
 @DependsOn("FBInitialize")
 public class ContractService {
     Firestore db = FirestoreClient.getFirestore();
+    @Autowired
+    private PropertyService propertyService;
 
     public static Contract getContractById(String contractId) {
-        // db call (sql)
-        // handle db response
-        // return response
         return null;
     }
 
-    public ResponseEntity<?> createNewContract(Contract contract) {
+    public ResponseEntity<?> createNewContract(Contract contract) throws ExecutionException, InterruptedException {
+        if (Objects.equals(contract.getTenantId(), contract.getOwnerId())) {
+            return new ResponseEntity<>(
+                    "You can not rant your own property.",
+                    HttpStatus.NOT_ACCEPTABLE
+            );
+        }
+
+        if (PropertyService.isPropertyListed(contract.getPropertyId())) {
+            return new ResponseEntity<>(
+                    "The selected property is not available.",
+                    HttpStatus.NOT_ACCEPTABLE
+            );
+        }
+
+        if (isPropertyUnderContract(contract)) {
+            return new ResponseEntity<>(
+                    "The selected property is not available.",
+                    HttpStatus.NOT_ACCEPTABLE
+            );
+        }
+
         if (!areDatesValid(contract.getStartingDay(), contract.getEndingDay())) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
+
         String contractId = addContractToDB(contract);
         addContractIdToUser(contract.getTenantId(), contractId);
         addContractIdToUser(contract.getOwnerId(), contractId);
@@ -70,5 +96,31 @@ public class ContractService {
         }
         documentReference.update("isAccepted", true);
         return new ResponseEntity<>("The contract has been accepted!", HttpStatus.OK);
+    }
+
+    private Boolean isPropertyUnderContract(Contract contract) throws ExecutionException, InterruptedException {
+//        TODO à repenser
+        boolean isPropertyUnderContract = false;
+        ApiFuture<QuerySnapshot> future = db.collection("Contracts")
+                .whereEqualTo("propertyId", contract.getPropertyId()).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if (documents.isEmpty()) {
+            return false;
+        }
+        LocalDate contractCheckInDate = LocalDate.parse(contract.getStartingDay());
+        for (QueryDocumentSnapshot document : documents) {
+            LocalDate checkInDate = LocalDate.parse(
+                    Objects.requireNonNull(document.getString("checkInDate"))
+            );
+            LocalDate checkOutDate = LocalDate.parse(
+                    Objects.requireNonNull(document.getString("checkOutDate"))
+            );
+            if(contractCheckInDate.isBefore(checkOutDate)) {
+                isPropertyUnderContract = true;
+                break;
+            }
+
+        }
+        return isPropertyUnderContract;
     }
 }

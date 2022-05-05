@@ -85,33 +85,23 @@ public class PropertyService {
     }
 
 
-
-
-//    public List<Property> getSearchCompliantProperties(String searchedString) throws ExecutionException, InterruptedException {
-//        List<Property> response = new ArrayList<>();
-//
-//        CollectionReference properties = db.collection("Properties");
-//        ApiFuture<QuerySnapshot> filteredProperties = properties
-//                .whereGreaterThanOrEqualTo("location.street",searchedString)
-//                .whereLessThanOrEqualTo("location.street",searchedString + "\uF7FF")
-//                .get();
-//        List<QueryDocumentSnapshot> documents = filteredProperties.get().getDocuments();
-//        for (QueryDocumentSnapshot document : documents) {
-//            response.add(document.toObject(Property.class));
-//        }
-//        return response;
-//    }
-//private void removePropertyToUser(String userId, String propertyId) throws ExecutionException, InterruptedException {
-//        DocumentReference user = db.collection("Users").document(userId);
-//
-//        ApiFuture<WriteResult> arrayRm = user.update(
-//                "propertiesId",
-//                FieldValue.arrayRemove(propertyId));
-//    }
-
     public ResponseEntity<HttpStatus> updateIsListed(String propertyId, boolean isListed) throws ExecutionException, InterruptedException {
         DocumentReference documentReference = db.collection("Properties").document(propertyId);
         documentReference.update("isListed",isListed);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public static boolean isPropertyListed(String propertyId) throws ExecutionException, InterruptedException {
+        DocumentSnapshot property = getPropertyById(propertyId);
+        if(!property.exists()) {
+            return false;
+        }
+        return Boolean.TRUE.equals(property.getBoolean("isListed"));
+    }
+
+    private static DocumentSnapshot getPropertyById(String propertyId) throws ExecutionException, InterruptedException {
+        DocumentReference propertyReference = FirestoreClient.getFirestore().collection("Properties").document(propertyId);
+        ApiFuture<DocumentSnapshot> propertyQuery = propertyReference.get();
+        return propertyQuery.get();
     }
 }
