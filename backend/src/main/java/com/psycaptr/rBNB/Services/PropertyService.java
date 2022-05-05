@@ -39,7 +39,7 @@ public class PropertyService {
         DocumentReference user = db.collection("Users").document(userId);
         user.update("propertiesId", FieldValue.arrayUnion(propertyId));
     }
-
+// TODO handle http response
     public void deletePropertyById(String id){
         ApiFuture<WriteResult> writeResult = db.collection("Properties").document(id).delete();
     }
@@ -48,7 +48,6 @@ public class PropertyService {
         List<Property> properties = new ArrayList<>();
 
         ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("isListed",true).get();
-//        ApiFuture<QuerySnapshot> future = db.collection("Properties").get();
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         for (QueryDocumentSnapshot document : documents) {
             properties.add(document.toObject(Property.class));

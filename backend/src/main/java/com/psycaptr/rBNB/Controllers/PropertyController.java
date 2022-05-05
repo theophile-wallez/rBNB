@@ -40,6 +40,7 @@ public class PropertyController {
         return propertyService.getPropertiesAmountByUserId(ownerId);
     }
 
+// TODO: Should be an update
     @GetMapping("/is-listed")
     public ResponseEntity<HttpStatus> updateIsListed(
             @RequestParam String propertyId,
