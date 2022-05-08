@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebService } from 'src/app/services/web.service';
-import { Property } from 'src/app/services/interfaces/interfaces';
-import { ThemePalette } from '@angular/material/core';
+import { Property, User } from 'src/app/services/interfaces/interfaces';
 
 @Component({
   selector: 'my-properties',
@@ -13,11 +12,13 @@ export class MyPropertiesComponent implements OnInit {
   constructor(private helper: HelperService, private webService: WebService) {}
 
   properties: Property[] = [];
-  toggleColor: ThemePalette = 'warn';
 
   ngOnInit(): void {
-    console.log('init');
-    this.getPropertiesByUserId();
+    this.helper.userObservable.subscribe((user: User) => {
+      if (user.id) {
+        this.getPropertiesByUserId(user.id);
+      }
+    });
   }
 
   async switchIsListed(
@@ -55,21 +56,19 @@ export class MyPropertiesComponent implements OnInit {
     }
   }
 
-  async getPropertiesByUserId() {
-    let userId = this.helper.currentUser.id;
-    if (userId) {
-      try {
-        let response = await this.webService.getPropertiesByUserId(userId);
-        if (response.ok) {
-          this.properties = await response.json();
-          return;
-        }
-        this.helper.newError("Sorry, your properties couln't be retrieved.");
-      } catch (error) {
-        this.helper.newError(
-          'we encountered an error while trying to load your properties.'
-        );
+  async getPropertiesByUserId(userId: string) {
+    //! ISSUE: on reload page because userId is being fetch
+    try {
+      let response = await this.webService.getPropertiesByUserId(userId);
+      if (response.ok) {
+        this.properties = await response.json();
+        return;
       }
+      this.helper.newError("Sorry, your properties couln't be retrieved.");
+    } catch (error) {
+      this.helper.newError(
+        'we encountered an error while trying to load your properties.'
+      );
     }
   }
 }

@@ -13,17 +13,29 @@ export class HelperService {
   //? User management
   currentUser: User = {};
 
+  public userBehaviorSubject = new BehaviorSubject<User>({});
+  userObservable = this.userBehaviorSubject.asObservable();
+  emitUser(user: User) {
+    this.userBehaviorSubject.next(user);
+  }
+
+  resetUser() {
+    this.userBehaviorSubject.next({});
+  }
+
   setCurrentUser(user: User) {
-    this.currentUser = user;
+    this.currentUser = user; //! TO REMOVE
+    this.emitUser(user);
     this.cookie.set('userId', user.id ?? 'none');
   }
 
   disconnectUser() {
-    this.currentUser = {};
+    this.currentUser = {}; //! TO REMOVE
+    this.resetUser();
     this.cookie.delete('userId');
     this.router.navigate(['']);
     this.closePopup();
-    this.createNewAlert(false, "You're now logged out");
+    this.newNotification("You're now logged out");
   }
 
   isUserLogged(): boolean {
