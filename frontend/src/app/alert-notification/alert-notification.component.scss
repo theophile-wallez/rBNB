@@ -3,7 +3,7 @@
   position: fixed;
   top: 3em;
   right: 3em;
-  width: 17em;
+  width: 20em;
   font-family: $font;
   color: $color-font-mid-plus;
   z-index: 100;
@@ -11,10 +11,10 @@
     position: relative;
     width: 100%;
     box-sizing: border-box;
-    padding-top: 0.6em;
-    padding-bottom: 0.6em;
-    padding-left: 1em;
-    padding-right: 1.2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
 
     margin-bottom: 1em;
     background-color: $color-background-over;
