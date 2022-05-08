@@ -35,6 +35,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +72,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
     MatNativeDateModule,
     MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
     MatSlideToggleModule,
+    AutoCompleteModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
