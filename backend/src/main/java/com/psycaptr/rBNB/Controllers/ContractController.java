@@ -49,6 +49,14 @@ public class ContractController {
     ) throws ExecutionException, InterruptedException {
         return contractService.updateIsAccepted(contractId, ownerId);
     }
+
+
+    // (HANS) TO BE VERIFIED:
+    @GetMapping("/dates-occupied/by-property-id")
+    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
+        return contractService.getPropertyOccupiedDates(propertyId);
+    }
+
     // (HANS) TO BE VERIFIED:
     @GetMapping("/by-contract-id")
     public ResponseEntity<Contract> getContractById(@RequestParam(defaultValue = "") String contractId) throws ExecutionException, InterruptedException {

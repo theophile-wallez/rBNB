@@ -36,6 +36,16 @@ public class ContractService {
         return new ResponseEntity<Contract>(documents.get(0).toObject(Contract.class),HttpStatus.OK);
     }
 
+    // (HANS) TO BE VERIFIED:
+    public List<Contract> getContractsByPropertyId(String propertyId) throws ExecutionException, InterruptedException {
+        List<Contract> contracts = new ArrayList<>();
+        ApiFuture<QuerySnapshot> future = db.collection("Contracts").whereEqualTo("propertyId",propertyId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            contracts.add(document.toObject(Contract.class));
+        }
+        return contracts;
+    }
     }
 
     public ResponseEntity<?> createNewContract(Contract contract) throws ExecutionException, InterruptedException {
@@ -87,6 +97,18 @@ public class ContractService {
         LocalDate checkOutDate = LocalDate.parse(checkOutString);
         return checkOutDate.isAfter(checkInDate);
     }
+
+    // (HANS) TO BE VERIFIED:
+    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(String propertyId) throws ExecutionException, InterruptedException {
+        List<List<String>> propertyOccupiedDates = new ArrayList<>();
+        List<Contract> contracts = getContractsByPropertyId(propertyId);
+        for (Contract contract: contracts) {
+            propertyOccupiedDates.add(new ArrayList<String>(Arrays.asList(contract.getCheckInDate(),contract.getCheckOutDate())));
+        }
+        return new ResponseEntity<>(propertyOccupiedDates,HttpStatus.OK);
+    }
+
+
 
     public ResponseEntity<?> updateIsAccepted(String contractId, String ownerId) throws ExecutionException, InterruptedException {
         DocumentReference documentReference = db.collection("Contracts").document(contractId);
