@@ -26,49 +26,32 @@ export class MyPropertiesComponent implements OnInit {
     isListed: boolean | undefined
   ) {
     if (propertyId == undefined || isListed === undefined) return;
-    try {
-      let response: Response = await this.webService.switchIsListed(
-        propertyId,
-        isListed
-      );
+    let response: Response = await this.webService.switchIsListed(
+      propertyId,
+      isListed
+    );
 
-      if (response.ok) {
-        let listedString: string = isListed ? 'listed' : 'unlisted';
-        console.log('isListed: ', isListed);
-        this.helper.newNotification(
-          'Your property has been successfully ' + listedString + '.'
-        );
-      } else {
-        let listedString: string = isListed ? 'list' : 'unlist';
-        this.helper.newError(
-          'We encountered an error while trying to ' +
-            listedString +
-            ' your property.'
-        );
-      }
-    } catch (error) {
-      let listedString: string = isListed ? 'list' : 'unlist';
+    if (!response.ok) {
       this.helper.newError(
         'We encountered an error while trying to ' +
-          listedString +
+          (isListed ? 'list' : 'unlist') +
           ' your property.'
       );
+      return;
     }
+    this.helper.newNotification(
+      'Your property has been successfully ' +
+        (isListed ? 'listed' : 'unlisted') +
+        '.'
+    );
   }
 
   async getPropertiesByUserId(userId: string) {
-    //! ISSUE: on reload page because userId is being fetch
-    try {
-      let response = await this.webService.getPropertiesByUserId(userId);
-      if (response.ok) {
-        this.properties = await response.json();
-        return;
-      }
-      this.helper.newError("Sorry, your properties couln't be retrieved.");
-    } catch (error) {
-      this.helper.newError(
-        'we encountered an error while trying to load your properties.'
-      );
+    let response = await this.webService.getPropertiesByUserId(userId);
+    if (response.ok) {
+      this.properties = await response.json();
+      return;
     }
+    this.helper.newError("Sorry, your properties couln't be retrieved.");
   }
 }

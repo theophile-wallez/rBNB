@@ -98,14 +98,15 @@ export class HelperService {
   // alert-popup
 
   timeOut: any = undefined;
-  public alertObservable = new Subject<Alert>();
+  public alertObservable = new BehaviorSubject<Alert>({});
+  test = this.alertObservable.asObservable();
   emitAlert(alert: Alert) {
     if (this.timeOut !== undefined) {
       clearTimeout(this.timeOut);
     }
     this.alertObservable.next(alert);
     this.timeOut = setTimeout(() => {
-      this.alertObservable.next({});
+      this.resetAlert();
       this.timeOut = undefined;
     }, 8000);
   }
@@ -124,6 +125,10 @@ export class HelperService {
 
   newNotification(message: string) {
     this.createNewAlert(false, message);
+  }
+
+  resetAlert() {
+    this.alertObservable.next({});
   }
 
   //? Click handler
