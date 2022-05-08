@@ -4,16 +4,16 @@ public class Contract {
     private String id;
     private String ownerId;
     private String tenantId;
-    private String startingDay;
-    private String endingDay;
+    private String checkInDate;
+    private String checkOutDate;
     private String propertyId;
 
-    public Contract(String ownerId, String tenantId, String startingDay, String endingDay, String propertyId, String id) {
+    public Contract(String ownerId, String tenantId, String checkInDate, String checkOutDate, String propertyId, String id) {
         this.id = id;
         this.ownerId = ownerId;
         this.tenantId = tenantId;
-        this.startingDay = startingDay;
-        this.endingDay = endingDay;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
         this.propertyId = propertyId;
     }
 
@@ -46,20 +46,20 @@ public class Contract {
         this.tenantId = tenantId;
     }
 
-    public String getStartingDay() {
-        return startingDay;
+    public String getCheckInDate() {
+        return checkInDate;
     }
 
-    public void setStartingDay(String startingDay) {
-        this.startingDay = startingDay;
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
     }
 
-    public String getEndingDay() {
-        return endingDay;
+    public String getCheckOutDate() {
+        return checkOutDate;
     }
 
-    public void setEndingDay(String endingDay) {
-        this.endingDay = endingDay;
+    public void setCheckOutDate(String checkOutDate) {
+        this.checkOutDate = checkOutDate;
     }
 
     public String getPropertyId() {

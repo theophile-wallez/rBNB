@@ -4,7 +4,6 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.psycaptr.rBNB.Models.Contract;
-import com.psycaptr.rBNB.Models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -31,7 +29,7 @@ public class ContractService {
     public ResponseEntity<?> createNewContract(Contract contract) throws ExecutionException, InterruptedException {
         if (Objects.equals(contract.getTenantId(), contract.getOwnerId())) {
             return new ResponseEntity<>(
-                    "You can not rant your own property.",
+                    "You can not rent your own property.",
                     HttpStatus.NOT_ACCEPTABLE
             );
         }
@@ -50,7 +48,7 @@ public class ContractService {
             );
         }
 
-        if (!areDatesValid(contract.getStartingDay(), contract.getEndingDay())) {
+        if (!areDatesValid(contract.getCheckInDate(), contract.getCheckOutDate())) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
 
@@ -107,7 +105,7 @@ public class ContractService {
         if (documents.isEmpty()) {
             return false;
         }
-        LocalDate contractCheckInDate = LocalDate.parse(contract.getStartingDay());
+        LocalDate contractCheckInDate = LocalDate.parse(contract.getCheckInDate());
         for (QueryDocumentSnapshot document : documents) {
             LocalDate checkInDate = LocalDate.parse(
                     Objects.requireNonNull(document.getString("checkInDate"))
