@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HelperService } from 'src/app/services/helper.service';
 import { WebService } from 'src/app/services/web.service';
 import { Property, User } from 'src/app/services/interfaces/interfaces';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 
 @Component({
   selector: 'my-properties',
@@ -9,7 +10,11 @@ import { Property, User } from 'src/app/services/interfaces/interfaces';
   styleUrls: ['./my-properties.component.scss'],
 })
 export class MyPropertiesComponent implements OnInit {
-  constructor(private helper: HelperService, private webService: WebService) {}
+  constructor(
+    private helper: HelperService,
+    private dashboardService: DashboardService,
+    private webService: WebService
+  ) {}
 
   properties: Property[] = [];
 
@@ -53,5 +58,13 @@ export class MyPropertiesComponent implements OnInit {
       return;
     }
     this.helper.newError("Sorry, your properties couln't be retrieved.");
+  }
+
+  scrollToPropertyForm() {
+    this.dashboardService.scrollToPropertyForm();
+  }
+
+  editProperty(selectedProperty: Property) {
+    this.dashboardService.editProperty(selectedProperty);
   }
 }

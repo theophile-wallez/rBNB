@@ -108,7 +108,7 @@ export class HelperService {
     this.timeOut = setTimeout(() => {
       this.resetAlert();
       this.timeOut = undefined;
-    }, 8000);
+    }, 3000);
   }
 
   createNewAlert(isError: boolean, content: string) {

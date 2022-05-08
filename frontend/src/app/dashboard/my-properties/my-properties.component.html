@@ -1,5 +1,9 @@
 <div class="container">
-  <div class="title">My properties</div>
+  <div class="title-container">
+    <div class="title-component">Your properties</div>
+    <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div>
+  </div>
+
   <div class="my-property-container" *ngIf="properties !== []">
     <table>
       <thead>
@@ -11,7 +15,8 @@
           <th colspan="1">Type</th>
           <th colspan="1">Bed(s)</th>
           <th colspan="1">Square Footage</th>
-          <th colspan="1">€/day</th>
+          <th colspan="1">Price</th>
+          <th colspan="2">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -45,10 +50,20 @@
             }}
           </td>
           <td>
-            {{ property.squareFootage }}
+            {{ property.squareFootage + " m²" }}
           </td>
           <td>
-            {{ property.pricePerDay }}
+            {{ property.pricePerDay + "€ / day" }}
+          </td>
+          <td>
+            <i
+              class="fa-solid fa-pen-to-square"
+              (click)="editProperty(property)"
+            ></i>
+          </td>
+          <td>
+            <!-- TODO -->
+            <i class="fa-solid fa-trash"></i>
           </td>
         </tr>
       </tbody>

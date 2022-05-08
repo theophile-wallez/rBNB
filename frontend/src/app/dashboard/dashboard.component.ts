@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../services/dashboard/dashboard.service';
 import { HelperService } from '../services/helper.service';
-import { User } from '../services/interfaces/interfaces';
 
 @Component({
   selector: 'dashboard',
@@ -8,7 +8,10 @@ import { User } from '../services/interfaces/interfaces';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(public helper: HelperService) {}
+  constructor(
+    public dashboardService: DashboardService,
+    public helper: HelperService
+  ) {}
 
   ngOnInit(): void {}
 }

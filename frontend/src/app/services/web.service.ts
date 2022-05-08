@@ -10,6 +10,8 @@ export class WebService {
   //TODO CONVERT ALL FETCH TO ANGULAR HTTPCLIENT
   URL = environment.URL;
 
+  // vvPHPRAY2LzkfJARkz0duukzyx145vzx8-Pf6HI3EqXgqvoTjumZwmxGYR3Kn1O96NM
+
   async getPropertiesByUserId(userId: string): Promise<Response> {
     return fetch(this.URL + '/property/by-user-id?ownerId=' + userId);
     // this.properties = await data.json();

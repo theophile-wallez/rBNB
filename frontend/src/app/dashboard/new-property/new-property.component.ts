@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { Property } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from '../../services/helper.service';
 import { WebService } from '../../services/web.service';
 
@@ -10,13 +12,13 @@ import { WebService } from '../../services/web.service';
 })
 export class NewPropertyComponent implements OnInit {
   myForm!: FormGroup;
-
+  title = 'Rent out your property';
   constructor(
     private fb: FormBuilder,
     private helper: HelperService,
-    private webService: WebService
+    private webService: WebService,
+    public dashboardService: DashboardService
   ) {}
-
   ngOnInit() {
     const location = this.fb.group({
       country: ['', [Validators.required]],
@@ -25,7 +27,6 @@ export class NewPropertyComponent implements OnInit {
       streetType: ['Street', [Validators.required]],
       street: ['', [Validators.required]],
     });
-
     this.myForm = this.fb.group({
       housingType: ['house', [Validators.required]],
       location: location,
@@ -33,6 +34,17 @@ export class NewPropertyComponent implements OnInit {
       bedAmount: ['', [Validators.required]],
       squareFootage: ['', [Validators.required]],
       pricePerDay: ['', [Validators.required]],
+    });
+    this.dashboardService.selectedPropertyBS.subscribe((property: Property) => {
+      if (property.id) {
+        this.title = 'Edit your property';
+      }
+      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+      this.myForm
+        ?.get('location')
+        ?.get('number')
+        ?.setValue(property.location?.number ?? '');
     });
   }
 
