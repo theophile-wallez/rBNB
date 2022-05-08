@@ -34,11 +34,6 @@ export class NewPropertyComponent implements OnInit {
       squareFootage: ['', [Validators.required]],
       pricePerDay: ['', [Validators.required]],
     });
-
-    // this.myForm.valueChanges.subscribe(console.log);
-    // this.myForm.valueChanges.subscribe(() => {
-    //   console.log(this.myForm.get('location')?.get('zipCode'));
-    // });
   }
 
   createNewProperty() {
