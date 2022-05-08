@@ -46,6 +46,24 @@ public class ContractService {
         }
         return contracts;
     }
+
+    // (HANS) TO BE VERIFIED:
+    public ResponseEntity<List<Contract>> getContractsByUserId(String userId) throws ExecutionException, InterruptedException {
+        List<Contract> contracts = new ArrayList<>();
+        ApiFuture<QuerySnapshot> future = db.collection("Contracts").get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.size()==0) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        for (QueryDocumentSnapshot document : documents) {
+            if(Objects.equals(userId, document.toObject(Contract.class).getTenantId())) {
+                contracts.add(document.toObject(Contract.class));
+            }
+            else if(Objects.equals(userId, document.toObject(Contract.class).getOwnerId())) {
+                contracts.add(document.toObject(Contract.class));
+            }
+        }
+        return new ResponseEntity<>(contracts,HttpStatus.OK);
     }
 
     public ResponseEntity<?> createNewContract(Contract contract) throws ExecutionException, InterruptedException {

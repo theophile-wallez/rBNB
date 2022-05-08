@@ -62,4 +62,10 @@ public class ContractController {
     public ResponseEntity<Contract> getContractById(@RequestParam(defaultValue = "") String contractId) throws ExecutionException, InterruptedException {
         return contractService.getContractById(contractId);
     }
+
+    // (HANS) TO BE VERIFIED:
+    @GetMapping("/by-user-id")
+    public ResponseEntity<List<Contract>> getContractsByUserId(@RequestParam(defaultValue = "") String userId) throws ExecutionException, InterruptedException {
+        return contractService.getContractsByUserId(userId);
+    }
 }
