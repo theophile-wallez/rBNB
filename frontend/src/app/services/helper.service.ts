@@ -103,8 +103,15 @@ export class HelperService {
       isError: isError,
       content: content,
     };
-    console.log('newAlert: ', newAlert);
     this.emitAlert(newAlert);
+  }
+
+  newError(message: string) {
+    this.createNewAlert(true, message);
+  }
+
+  newNotification(message: string) {
+    this.createNewAlert(false, message);
   }
 
   //? Click handler
