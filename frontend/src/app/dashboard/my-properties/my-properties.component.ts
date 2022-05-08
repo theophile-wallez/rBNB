@@ -34,24 +34,21 @@ export class MyPropertiesComponent implements OnInit {
       if (response.ok) {
         let listedString: string = isListed ? 'listed' : 'unlisted';
         console.log('isListed: ', isListed);
-        this.helper.createNewAlert(
-          false,
+        this.helper.newNotification(
           'Your property has been successfully ' + listedString + '.'
         );
       } else {
         let listedString: string = isListed ? 'list' : 'unlist';
-        this.helper.createNewAlert(
-          true,
-          'we encountered an error while trying to ' +
+        this.helper.newError(
+          'We encountered an error while trying to ' +
             listedString +
             ' your property.'
         );
       }
     } catch (error) {
       let listedString: string = isListed ? 'list' : 'unlist';
-      this.helper.createNewAlert(
-        true,
-        'we encountered an error while trying to ' +
+      this.helper.newError(
+        'We encountered an error while trying to ' +
           listedString +
           ' your property.'
       );
@@ -67,13 +64,9 @@ export class MyPropertiesComponent implements OnInit {
           this.properties = await response.json();
           return;
         }
-        this.helper.createNewAlert(
-          true,
-          "Sorry, your properties couln't be retrieved."
-        );
+        this.helper.newError("Sorry, your properties couln't be retrieved.");
       } catch (error) {
-        this.helper.createNewAlert(
-          true,
+        this.helper.newError(
           'we encountered an error while trying to load your properties.'
         );
       }

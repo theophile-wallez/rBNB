@@ -39,8 +39,7 @@ export class AppComponent implements OnInit {
           this.helper.setCurrentUser(user);
         }
       } catch (error) {
-        this.helper.createNewAlert(
-          true,
+        this.helper.newError(
           'There has been an error while trying to connect our servers.'
         );
       }

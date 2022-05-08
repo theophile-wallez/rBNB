@@ -77,12 +77,11 @@ export class SignInAndUpComponent implements OnInit {
         this.helper.setCurrentUser(user);
         this.helper.closePopup();
 
-        this.helper.createNewAlert(
-          false,
+        this.helper.newNotification(
           'Hello ' + user.firstName + ", you've successfully logged in!"
         );
       } else {
-        this.helper.createNewAlert(true, await response.text());
+        this.helper.newError(await response.text());
       }
     }
   }
@@ -96,14 +95,13 @@ export class SignInAndUpComponent implements OnInit {
         let user: User = await response.json();
         this.helper.setCurrentUser(user);
         this.helper.closePopup();
-        this.helper.createNewAlert(
-          false,
+        this.helper.newNotification(
           'Hello ' +
             user.firstName +
             ", you've successfully created your account!"
         );
       } else {
-        this.helper.createNewAlert(true, await response.text());
+        this.helper.newError(await response.text());
       }
     }
   }

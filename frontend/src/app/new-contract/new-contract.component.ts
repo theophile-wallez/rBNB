@@ -82,9 +82,6 @@ export class NewContractComponent implements OnInit {
       this.owner = await response.json();
       return;
     }
-    this.helper.createNewAlert(
-      true,
-      "Sorry, we couln't find the owner's infos."
-    );
+    this.helper.newError("Sorry, we couln't find the owner's infos.");
   }
 }
