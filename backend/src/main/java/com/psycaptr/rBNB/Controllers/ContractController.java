@@ -1,5 +1,7 @@
 package com.psycaptr.rBNB.Controllers;
 
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.ContractService;
 import com.psycaptr.rBNB.Models.Contract;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("api/contract")
@@ -45,5 +48,10 @@ public class ContractController {
             @RequestParam String ownerId
     ) throws ExecutionException, InterruptedException {
         return contractService.updateIsAccepted(contractId, ownerId);
+    }
+    // (HANS) TO BE VERIFIED:
+    @GetMapping("/by-contract-id")
+    public ResponseEntity<Contract> getContractById(@RequestParam(defaultValue = "") String contractId) throws ExecutionException, InterruptedException {
+        return contractService.getContractById(contractId);
     }
 }

@@ -4,13 +4,17 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.psycaptr.rBNB.Models.Contract;
+import com.psycaptr.rBNB.Models.Property;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
@@ -22,8 +26,16 @@ public class ContractService {
     @Autowired
     private PropertyService propertyService;
 
-    public static Contract getContractById(String contractId) {
-        return null;
+    // (HANS) TO BE VERIFIED:
+    public ResponseEntity<Contract> getContractById(String contractId) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = db.collection("Contracts").whereEqualTo("id",contractId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.size()==0) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Contract>(documents.get(0).toObject(Contract.class),HttpStatus.OK);
+    }
+
     }
 
     public ResponseEntity<?> createNewContract(Contract contract) throws ExecutionException, InterruptedException {
