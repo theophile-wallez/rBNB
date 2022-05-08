@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Property } from 'src/app/services/interfaces/interfaces';
+import { Contract, Property } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from '../services/helper.service';
 import { WebService } from '../services/web.service';
 
@@ -83,5 +83,16 @@ export class NewContractComponent implements OnInit {
       return;
     }
     this.helper.newError("Sorry, we couln't find the owner's infos.");
+  }
+
+  createNewContract() {
+    let contract: Contract = {
+      ownerId: this.property.ownerId,
+      tenantId: this.helper.currentUser.id,
+      checkInDate: this.checkInDate.toISOString().substring(0, 10),
+      checkOutDate: this.checkOutDate.toISOString().substring(0, 10),
+      propertyId: this.property.id
+    }
+    this.webService.postContract(contract);
   }
 }

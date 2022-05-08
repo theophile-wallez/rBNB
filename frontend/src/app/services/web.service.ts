@@ -65,4 +65,15 @@ export class WebService {
       body: JSON.stringify(data),
     });
   }
+
+  postContract(data: any): Promise<Response> {
+    return fetch(this.URL + '/contract', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  }
 }

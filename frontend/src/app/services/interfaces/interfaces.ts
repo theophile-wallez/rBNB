@@ -37,11 +37,11 @@ export interface Location {
 
 export interface Contract {
   id?: string;
-  ownerId: string;
-  tenantId: string;
-  startingDate: Date;
-  endingDate: Date;
-  propertyId: string;
+  ownerId?: string;
+  tenantId?: string;
+  checkInDate?: string;
+  checkOutDate?: string;
+  propertyId?: string;
 }
 
 export interface Auth {
