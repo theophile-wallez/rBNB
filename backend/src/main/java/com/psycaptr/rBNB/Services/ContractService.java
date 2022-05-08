@@ -34,7 +34,7 @@ public class ContractService {
             );
         }
 
-        if (PropertyService.isPropertyListed(contract.getPropertyId())) {
+        if (!PropertyService.isPropertyListed(contract.getPropertyId())) {
             return new ResponseEntity<>(
                     "The selected property is not available.",
                     HttpStatus.NOT_ACCEPTABLE
