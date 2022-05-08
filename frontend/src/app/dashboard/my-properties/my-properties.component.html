@@ -1,7 +1,6 @@
 <div class="container">
   <div class="title">My properties</div>
-  <!-- *ngIf="properties !== []" -->
-  <div class="my-property-container">
+  <div class="my-property-container" *ngIf="properties !== []">
     <table>
       <thead>
         <tr>
@@ -20,7 +19,7 @@
           <td>
             <mat-slide-toggle
               [(ngModel)]="property.isListed"
-              [color]="toggleColor"
+              color="warn"
               (toggleChange)="switchIsListed(property.id, !property.isListed)"
             >
             </mat-slide-toggle>
