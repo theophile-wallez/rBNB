@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
 
   changeRoute(path: string): void {
+    console.log('path: ', path);
     this.helper.closePopup();
     this.router.navigate([path]);
   }

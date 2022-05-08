@@ -1,16 +1,7 @@
-import { Country } from '@angular-material-extensions/select-country';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Property } from 'src/app/services/interfaces/interfaces';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from '../../services/helper.service';
 import { WebService } from '../../services/web.service';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'new-property',
@@ -45,18 +36,9 @@ export class NewPropertyComponent implements OnInit {
     });
 
     // this.myForm.valueChanges.subscribe(console.log);
-    this.myForm.valueChanges.subscribe(() => {
-      console.log(this.myForm.get('location')?.get('zipCode'));
-    });
-  }
-
-  cleanPropertyBeforeSubmit(property: any): any {
-    property.location['country'] = property.location?.country['name'];
-    property.location['street'] =
-      property.location['street'] + ' ' + property.location['streetType'];
-    delete property.location['streetType'];
-    property['isListed'] = true;
-    return property;
+    // this.myForm.valueChanges.subscribe(() => {
+    //   console.log(this.myForm.get('location')?.get('zipCode'));
+    // });
   }
 
   createNewProperty() {
@@ -67,6 +49,15 @@ export class NewPropertyComponent implements OnInit {
     if (userId) {
       this.webService.postPropertyByUserId(property, userId);
     }
+  }
+
+  cleanPropertyBeforeSubmit(property: any): any {
+    property.location['country'] = property.location?.country['name'];
+    property.location['street'] =
+      property.location['street'] + ' ' + property.location['streetType'];
+    delete property.location['streetType'];
+    property['isListed'] = true;
+    return property;
   }
 
   get zipCode() {

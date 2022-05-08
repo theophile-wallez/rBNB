@@ -6,7 +6,10 @@ import { ListingComponent } from './listing/listing.component';
 const routes: Routes = [
   { path: '', redirectTo: 'listing', pathMatch: 'full' },
   { path: 'listing', component: ListingComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
   { path: '**', redirectTo: 'listing', pathMatch: 'full' },
 ];
 

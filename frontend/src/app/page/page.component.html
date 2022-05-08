@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" [ngClass]="{ dashboard: router.url === '/dashboard' }">
   <router-outlet></router-outlet>
 </div>
 <popup></popup>

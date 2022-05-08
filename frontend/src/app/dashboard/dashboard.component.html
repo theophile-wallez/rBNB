@@ -1,11 +1,28 @@
 <!-- <my-properties></my-properties> -->
-<new-property></new-property>
 <!-- <div class="global-container">
   <div class="title">Dashboard</div>
   <div class="container">
     <div class="card-container"></div>
     <div class="card-container"></div>
   </div>
-</div>
+</div> -->
 
-<my-properties></my-properties> -->
+<div class="page">
+  <header>
+    <div class="title-container">
+      <div class="title">Dashboard</div>
+      <div class="hello-message">
+        {{ "Hello " + helper.currentUser.firstName + ", here's your summary!" }}
+      </div>
+    </div>
+    <div class="user-infos">
+      <div class="picture-container">
+        <img src="../../assets/images/face.png" draggable="false" />
+      </div>
+    </div>
+  </header>
+  <section class="content-section">
+    <my-properties></my-properties>
+    <!-- <new-property></new-property> -->
+  </section>
+</div>

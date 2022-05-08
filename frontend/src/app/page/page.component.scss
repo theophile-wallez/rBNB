@@ -4,10 +4,15 @@
   padding: 0;
   position: relative;
   min-height: 100vh;
-  width: calc(100vw - 19em);
-  margin-left: 17em;
+  width: calc(100vw - 17.1em);
+  // width: 100%;
+  margin-left: 16em;
   padding: 1em 5em;
   box-sizing: border-box;
   background-color: $color-background;
   z-index: 1;
+  &.dashboard {
+    background-color: $color-background-over;
+    padding: 0;
+  }
 }

@@ -32,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
     MatCardModule,
     MatNativeDateModule,
     MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
+    MatSlideToggleModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

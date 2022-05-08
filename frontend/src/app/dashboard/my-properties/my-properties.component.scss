@@ -1,0 +1,25 @@
+@import "../../../variables.scss";
+
+.container {
+  width: 100%;
+  .my-property-container {
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      text-align: left;
+      color: $color-font-mid-plus;
+      tr {
+        height: 4em;
+        &:nth-child(2n) {
+          background-color: $color-background;
+        }
+        td,
+        th {
+          &:first-child {
+            padding-left: 1em;
+          }
+        }
+      }
+    }
+  }
+}

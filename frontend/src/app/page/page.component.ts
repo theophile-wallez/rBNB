@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HelperService } from '../services/helper.service';
 
 @Component({
@@ -7,6 +8,6 @@ import { HelperService } from '../services/helper.service';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
-  constructor(public helper: HelperService) {}
+  constructor(public helper: HelperService, public router: Router) {}
   ngOnInit(): void {}
 }

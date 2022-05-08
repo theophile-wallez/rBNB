@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+/* Importing the environment file. */
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from './services/helper.service';
@@ -31,10 +32,17 @@ export class AppComponent implements OnInit {
   async readCookie() {
     let userId = this.cookie.get('userId');
     if (userId !== '') {
-      let response = await this.webService.getUserById(userId);
-      if (response.ok) {
-        let user: User = await response.json();
-        this.helper.setCurrentUser(user);
+      try {
+        let response = await this.webService.getUserById(userId);
+        if (response.ok) {
+          let user: User = await response.json();
+          this.helper.setCurrentUser(user);
+        }
+      } catch (error) {
+        this.helper.createNewAlert(
+          true,
+          'There has been an error while trying to connect our servers.'
+        );
       }
     }
   }

@@ -19,14 +19,15 @@ export class WebService {
     return await fetch(this.URL + '/property');
   }
 
-  // async getProperties() {
-  //   let data = await fetch(environment.URL + '/property');
-  //   this.properties = await data.json();
-  //   this.properties.forEach((property) => {
-  //     property.isSelected = false;
-  //   });
-  //   this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
-  // }
+  switchIsListed(propertyId: string, isListed: boolean): Promise<Response> {
+    return fetch(
+      this.URL +
+        '/property/is-listed?propertyId=' +
+        propertyId +
+        '&isListed=' +
+        isListed
+    );
+  }
 
   getUserById(userId: string): Promise<Response> {
     return fetch(this.URL + '/user/by-id?id=' + userId);

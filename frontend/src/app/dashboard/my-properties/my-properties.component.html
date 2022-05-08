@@ -1,6 +1,62 @@
-<div class="title">My properties</div>
-<div class="property-container" *ngIf="properties !== []">
-  <div class="property" *ngFor="let property of properties">
-    {{ property | json }}
+<div class="container">
+  <div class="title">My properties</div>
+  <!-- *ngIf="properties !== []" -->
+  <div class="my-property-container">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="1">Listed</th>
+          <th colspan="1">Address</th>
+          <th colspan="1">City</th>
+          <th colspan="1">Country</th>
+          <th colspan="1">Type</th>
+          <th colspan="1">Bed(s)</th>
+          <th colspan="1">Square Footage</th>
+          <th colspan="1">€/day</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties">
+          <td>
+            <mat-slide-toggle
+              [(ngModel)]="property.isListed"
+              [color]="toggleColor"
+              (toggleChange)="switchIsListed(property.id, !property.isListed)"
+            >
+            </mat-slide-toggle>
+          </td>
+          <!-- <td>{{ property.isListed }}</td> -->
+          <td>
+            {{ property.location?.number + " " + property.location?.street }}
+          </td>
+          <td>
+            {{ property.location?.city ?? "The city" }}
+          </td>
+          <td>
+            {{ property.location?.country }}
+          </td>
+          <td>
+            {{ property.housingType }}
+          </td>
+          <td>
+            {{
+              (property.bedAmount ?? "0") +
+                (property["bedAmount"] && property["bedAmount"] > 1
+                  ? " beds"
+                  : " bed")
+            }}
+          </td>
+          <td>
+            {{ property.squareFootage }}
+          </td>
+          <td>
+            {{ property.pricePerDay }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="property" *ngFor="let property of properties">
+      {{ property | json }}
+    </div> -->
   </div>
 </div>
