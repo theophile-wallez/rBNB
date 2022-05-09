@@ -32,6 +32,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,6 +67,7 @@ import { ConfirmationService } from 'primeng/api';
     RippleModule,
     InputSwitchModule,
     ConfirmPopupModule,
+    ButtonModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

@@ -89,7 +89,7 @@ export class NewPropertyComponent implements OnInit {
   }
 
   cleanPropertyBeforeSubmit(property: any): any {
-    property.location['country'] = property.location?.country['name'];
+    // property.location['country'] = property.location?.country['name'];
     property.location['street'] =
       property.location['street'] + ' ' + property.location['streetType'];
     delete property.location['streetType'];
