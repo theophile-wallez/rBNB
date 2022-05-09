@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 $header-height: 6em;
 * {
-  scroll-margin: calc($header-height + 1.8em);
+  scroll-margin: calc($header-height + 1.7em);
 }
 .separator {
   margin: 2em 0em;
@@ -17,7 +17,7 @@ $header-height: 6em;
   box-sizing: border-box;
   .content-section {
     width: 100%;
-    margin-top: calc($header-height + 2em);
+    margin-top: calc($header-height + 1.9em);
     padding-left: 3em;
     padding-right: 3em;
   }
