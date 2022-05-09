@@ -10,6 +10,8 @@ export class WebService {
   //TODO CONVERT ALL FETCH TO ANGULAR HTTPCLIENT
   URL = environment.URL;
 
+  // vvPHPRAY2LzkfJARkz0duukzyx145vzx8-Pf6HI3EqXgqvoTjumZwmxGYR3Kn1O96NM
+
   async getPropertiesByUserId(userId: string): Promise<Response> {
     return fetch(this.URL + '/property/by-user-id?ownerId=' + userId);
     // this.properties = await data.json();
@@ -75,5 +77,47 @@ export class WebService {
       },
       body: JSON.stringify(data),
     });
+  }
+
+  async getCountries(countryName: any) {
+    const timeout = 3000;
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    if (!countryName) return;
+    let response: Response = await fetch(
+      'https://restcountries.com/v3.1/name/' + countryName,
+      {
+        signal: controller.signal,
+      }
+    );
+    if (response.ok) {
+      clearTimeout(id);
+      let rawCountries = await response.json();
+      return rawCountries.map((country: any) => country.name.common);
+    }
+  }
+
+  async getCities(cityName: string) {
+    if (!cityName) return;
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com',
+        'X-RapidAPI-Key': '4908ec585bmshe9764bc603b011dp10878djsn38391d0577dc',
+      },
+    };
+
+    let response = await fetch(
+      'https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=' +
+        cityName +
+        '&sort=-population',
+      options
+    );
+    if (response.ok) {
+      let rawDatas = await response.json();
+      let data = await rawDatas.data;
+      return await data.map((rawData: any) => rawData.city);
+    }
   }
 }

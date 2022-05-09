@@ -1,88 +1,152 @@
-<h1 class="title">Rent out your property</h1>
+<div class="container">
+  <div class="title-component">{{ title }}</div>
+  <form [formGroup]="myForm" (ngSubmit)="createNewProperty()">
+    <div class="location" formGroupName="location">
+      <span class="p-float-label">
+        <p-autoComplete
+          formControlName="country"
+          [suggestions]="countries"
+          (completeMethod)="getCountries($event)"
+          [dropdown]="false"
+          dropdownMode="current"
+          inputId="country"
+          [required]="true"
+        ></p-autoComplete>
+        <label for="country">Country</label>
+      </span>
+      <span class="p-float-label">
+        <p-autoComplete
+          formControlName="city"
+          [suggestions]="cities"
+          (completeMethod)="getCities($event)"
+          [dropdown]="false"
+          dropdownMode="current"
+          inputId="city"
+          [required]="true"
+        ></p-autoComplete>
+        <label for="city">City</label>
+      </span>
 
-<form [formGroup]="myForm" action="" (ngSubmit)="createNewProperty()">
-  <div>
-    <mat-form-field appearance="standard">
-      <mat-label>Housing Type</mat-label>
-      <mat-select formControlName="housingType" required>
-        <mat-option value="house">House</mat-option>
-        <mat-option value="flat">Flat</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="location" formGroupName="location">
-    <mat-select-country
-      appearance="standard"
-      label="Country *"
-      class="className"
-      formControlName="country"
-    >
-    </mat-select-country>
-    <mat-form-field appearance="standard">
-      <mat-label>Zip Code</mat-label>
-      <input required matInput formControlName="zipCode" type="number" />
-      <mat-icon matSuffix *ngIf="!zipCode?.invalid && zipCode?.touched"
-        >check</mat-icon
+      <span class="p-inputgroup little">
+        <span class="p-inputgroup-addon">n°</span>
+
+        <p-inputNumber
+          formControlName="number"
+          inputId="number"
+          mode="decimal"
+          [min]="1"
+          [required]="true"
+        ></p-inputNumber>
+      </span>
+
+      <span class="p-float-label">
+        <input id="street" type="text" formControlName="street" pInputText />
+        <label for="street">Street name</label>
+      </span>
+
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="['Avenue', 'Street']"
+          formControlName="streetType"
+          inputId="streetType"
+          [required]="true"
+          placeholder="Street type"
+        ></p-dropdown>
+      </span>
+    </div>
+
+    <div class="form-content">
+      <span class="p-float-label">
+        <p-dropdown
+          [options]="housingTypes"
+          formControlName="housingType"
+          inputId="housingType"
+          optionLabel="name"
+          optionValue="value"
+          placeholder="Housing type"
+          [required]="true"
+        ></p-dropdown>
+      </span>
+
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="info-icon fa-solid fa-bed"></i>
+        </span>
+        <p-inputNumber
+          formControlName="bedAmount"
+          [suffix]="bedAmount?.value > 1 ? ' beds' : ' bed'"
+          [min]="1"
+          mode="decimal"
+          placeholder="Amount of bed(s)"
+          [required]="true"
+        ></p-inputNumber>
+      </div>
+
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="info-icon fa-regular fa-clone"></i>
+        </span>
+        <p-inputNumber
+          formControlName="squareFootage"
+          [min]="9"
+          mode="decimal"
+          suffix=" m²"
+          placeholder="Square footage"
+          [required]="true"
+        ></p-inputNumber>
+      </div>
+
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-euro"></i>
+        </span>
+        <p-inputNumber
+          formControlName="pricePerDay"
+          [min]="9"
+          suffix=" / day"
+          mode="currency"
+          currency="EUR"
+          locale="de-DE"
+          placeholder="ex: 20,00 € / day"
+          [required]="true"
+        ></p-inputNumber>
+      </div>
+    </div>
+    <span class="p-float-label">
+      <textarea
+        [rows]="2"
+        [cols]="30"
+        pInputTextarea
+        inputId="description"
+        formControlName="description"
+        [autoResize]="true"
+      ></textarea>
+      <label for="description">Describe your property</label>
+    </span>
+
+    <!-- <label for="currency-germany">Germany</label>
+      <p-inputNumber
+        [(ngModel)]="value10"
+        mode="currency"
+        inputId="currency-germany"
+        currency="EUR"
+        locale="de-DE"
       >
-    </mat-form-field>
-    <mat-form-field appearance="standard">
-      <mat-label>Street Number</mat-label>
-      <input required matInput formControlName="number" type="number" />
-      <mat-icon matSuffix *ngIf="!number?.invalid && number?.touched"
-        >check</mat-icon
-      >
-    </mat-form-field>
-    <mat-form-field appearance="standard">
-      <mat-label>Street</mat-label>
-      <input required matInput formControlName="street" />
-      <mat-icon matSuffix *ngIf="!street?.invalid && street?.touched"
-        >check</mat-icon
-      >
-    </mat-form-field>
-    <mat-form-field appearance="standard">
-      <mat-label>Street-Type</mat-label>
-      <mat-select formControlName="streetType" required>
-        <mat-option value="Street">Street</mat-option>
-        <mat-option value="Avenue">Avenue</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div>
-    <mat-form-field appearance="standard">
-      <mat-label>Description</mat-label>
-      <input matInput formControlName="description" />
-    </mat-form-field>
+      </p-inputNumber> -->
+    <!-- <mat-form-field appearance="standard">
+        <mat-label>Price per day (euros)</mat-label>
+        <input required matInput type="number" formControlName="pricePerDay" />
+        <mat-icon
+          matSuffix
+          *ngIf="!pricePerDay?.invalid && pricePerDay?.touched"
+          >check</mat-icon
+        >
+      </mat-form-field> -->
     <br />
-    <mat-form-field appearance="standard">
-      <mat-label>Bed Amount</mat-label>
-      <input required matInput type="number" formControlName="bedAmount" />
-      <mat-icon matSuffix *ngIf="!bedAmount?.invalid && bedAmount?.touched"
-        >check</mat-icon
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="standard">
-      <mat-label>Square Footage</mat-label>
-      <input required matInput type="number" formControlName="squareFootage" />
-      <mat-icon
-        matSuffix
-        *ngIf="!squareFootage?.invalid && squareFootage?.touched"
-        >check</mat-icon
-      >
-    </mat-form-field>
-    <br />
-    <mat-form-field appearance="standard">
-      <mat-label>Price per day (euros)</mat-label>
-      <input required matInput type="number" formControlName="pricePerDay" />
-      <mat-icon matSuffix *ngIf="!pricePerDay?.invalid && pricePerDay?.touched"
-        >check</mat-icon
-      >
-    </mat-form-field>
-  </div>
-  <br />
-  <div class="button">
-    <button [disabled]="myForm.invalid" mat-raised-button type="submit">
-      Publish
-    </button>
-  </div>
-</form>
+    <!-- <div class="button">
+      <button [disabled]="myForm.invalid" mat-raised-button type="submit">
+        Publish
+      </button>
+    </div> -->
+  </form>
+</div>

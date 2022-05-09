@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from './services/helper.service';
 import { WebService } from './services/web.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   title = 'rBNB-client';
 
   constructor(
+    private primengConfig: PrimeNGConfig,
     private cookie: CookieService,
     private helper: HelperService,
     private webService: WebService
@@ -25,6 +27,7 @@ export class AppComponent implements OnInit {
     this.helper.documentClickedTarget.next(event.target);
   }
   ngOnInit() {
+    this.primengConfig.ripple = true;
     this.helper.setPopupPage('newContract');
     this.readCookie();
   }
