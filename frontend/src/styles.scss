@@ -22,3 +22,7 @@ body {
   margin: 0;
   // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.p-inputswitch.p-focus .p-inputswitch-slider {
+  box-shadow: none !important;
+}

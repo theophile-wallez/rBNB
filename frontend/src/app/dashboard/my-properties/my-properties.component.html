@@ -68,7 +68,12 @@
           </td>
           <td>
             <!-- TODO -->
-            <i class="fa-solid fa-trash"></i>
+            <p-confirmPopup></p-confirmPopup>
+
+            <i
+              class="fa-solid fa-trash"
+              (click)="confirmDelete($event, property)"
+            ></i>
           </td>
         </tr>
       </tbody>

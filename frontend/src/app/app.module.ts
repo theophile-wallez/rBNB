@@ -30,6 +30,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RippleModule } from 'primeng/ripple';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,8 +64,9 @@ import { RippleModule } from 'primeng/ripple';
     InputTextareaModule,
     RippleModule,
     InputSwitchModule,
+    ConfirmPopupModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

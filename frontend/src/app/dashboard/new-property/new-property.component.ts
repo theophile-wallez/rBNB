@@ -17,7 +17,7 @@ interface HousingType {
 export class NewPropertyComponent implements OnInit {
   myForm!: FormGroup;
   test: number = 2;
-  title = 'Rent out your property';
+  title = 'Add a new property';
   countries: any = {};
   cities: any = {};
   housingTypes: HousingType[] = [

@@ -3,6 +3,7 @@ import { HelperService } from 'src/app/services/helper.service';
 import { WebService } from 'src/app/services/web.service';
 import { Property, User } from 'src/app/services/interfaces/interfaces';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'my-properties',
@@ -13,7 +14,8 @@ export class MyPropertiesComponent implements OnInit {
   constructor(
     private helper: HelperService,
     private dashboardService: DashboardService,
-    private webService: WebService
+    private webService: WebService,
+    private confirmationService: ConfirmationService
   ) {}
 
   properties: Property[] = [];
@@ -66,5 +68,25 @@ export class MyPropertiesComponent implements OnInit {
 
   editProperty(selectedProperty: Property) {
     this.dashboardService.editProperty(selectedProperty);
+  }
+
+  // Delete
+
+  confirmDelete(event: any, property: Property) {
+    this.confirmationService.confirm({
+      target: event.target,
+      message: 'Do you really want to delete this property?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (property.id) {
+          this.deleteProperty(property.id);
+        }
+      },
+    });
+  }
+
+  deleteProperty(propertyId: string) {
+    // TODO
+    console.log('delete property (id):', propertyId);
   }
 }
