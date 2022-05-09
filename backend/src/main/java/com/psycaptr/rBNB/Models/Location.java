@@ -2,13 +2,13 @@ package com.psycaptr.rBNB.Models;
 
 public class Location {
     private String country;
-    private int zipCode;
+    private String city;
     private String street;
     private int number;
 
-    public Location(String country, int zipCode, String street, int number) {
+    public Location(String country, String city, String street, int number) {
         this.country = country;
-        this.zipCode = zipCode;
+        this.city = city;
         this.street = street;
         this.number = number;
     }
@@ -23,12 +23,12 @@ public class Location {
         this.country = country;
     }
 
-    public int getZipCode() {
-        return zipCode;
+    public String getCity() {
+        return city;
     }
 
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getStreet() {
