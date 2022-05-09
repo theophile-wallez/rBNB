@@ -1,5 +1,11 @@
 @import "../../../variables.scss";
 
+.p-inputSwitch {
+  // max-height: 1em !important;
+}
+.p-inputswitch-slider {
+  height: 4rem !important;
+}
 .container {
   width: 100%;
   position: relative;
@@ -45,6 +51,7 @@
           &:first-child {
             padding-left: 1em;
             text-align: left;
+            margin: auto 0;
           }
         }
         td {

@@ -1,43 +1,33 @@
 @import "../../../variables.scss";
-
-// .location {
-//   display: flex;
-//   flex-direction: row;
-//   align-items: center;
-// }
-
-// .location mat-form-field {
-//   display: inline-block;
-//   vertical-align: middle;
-// }
-
-// .location mat-form-field {
-//   margin-right: 20px;
-// }
-
-// .location mat-select-country {
-//   margin-right: 20px;
-// }
-
-// mat-icon {
-//   color: rgb(1, 254, 1);
-// }
-
-.title {
-  color: $color-font-dark;
-  font-family: sans-serif;
-  font-size: 1.5em;
-  margin: 0;
+form {
   // margin-top: 2em;
-  margin-bottom: 2em;
-  user-select: none;
+  & > * {
+    margin-top: 2em;
+    font-size: 1em;
+    &::placeholder {
+      font-size: 1em;
+    }
+  }
 }
-
-// .button {
-//   display: table-cell;
-//   font-size: 14px;
-//   margin-left: 8px;
-//   min-width: 120px;
-//   display: table-cell;
-//   width: 490px;
-// }
+.location {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  & > * {
+    margin-right: 1.4em;
+  }
+  & > .little {
+    width: 8em;
+  }
+}
+.p-inputgroup {
+  width: max-content;
+}
+.form-content {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  & > * {
+    margin-right: 1.4em;
+  }
+}

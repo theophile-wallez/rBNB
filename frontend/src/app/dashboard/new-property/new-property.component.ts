@@ -5,6 +5,10 @@ import { Property } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from '../../services/helper.service';
 import { WebService } from '../../services/web.service';
 
+interface HousingType {
+  name: string;
+  value: string;
+}
 @Component({
   selector: 'new-property',
   templateUrl: './new-property.component.html',
@@ -12,7 +16,20 @@ import { WebService } from '../../services/web.service';
 })
 export class NewPropertyComponent implements OnInit {
   myForm!: FormGroup;
+  test: number = 2;
   title = 'Rent out your property';
+  countries: any = {};
+  cities: any = {};
+  housingTypes: HousingType[] = [
+    {
+      name: 'Flat',
+      value: 'flat',
+    },
+    {
+      name: 'House',
+      value: 'house',
+    },
+  ];
   constructor(
     private fb: FormBuilder,
     private helper: HelperService,
@@ -20,32 +37,45 @@ export class NewPropertyComponent implements OnInit {
     public dashboardService: DashboardService
   ) {}
   ngOnInit() {
+    this.initDefaultForm();
+
+    this.dashboardService.selectedPropertyBS.subscribe((property: Property) => {
+      if (property.id) {
+        this.editPropertyInit(property);
+      }
+    });
+
+    this.myForm.valueChanges.subscribe(console.log);
+  }
+
+  initDefaultForm(): void {
     const location = this.fb.group({
       country: ['', [Validators.required]],
-      zipCode: ['', [Validators.required]],
-      number: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      number: [null, [Validators.required]],
       streetType: ['Street', [Validators.required]],
       street: ['', [Validators.required]],
     });
     this.myForm = this.fb.group({
-      housingType: ['house', [Validators.required]],
+      housingType: ['', [Validators.required]],
       location: location,
       description: '',
-      bedAmount: ['', [Validators.required]],
-      squareFootage: ['', [Validators.required]],
-      pricePerDay: ['', [Validators.required]],
+      bedAmount: null,
+      squareFootage: [null, [Validators.required]],
+      pricePerDay: [null, [Validators.required]],
     });
-    this.dashboardService.selectedPropertyBS.subscribe((property: Property) => {
-      if (property.id) {
-        this.title = 'Edit your property';
-      }
-      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
-      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
-      this.myForm
-        ?.get('location')
-        ?.get('number')
-        ?.setValue(property.location?.number ?? '');
-    });
+  }
+
+  editPropertyInit(property: Property): void {
+    if (property.id) {
+      this.title = 'Edit your property';
+    }
+    this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+    this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+    this.myForm
+      ?.get('location')
+      ?.get('number')
+      ?.setValue(property.location?.number ?? '');
   }
 
   createNewProperty() {
@@ -67,8 +97,20 @@ export class NewPropertyComponent implements OnInit {
     return property;
   }
 
-  get zipCode() {
-    return this.myForm.get('location')?.get('zipCode');
+  async getCountries(event: any) {
+    this.countries = await this.webService.getCountries(event.query);
+  }
+
+  async getCities(event: any) {
+    let citiesKeep = JSON.parse(JSON.stringify(this.cities));
+    this.cities = (await this.webService.getCities(event.query)) ?? citiesKeep;
+  }
+
+  get country() {
+    return this.myForm.get('location')?.get('country');
+  }
+  get city() {
+    return this.myForm.get('location')?.get('city');
   }
   get number() {
     return this.myForm.get('location')?.get('number');

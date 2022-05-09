@@ -22,12 +22,17 @@
       <tbody>
         <tr *ngFor="let property of properties">
           <td>
-            <mat-slide-toggle
+            <p-inputSwitch
+              [(ngModel)]="property.isListed"
+              (onChange)="switchIsListed(property.id, !property.isListed)"
+            ></p-inputSwitch>
+
+            <!-- <mat-slide-toggle
               [(ngModel)]="property.isListed"
               color="warn"
               (toggleChange)="switchIsListed(property.id, !property.isListed)"
             >
-            </mat-slide-toggle>
+            </mat-slide-toggle> -->
           </td>
           <td>
             {{ property.location?.number + " " + property.location?.street }}

@@ -23,20 +23,13 @@ import { AlertNotificationComponent } from './alert-notification/alert-notificat
 import { ConnectAdvertismentComponent } from './navbar/connect-advertisment/connect-advertisment.component';
 import { UserInfosComponent } from './navbar/user-infos/user-infos.component';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRippleModule } from '@angular/material/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { RippleModule } from 'primeng/ripple';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,18 +54,14 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatCardModule,
-    MatNativeDateModule,
-    MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
-    MatSlideToggleModule,
+
     AutoCompleteModule,
+    InputTextModule,
+    DropdownModule,
+    InputNumberModule,
+    InputTextareaModule,
+    RippleModule,
+    InputSwitchModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
