@@ -68,4 +68,9 @@ public class ContractController {
     public ResponseEntity<List<Contract>> getContractsByUserId(@RequestParam(defaultValue = "") String userId) throws ExecutionException, InterruptedException {
         return contractService.getContractsByUserId(userId);
     }
+
+    @DeleteMapping("/by-id")
+    public ResponseEntity<String> deleteUserById(@RequestParam String id) throws ExecutionException, InterruptedException {
+        return contractService.deleteContractById(id);
+    }
 }

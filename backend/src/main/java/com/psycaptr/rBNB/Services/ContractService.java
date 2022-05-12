@@ -174,4 +174,20 @@ public class ContractService {
         }
         return isPropertyUnderContract;
     }
+
+    public ResponseEntity<String> deleteContractById(String id) throws ExecutionException, InterruptedException {
+        if(id.equals("") || id.equals(" ")) {
+            return new ResponseEntity<>("Contract was not deleted: Provided id is not acceptable.",HttpStatus.NOT_ACCEPTABLE);
+        }
+        ApiFuture<QuerySnapshot> future = db.collection("Contracts").whereEqualTo("id",id).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.isEmpty()) {
+            return new ResponseEntity<>("Contract was not deleted: No contract was found.",HttpStatus.NOT_FOUND);
+        }
+        if(documents.size()!=1) {
+            return new ResponseEntity<>("Contract was not deleted: At least two contracts share the same id.",HttpStatus.CONFLICT);
+        }
+        ApiFuture<WriteResult> writeResult = db.collection("Contracts").document(id).delete();
+        return new ResponseEntity<>("Contract successfully deleted.",HttpStatus.OK);
+    }
 }
