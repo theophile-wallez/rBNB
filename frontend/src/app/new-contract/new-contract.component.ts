@@ -76,9 +76,16 @@ export class NewContractComponent implements OnInit {
     let contract: Contract = {
       ownerId: this.property.ownerId,
       tenantId: this.helper.currentUser.id,
-      //! TO REFACTOR
-      checkInDate: this.rangeDates[0].toISOString().substring(0, 10),
-      checkOutDate: this.rangeDates[1].toISOString().substring(0, 10),
+      checkInDate: this.rangeDates[0].toLocaleDateString('fr-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }),
+      checkOutDate: this.rangeDates[1].toLocaleDateString('fr-CA', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }),
       propertyId: this.property.id,
     };
 
