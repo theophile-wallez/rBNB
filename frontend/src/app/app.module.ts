@@ -11,7 +11,7 @@ import { PageComponent } from './page/page.component';
 import { ListingComponent } from './listing/listing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
-import { NewContractComponent } from './new-contract/new-contract.component';
+import { NewContractComponent } from './popup/new-contract/new-contract.component';
 import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
