@@ -1,5 +1,6 @@
 package com.psycaptr.rBNB.Services;
 
+import com.google.api.Http;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
@@ -39,9 +40,21 @@ public class PropertyService {
         DocumentReference user = db.collection("Users").document(userId);
         user.update("propertiesId", FieldValue.arrayUnion(propertyId));
     }
-// TODO handle http response
-    public void deletePropertyById(String id){
+
+    public ResponseEntity<String> deletePropertyById(String id) throws ExecutionException, InterruptedException {
+        if(id.equals("") || id.equals(" ")) {
+            return new ResponseEntity<>("Property was not deleted: Provided id is not acceptable.",HttpStatus.NOT_ACCEPTABLE);
+        }
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("id",id).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.isEmpty()) {
+            return new ResponseEntity<>("Property was not deleted: No property was found.",HttpStatus.NOT_FOUND);
+        }
+        if(documents.size()!=1) {
+            return new ResponseEntity<>("Property was not deleted: At least two properties share the same id.",HttpStatus.CONFLICT);
+        }
         ApiFuture<WriteResult> writeResult = db.collection("Properties").document(id).delete();
+        return new ResponseEntity<>("Property successfully deleted.",HttpStatus.OK);
     }
 
     public List<Property> getAllProperties(String ownerId) throws ExecutionException, InterruptedException {
