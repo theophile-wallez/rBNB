@@ -89,8 +89,8 @@ public class ContractService {
 //            );
 //        }
 
-        if (!areDatesValid(contract.getCheckInDate(), contract.getCheckOutDate())) {
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        if (!areDatesValid(contract.getPropertyId(),contract.getCheckInDate(), contract.getCheckOutDate())) {
+            return new ResponseEntity<>("Dates are not valid",HttpStatus.NOT_ACCEPTABLE);
         }
 
         String contractId = addContractToDB(contract);
@@ -111,14 +111,28 @@ public class ContractService {
         user.update("contractsId", FieldValue.arrayUnion(contractId));
     }
 
-    private boolean areDatesValid(String checkInDateString, String checkOutString) {
+    private boolean areDatesValid(String propertyId, String checkInDateString, String checkOutString) throws ExecutionException, InterruptedException {
         LocalDate checkInDate = LocalDate.parse(checkInDateString);
         LocalDate checkOutDate = LocalDate.parse(checkOutString);
-        return checkOutDate.isAfter(checkInDate);
+        if(!checkOutDate.isAfter(checkInDate)) {
+            return false;
+        }
+        List<List<String>> occupiedDates = getPropertyOccupiedDates(propertyId).getBody();
+        for (List<String> dateInterval:
+             occupiedDates) {
+            if(checkInDate.isBefore(LocalDate.parse(dateInterval.get(0))) && checkOutDate.isAfter(LocalDate.parse(dateInterval.get(0))) ||
+                    checkInDate.isBefore(LocalDate.parse(dateInterval.get(1))) && checkOutDate.isAfter(LocalDate.parse(dateInterval.get(1))) ||
+                    checkInDate.isBefore(LocalDate.parse(dateInterval.get(0))) && checkOutDate.isAfter(LocalDate.parse(dateInterval.get(1))) ||
+                    checkInDate.isAfter(LocalDate.parse(dateInterval.get(0))) && checkOutDate.isBefore(LocalDate.parse(dateInterval.get(1))) ) {
+                return false;
+            }
+        }
+        return true;
+
     }
 
     // (HANS) TO BE VERIFIED:
-    public ResponseEntity<?> getPropertyOccupiedDates(String propertyId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(String propertyId) throws ExecutionException, InterruptedException {
 
         if(Objects.equals(propertyId, "")) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
