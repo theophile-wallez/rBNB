@@ -12,24 +12,26 @@ export class NewContractComponent implements OnInit {
   constructor(public helper: HelperService, private webService: WebService) {}
   property: Property = {};
   owner: any = {};
-  //TODO clean
-  checkInDate: Date = new Date();
-  checkOutDate!: Date;
+  disabledDates: Date[] = [];
   rangeDates: Date[] = [];
   minDate = new Date();
-  gapBetweenDates: number = 4;
-  doCheckOutDateFollowCheckInDate: boolean = true;
 
   ngOnInit(): void {
-    this.checkOutDate = this.addDaysToDate(new Date(), this.gapBetweenDates);
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
       this.property = property;
+      this.resetInfos();
+      if (property.id) {
+        this.getPropertyOccupiedDates(property.id);
+      }
       if (property.ownerId) {
         this.getOwnerByOwnerId(property.ownerId);
       }
     });
   }
 
+  resetInfos(): void {
+    this.rangeDates = [];
+  }
   //? DATES HANDLING
 
   getDateToString(date: Date): string {
@@ -48,31 +50,16 @@ export class NewContractComponent implements OnInit {
     return result;
   }
 
-  updateCheckOutDate() {
-    this.checkOutDate = this.addDaysToDate(
-      this.checkInDate,
-      this.gapBetweenDates
-    );
-  }
-
-  setGapBetweenDates(): void {
-    this.gapBetweenDates = this.getGapBetweenDates(
-      this.checkInDate,
-      this.checkOutDate
-    );
-  }
-
   getGapBetweenDates(checkInDate: Date, checkOutDate: Date): number {
-    const diffTime = Math.abs(checkOutDate.getDate() - checkInDate.getDate());
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return Math.abs(checkOutDate.getDate() - checkInDate.getDate());
   }
 
   //? PRICE HANDLING
 
-  getEstimatedPrice(): number | undefined {
-    let pricePerDay = this.property.pricePerDay;
-    return pricePerDay ? this.gapBetweenDates * pricePerDay : undefined;
-  }
+  // getEstimatedPrice(): number | undefined {
+  //   let pricePerDay = this.property.pricePerDay;
+  //   return pricePerDay ? this.gapBetweenDates * pricePerDay : undefined;
+  // }
 
   // ? OWNER HANDLING
 
@@ -89,18 +76,79 @@ export class NewContractComponent implements OnInit {
     let contract: Contract = {
       ownerId: this.property.ownerId,
       tenantId: this.helper.currentUser.id,
-      checkInDate: this.checkInDate.toISOString().substring(0, 10),
-      checkOutDate: this.checkOutDate.toISOString().substring(0, 10),
+      //! TO REFACTOR
+      checkInDate: this.rangeDates[0].toISOString().substring(0, 10),
+      checkOutDate: this.rangeDates[1].toISOString().substring(0, 10),
       propertyId: this.property.id,
     };
+
+    if (!this.rangeDates || !this.rangeDates[0] || !this.rangeDates[1]) {
+      return;
+    }
     this.webService.postContract(contract);
   }
 
-  updateDatesFromRange() {
+  onDateRangeChange(): void {
     if (!this.rangeDates || this.rangeDates[1] === null) return;
-
     if (this.getGapBetweenDates(this.rangeDates[0], this.rangeDates[1]) < 1) {
       this.rangeDates[1] = this.addDaysToDate(this.rangeDates[0], 1);
     }
+    if (!this.isRangeDateValid()) {
+      this.rangeDates = [];
+    }
+  }
+
+  //? Handle invalids dates when contract already exist
+
+  async getPropertyOccupiedDates(propertyId: string) {
+    let response: Response = await this.webService.getPropertyOccupiedDates(
+      propertyId
+    );
+    if (response.ok) {
+      let rawOccupiedDatesArrays = await response.json();
+      this.transformOccupiedDatesArrays(rawOccupiedDatesArrays);
+    }
+  }
+
+  transformOccupiedDatesArrays(rawDatesRange: string[][]) {
+    let disabledDates: Date[] = [];
+    rawDatesRange.forEach((rawDateRange: string[]) => {
+      let checkInDate: Date = new Date(rawDateRange[0]);
+      let checkOutDate: Date = new Date(rawDateRange[1]);
+      checkInDate.setHours(0, 0, 0, 0);
+      checkOutDate.setHours(0, 0, 0, 0);
+      let gap = this.getGapBetweenDates(checkInDate, checkOutDate);
+      for (let index = 0; index <= gap; index++) {
+        let nextDate = this.addDaysToDate(checkInDate, index);
+        if (!disabledDates.includes(nextDate)) {
+          disabledDates.push(nextDate);
+        }
+      }
+    });
+
+    this.disabledDates = disabledDates;
+  }
+
+  isRangeDateValid(): boolean {
+    let isRangeDateValid: boolean = true;
+    let checkInDate: Date = new Date(this.rangeDates[0]);
+    let checkOutDate: Date = new Date(this.rangeDates[1]);
+    checkInDate.setHours(0, 0, 0, 0);
+    checkOutDate.setHours(0, 0, 0, 0);
+    let gap = this.getGapBetweenDates(checkInDate, checkOutDate);
+    for (let index = 0; index <= gap; index++) {
+      let nextDate = this.addDaysToDate(checkInDate, index);
+      if (this.isDateInDisabledDate(nextDate)) {
+        isRangeDateValid = false;
+        break;
+      }
+    }
+    return isRangeDateValid;
+  }
+
+  isDateInDisabledDate(date: Date) {
+    return !!this.disabledDates.find((disabledDate) => {
+      return disabledDate.getTime() == date.getTime();
+    });
   }
 }

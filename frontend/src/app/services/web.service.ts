@@ -126,4 +126,12 @@ export class WebService {
       return await data.map((rawData: any) => rawData.city);
     }
   }
+
+  getPropertyOccupiedDates(propertyId: string): Promise<Response> {
+    return fetch(
+      this.URL +
+        '/contract/dates-occupied/by-property-id?propertyId=' +
+        propertyId
+    );
+  }
 }

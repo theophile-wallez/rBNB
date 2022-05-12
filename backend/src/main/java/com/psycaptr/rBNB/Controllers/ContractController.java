@@ -53,7 +53,7 @@ public class ContractController {
 
     // (HANS) TO BE VERIFIED:
     @GetMapping("/dates-occupied/by-property-id")
-    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<?> getPropertyOccupiedDates(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
         return contractService.getPropertyOccupiedDates(propertyId);
     }
 

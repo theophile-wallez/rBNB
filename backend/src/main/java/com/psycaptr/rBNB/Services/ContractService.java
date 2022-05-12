@@ -118,11 +118,16 @@ public class ContractService {
     }
 
     // (HANS) TO BE VERIFIED:
-    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(String propertyId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<?> getPropertyOccupiedDates(String propertyId) throws ExecutionException, InterruptedException {
+
+        if(Objects.equals(propertyId, "")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         List<List<String>> propertyOccupiedDates = new ArrayList<>();
         List<Contract> contracts = getContractsByPropertyId(propertyId);
         for (Contract contract: contracts) {
-            propertyOccupiedDates.add(new ArrayList<String>(Arrays.asList(contract.getCheckInDate(),contract.getCheckOutDate())));
+            propertyOccupiedDates.add(new ArrayList<>(Arrays.asList(contract.getCheckInDate(),contract.getCheckOutDate())));
         }
         return new ResponseEntity<>(propertyOccupiedDates,HttpStatus.OK);
     }

@@ -61,16 +61,17 @@
   <div class="calendar-container">
     <p-calendar
       [(ngModel)]="rangeDates"
-      (onSelect)="updateDatesFromRange()"
+      (onSelect)="onDateRangeChange()"
       selectionMode="range"
       [inline]="true"
       [minDate]="minDate"
       [firstDayOfWeek]="1"
+      [disabledDates]="disabledDates"
     ></p-calendar>
   </div>
 
   <div class="submit-container">
-    <div class="left-container">hello</div>
+    <div class="left-container">price</div>
     <div class="btn btn-contract" (click)="createNewContract()">Rent now</div>
   </div>
 </section>
