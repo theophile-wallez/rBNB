@@ -33,6 +33,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { ButtonModule } from 'primeng/button';
     InputSwitchModule,
     ConfirmPopupModule,
     ButtonModule,
+    CalendarModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

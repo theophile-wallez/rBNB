@@ -36,45 +36,39 @@
     </div>
   </div>
   <div class="dates-container">
-    <div
-      class="date-container"
-      (click)="setSelectedDate('checkInDate')"
-      [ngClass]="{ selectedDate: selectedDate === 'checkInDate' }"
-    >
+    <div class="date-container">
       <div class="date-name">Check-in</div>
       <div class="date">
-        {{ getDateToString(checkInDate) }}
+        {{
+          this.rangeDates[0]
+            ? getDateToString(this.rangeDates[0])
+            : "Pick a date"
+        }}
       </div>
     </div>
     <i class="fa-solid fa-angle-right"></i>
-    <div
-      class="date-container"
-      (click)="setSelectedDate('checkOutDate')"
-      [ngClass]="{ selectedDate: selectedDate === 'checkOutDate' }"
-    >
+    <div class="date-container">
       <div class="date-name">Check-out</div>
       <div class="date">
-        {{ getDateToString(checkOutDate) }}
+        {{
+          this.rangeDates[1]
+            ? getDateToString(this.rangeDates[1])
+            : "Pick a date"
+        }}
       </div>
     </div>
   </div>
-  <!-- <mat-card class="calendar-card firstDate">
-    <mat-calendar
-      *ngIf="selectedDate === 'checkInDate'"
-      [(selected)]="checkInDate"
-      (selectedChange)="updateCheckOutDate()"
+  <div class="calendar-container">
+    <p-calendar
+      [(ngModel)]="rangeDates"
+      (onSelect)="updateDatesFromRange()"
+      selectionMode="range"
+      [inline]="true"
       [minDate]="minDate"
-    ></mat-calendar>
-    <mat-calendar
-      *ngIf="selectedDate === 'checkOutDate'"
-      [(selected)]="checkOutDate"
-      (selectedChange)="setGapBetweenDates()"
-      [minDate]="addDaysToDate(checkInDate, 1)"
-    ></mat-calendar>
-  </mat-card> -->
-  <!-- <div class="price-container">
-    {{ getEstimatedPrice() }}
-  </div> -->
+      [firstDayOfWeek]="1"
+    ></p-calendar>
+  </div>
+
   <div class="submit-container">
     <div class="left-container">hello</div>
     <div class="btn btn-contract" (click)="createNewContract()">Rent now</div>

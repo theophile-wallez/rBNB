@@ -12,15 +12,14 @@ export class NewContractComponent implements OnInit {
   constructor(public helper: HelperService, private webService: WebService) {}
   property: Property = {};
   owner: any = {};
-  selectedDate: string = 'checkInDate';
+  //TODO clean
   checkInDate: Date = new Date();
   checkOutDate!: Date;
+  rangeDates: Date[] = [];
   minDate = new Date();
   gapBetweenDates: number = 4;
   doCheckOutDateFollowCheckInDate: boolean = true;
 
-  // ! PEUT ETRE REFACTOR FONCTIONNEMENT AVEC UN OBSERVABLE DE PROPERTY
-  // ? car ngOnInit() n'est trigger QUE pour la première property choisie
   ngOnInit(): void {
     this.checkOutDate = this.addDaysToDate(new Date(), this.gapBetweenDates);
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
@@ -43,10 +42,6 @@ export class NewContractComponent implements OnInit {
     );
   }
 
-  setSelectedDate(dateName: string): void {
-    this.selectedDate = dateName;
-  }
-
   addDaysToDate(date: Date, days: number): Date {
     var result = new Date(date);
     result.setDate(result.getDate() + days);
@@ -60,11 +55,16 @@ export class NewContractComponent implements OnInit {
     );
   }
 
-  setGapBetweenDates() {
-    const diffTime = Math.abs(
-      this.checkOutDate.getDate() - this.checkInDate.getDate()
+  setGapBetweenDates(): void {
+    this.gapBetweenDates = this.getGapBetweenDates(
+      this.checkInDate,
+      this.checkOutDate
     );
-    this.gapBetweenDates = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  getGapBetweenDates(checkInDate: Date, checkOutDate: Date): number {
+    const diffTime = Math.abs(checkOutDate.getDate() - checkInDate.getDate());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
 
   //? PRICE HANDLING
@@ -91,8 +91,16 @@ export class NewContractComponent implements OnInit {
       tenantId: this.helper.currentUser.id,
       checkInDate: this.checkInDate.toISOString().substring(0, 10),
       checkOutDate: this.checkOutDate.toISOString().substring(0, 10),
-      propertyId: this.property.id
-    }
+      propertyId: this.property.id,
+    };
     this.webService.postContract(contract);
+  }
+
+  updateDatesFromRange() {
+    if (!this.rangeDates || this.rangeDates[1] === null) return;
+
+    if (this.getGapBetweenDates(this.rangeDates[0], this.rangeDates[1]) < 1) {
+      this.rangeDates[1] = this.addDaysToDate(this.rangeDates[0], 1);
+    }
   }
 }

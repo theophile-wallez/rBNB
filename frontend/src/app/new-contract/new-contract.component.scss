@@ -76,19 +76,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    cursor: pointer;
     transition: all 0.2s;
-    &:hover {
-      // background-color: $color-border;
-      box-shadow: $box-shadow;
-      // outline-offset: -3px;
-      // outline: 3px solid $color-border;
-    }
-    &.selectedDate {
-      box-shadow: $box-shadow;
-
-      // background-color: $color-primary-deep-light;
-    }
 
     .date-name {
       color: $color-font-mid-plus;
@@ -123,8 +111,6 @@ mat-card {
   .btn-contract {
     margin-right: 1em;
   }
-}
-.test {
 }
 
 $container-height: 4em;
@@ -183,4 +169,22 @@ $container-height: 4em;
       }
     }
   }
+}
+
+.calendar-container {
+  margin-top: 1em;
+}
+:host ::ng-deep .p-calendar table td {
+  padding: 0.04rem;
+  font-size: 0.9em;
+  user-select: none;
+}
+
+:host
+  ::ng-deep
+  .p-datepicker
+  table
+  td.p-datepicker-today
+  > :not(span.p-highlight) {
+  background-color: transparent;
 }
