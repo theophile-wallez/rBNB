@@ -12,17 +12,11 @@ export class NewContractComponent implements OnInit {
   constructor(public helper: HelperService, private webService: WebService) {}
   property: Property = {};
   owner: any = {};
-  //TODO clean
   disabledDates: Date[] = [];
-  // checkInDate: Date = new Date();
-  // checkOutDate!: Date;
   rangeDates: Date[] = [];
   minDate = new Date();
-  // gapBetweenDates: number = 4;
-  doCheckOutDateFollowCheckInDate: boolean = true;
 
   ngOnInit(): void {
-    // this.checkOutDate = this.addDaysToDate(new Date(), this.gapBetweenDates);
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
       this.property = property;
       this.resetInfos();
@@ -56,23 +50,8 @@ export class NewContractComponent implements OnInit {
     return result;
   }
 
-  // updateCheckOutDate() {
-  //   this.checkOutDate = this.addDaysToDate(
-  //     this.checkInDate,
-  //     this.gapBetweenDates
-  //   );
-  // }
-
-  // setGapBetweenDates(): void {
-  //   this.gapBetweenDates = this.getGapBetweenDates(
-  //     this.checkInDate,
-  //     this.checkOutDate
-  //   );
-  // }
-
   getGapBetweenDates(checkInDate: Date, checkOutDate: Date): number {
     return Math.abs(checkOutDate.getDate() - checkInDate.getDate());
-    // return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
 
   //? PRICE HANDLING
