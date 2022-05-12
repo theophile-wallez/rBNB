@@ -71,11 +71,11 @@ public class Contract {
         this.propertyId = propertyId;
     }
 
-    public Boolean getAccepted() {
+    public Boolean getIsAccepted() {
         return isAccepted;
     }
 
-    public void setAccepted(Boolean accepted) {
+    public void setIsAccepted(Boolean accepted) {
         isAccepted = accepted;
     }
 }
