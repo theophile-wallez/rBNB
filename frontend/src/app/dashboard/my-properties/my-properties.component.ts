@@ -86,7 +86,7 @@ export class MyPropertiesComponent implements OnInit {
   }
 
   deleteProperty(propertyId: string) {
-    // TODO
+    this.webService.deletePropertyByUserId(propertyId);
     console.log('delete property (id):', propertyId);
   }
 }
