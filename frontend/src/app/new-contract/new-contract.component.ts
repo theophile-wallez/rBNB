@@ -77,8 +77,14 @@ export class NewContractComponent implements OnInit {
       ownerId: this.property.ownerId,
       tenantId: this.helper.currentUser.id,
       //! TO REFACTOR
+      checkInDate: this.rangeDates[0].toISOString().substring(0, 10),
+      checkOutDate: this.rangeDates[1].toISOString().substring(0, 10),
       propertyId: this.property.id,
     };
+
+    if (!this.rangeDates || !this.rangeDates[0] || !this.rangeDates[1]) {
+      return;
+    }
     this.webService.postContract(contract);
   }
 
