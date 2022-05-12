@@ -16,8 +16,10 @@ interface HousingType {
 })
 export class NewPropertyComponent implements OnInit {
   myForm!: FormGroup;
+  isEditMode: Boolean = false;
   test: number = 2;
   title = 'Add a new property';
+  buttonTitle = 'Submit your property';
   countries: any = {};
   cities: any = {};
   housingTypes: HousingType[] = [
@@ -68,30 +70,44 @@ export class NewPropertyComponent implements OnInit {
 
   editPropertyInit(property: Property): void {
     if (property.id) {
-      this.title = 'Edit your property';
-    }this.myForm
-      ?.get('location')
-      ?.get('number')
-      ?.setValue(property.location?.number ?? '');
-    this.myForm
-      ?.get('location')?.get('country')?.setValue(property.location?.country ?? '');
-    this.myForm
-    ?.get('location')?.get('city')?.setValue(property.location?.city ?? '');
-    this.myForm
-      ?.get('location')
-      ?.get('number')
-      ?.setValue(property.location?.number ?? '');
-    this.myForm
-      ?.get('location')?.get('street')?.setValue(property.location?.street.substring(0, property.location?.street.lastIndexOf(" ")) ?? '');
-    this.myForm
-      ?.get('location')?.get('streetType')?.setValue(property.location?.street.split(' ').pop()  ?? ''); 
-    this.myForm.controls['housingType'].setValue(property.housingType ?? '');
-    this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
-    this.myForm.controls['squareFootage'].setValue(property.squareFootage ?? '');
-    this.myForm.controls['pricePerDay'].setValue(property.pricePerDay ?? '');
-    this.myForm.controls['description'].setValue(property.description ?? '');
-
-    
+      this.isEditMode = true;
+      this.myForm
+        ?.get('location')
+        ?.get('number')
+        ?.setValue(property.location?.number ?? '');
+      this.myForm
+        ?.get('location')
+        ?.get('country')
+        ?.setValue(property.location?.country ?? '');
+      this.myForm
+        ?.get('location')
+        ?.get('city')
+        ?.setValue(property.location?.city ?? '');
+      this.myForm
+        ?.get('location')
+        ?.get('number')
+        ?.setValue(property.location?.number ?? '');
+      this.myForm
+        ?.get('location')
+        ?.get('street')
+        ?.setValue(
+          property.location?.street.substring(
+            0,
+            property.location?.street.lastIndexOf(' ')
+          ) ?? ''
+        );
+      this.myForm
+        ?.get('location')
+        ?.get('streetType')
+        ?.setValue(property.location?.street.split(' ').pop() ?? '');
+      this.myForm.controls['housingType'].setValue(property.housingType ?? '');
+      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+      this.myForm.controls['squareFootage'].setValue(
+        property.squareFootage ?? ''
+      );
+      this.myForm.controls['pricePerDay'].setValue(property.pricePerDay ?? '');
+      this.myForm.controls['description'].setValue(property.description ?? '');
+    }
   }
 
   createNewProperty() {
