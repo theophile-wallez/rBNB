@@ -49,7 +49,10 @@ public class PropertyController {
         return propertyService.updateIsListed(propertyId,isListed);
     }
 
-
+    @DeleteMapping("/by-id")
+    public ResponseEntity<String> deleteUserById(@RequestParam String id) throws ExecutionException, InterruptedException {
+        return propertyService.deletePropertyById(id);
+    }
 
 //    @GetMapping("/search")
 //    public List<Property> getSearchCompliantProperties(@RequestParam String query) throws ExecutionException, InterruptedException {
