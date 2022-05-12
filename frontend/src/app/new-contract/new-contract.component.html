@@ -61,11 +61,12 @@
   <div class="calendar-container">
     <p-calendar
       [(ngModel)]="rangeDates"
-      (onSelect)="updateDatesFromRange()"
+      (onSelect)="onDateRangeChange()"
       selectionMode="range"
       [inline]="true"
       [minDate]="minDate"
       [firstDayOfWeek]="1"
+      [disabledDates]="disabledDates"
     ></p-calendar>
   </div>
 
