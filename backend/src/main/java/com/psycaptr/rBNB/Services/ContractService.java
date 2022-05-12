@@ -81,12 +81,13 @@ public class ContractService {
             );
         }
 
-        if (isPropertyUnderContract(contract)) {
-            return new ResponseEntity<>(
-                    "The selected property is not available.",
-                    HttpStatus.NOT_ACCEPTABLE
-            );
-        }
+        // TODO: Outdated
+//        if (isPropertyUnderContract(contract)) {
+//            return new ResponseEntity<>(
+//                    "The selected property is not available.",
+//                    HttpStatus.NOT_ACCEPTABLE
+//            );
+//        }
 
         if (!areDatesValid(contract.getCheckInDate(), contract.getCheckOutDate())) {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

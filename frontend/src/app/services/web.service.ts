@@ -46,6 +46,12 @@ export class WebService {
     });
   }
 
+  deletePropertyByUserId(propertyId: String): Promise<Response> {
+    return fetch(this.URL + '/property/by-id?id=' + propertyId, {
+      method: 'DELETE',
+    });
+  }
+
   postSignInForms(data: any): Promise<Response> {
     return fetch(this.URL + '/auth', {
       method: 'POST',

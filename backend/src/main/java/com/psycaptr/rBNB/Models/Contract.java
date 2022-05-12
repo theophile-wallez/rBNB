@@ -7,6 +7,7 @@ public class Contract {
     private String checkInDate;
     private String checkOutDate;
     private String propertyId;
+    private Boolean isAccepted = false;
 
     public Contract(String ownerId, String tenantId, String checkInDate, String checkOutDate, String propertyId, String id) {
         this.id = id;
@@ -68,5 +69,13 @@ public class Contract {
 
     public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
+    }
+
+    public Boolean getAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
     }
 }
