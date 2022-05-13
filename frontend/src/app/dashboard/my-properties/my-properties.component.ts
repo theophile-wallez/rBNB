@@ -19,13 +19,22 @@ export class MyPropertiesComponent implements OnInit {
   ) {}
 
   properties: Property[] = [];
+  user: User = {};
 
   ngOnInit(): void {
     this.helper.userObservable.subscribe((user: User) => {
       if (user.id) {
+        this.user = user;
         this.getPropertiesByUserId(user.id);
       }
     });
+    this.dashboardService.doRefreshPropertyList.subscribe(
+      (doRefresh: Boolean) => {
+        if (this.user.id && doRefresh) {
+          this.getPropertiesByUserId(this.user.id);
+        }
+      }
+    );
   }
 
   async switchIsListed(
@@ -63,7 +72,7 @@ export class MyPropertiesComponent implements OnInit {
   }
 
   scrollToPropertyForm() {
-    this.dashboardService.scrollToPropertyForm();
+    this.dashboardService.scrollToId('propertyForm');
   }
 
   editProperty(selectedProperty: Property) {

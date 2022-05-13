@@ -46,7 +46,7 @@ export class NewPropertyComponent implements OnInit {
         this.editPropertyInit(property);
       }
     });
-
+    //! For dev only, to remove
     this.myForm.valueChanges.subscribe(console.log);
   }
 
@@ -110,13 +110,22 @@ export class NewPropertyComponent implements OnInit {
     }
   }
 
-  createNewProperty() {
+  async createNewProperty() {
     let property: any = JSON.parse(JSON.stringify(this.myForm.value));
     property = this.cleanPropertyBeforeSubmit(property);
     console.log(property);
     let userId: string | undefined = this.helper.currentUser.id;
-    if (userId) {
-      this.webService.postPropertyByUserId(property, userId);
+    if (!userId) return;
+    let response = await this.webService.postPropertyByUserId(property, userId);
+    if (response.ok) {
+      this.helper.newNotification('Your property has been added!');
+      //TODO clear form
+      this.dashboardService.refreshPropertyList();
+      this.dashboardService.scrollToId('propertyList');
+    } else {
+      this.helper.newError(
+        'There was a problem when trying to add your property.'
+      );
     }
   }
 

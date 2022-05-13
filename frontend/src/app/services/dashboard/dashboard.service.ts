@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Subject } from 'rxjs/internal/Subject';
 import { Property } from '../interfaces/interfaces';
 
 @Injectable({
@@ -8,15 +9,10 @@ import { Property } from '../interfaces/interfaces';
 export class DashboardService {
   constructor() {}
 
-  scrollToPropertyForm() {
+  scrollToId(idName: String) {
+    // propertyList;
     document
-      ?.querySelector('#propertyForm')
-      ?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  scrollToPropertyList() {
-    document
-      ?.querySelector('#propertyList')
+      ?.querySelector('#' + idName)
       ?.scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -33,6 +29,16 @@ export class DashboardService {
 
   editProperty(property: Property) {
     this.setSelectedProperty(property);
-    this.scrollToPropertyForm();
+    this.scrollToId('propertyForm');
+  }
+
+  // REFRESH PROPERTY
+
+  public doRefreshPropertyList = new BehaviorSubject<Boolean>(false);
+  refreshPropertyList() {
+    this.doRefreshPropertyList.next(true);
+    setTimeout(() => {
+      this.doRefreshPropertyList.next(false);
+    }, 1000);
   }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title-component">
-    {{ isEditMode ? "Edit your property" : "Add a new property" }}
+    {{ isEditMode ? "Edit your property" : "Add your property" }}
   </div>
   <form [formGroup]="myForm" (ngSubmit)="createNewProperty()">
     <div class="location" formGroupName="location">
@@ -151,7 +151,7 @@
       </button>
     </div> -->
     <p-button
-      [label]="isEditMode ? 'Submit your changes' : 'Submit your property'"
+      [label]="isEditMode ? 'Submit your changes' : 'Add your property'"
       [disabled]="myForm.invalid"
       type="submit"
     ></p-button>
