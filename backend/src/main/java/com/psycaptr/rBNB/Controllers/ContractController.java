@@ -53,7 +53,7 @@ public class ContractController {
 
     // (HANS) TO BE VERIFIED:
     @GetMapping("/dates-occupied/by-property-id")
-    public ResponseEntity<?> getPropertyOccupiedDates(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<List<String>>> getPropertyOccupiedDates(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
         return contractService.getPropertyOccupiedDates(propertyId);
     }
 
@@ -67,5 +67,10 @@ public class ContractController {
     @GetMapping("/by-user-id")
     public ResponseEntity<List<Contract>> getContractsByUserId(@RequestParam(defaultValue = "") String userId) throws ExecutionException, InterruptedException {
         return contractService.getContractsByUserId(userId);
+    }
+
+    @DeleteMapping("/by-id")
+    public ResponseEntity<String> deleteUserById(@RequestParam String id) throws ExecutionException, InterruptedException {
+        return contractService.deleteContractById(id);
     }
 }
