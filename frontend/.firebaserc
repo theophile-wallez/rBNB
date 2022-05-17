@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "default": "rbnb-b3444"
-  },
-  "hosting": {
-    "site": "rbnb-proj",
-    "public": "public"
-  }
-}
