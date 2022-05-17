@@ -113,15 +113,17 @@ export class NewPropertyComponent implements OnInit {
   async createNewProperty() {
     let property: any = JSON.parse(JSON.stringify(this.myForm.value));
     property = this.cleanPropertyBeforeSubmit(property);
-    console.log(property);
     let userId: string | undefined = this.helper.currentUser.id;
+
     if (!userId) return;
+
     let response = await this.webService.postPropertyByUserId(property, userId);
     if (response.ok) {
       this.helper.newNotification('Your property has been added!');
       //TODO clear form
       this.dashboardService.refreshPropertyList();
       this.dashboardService.scrollToId('propertyList');
+      this.initDefaultForm();
     } else {
       this.helper.newError(
         'There was a problem when trying to add your property.'

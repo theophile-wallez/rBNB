@@ -94,8 +94,17 @@ export class MyPropertiesComponent implements OnInit {
     });
   }
 
-  deleteProperty(propertyId: string) {
-    this.webService.deletePropertyByUserId(propertyId);
-    console.log('delete property (id):', propertyId);
+  async deleteProperty(propertyId: string) {
+    let response = await this.webService.deletePropertyByUserId(propertyId);
+    if (response.ok) {
+      this.helper.newNotification('Property successfully delete');
+      if (this.user.id) {
+        this.getPropertiesByUserId(this.user.id);
+      }
+    } else {
+      this.helper.newError(
+        'There has been an error when trying to delete your property.'
+      );
+    }
   }
 }

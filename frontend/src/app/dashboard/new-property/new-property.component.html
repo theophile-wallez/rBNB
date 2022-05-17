@@ -126,34 +126,13 @@
       <label for="description">Describe your property</label>
     </span>
 
-    <!-- <label for="currency-germany">Germany</label>
-      <p-inputNumber
-        [(ngModel)]="value10"
-        mode="currency"
-        inputId="currency-germany"
-        currency="EUR"
-        locale="de-DE"
-      >
-      </p-inputNumber> -->
-    <!-- <mat-form-field appearance="standard">
-        <mat-label>Price per day (euros)</mat-label>
-        <input required matInput type="number" formControlName="pricePerDay" />
-        <mat-icon
-          matSuffix
-          *ngIf="!pricePerDay?.invalid && pricePerDay?.touched"
-          >check</mat-icon
-        >
-      </mat-form-field> -->
-    <br />
-    <!-- <div class="button">
-      <button [disabled]="myForm.invalid" mat-raised-button type="submit">
-        Publish
-      </button>
-    </div> -->
-    <p-button
-      [label]="isEditMode ? 'Submit your changes' : 'Add your property'"
-      [disabled]="myForm.invalid"
-      type="submit"
-    ></p-button>
+    <div class="btn-container">
+      <p-button
+        [label]="isEditMode ? 'Submit your changes' : 'Add your property'"
+        [disabled]="myForm.invalid"
+        type="submit"
+      ></p-button>
+      <p-button icon="pi pi-check" class="p-button-warning"></p-button>
+    </div>
   </form>
 </div>
