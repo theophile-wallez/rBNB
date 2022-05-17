@@ -35,6 +35,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
+import { ContractsComponent } from './dashboard/contracts/contracts.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ChipsModule } from 'primeng/chips';
     AlertNotificationComponent,
     ConnectAdvertismentComponent,
     UserInfosComponent,
+    ContractsComponent,
   ],
   imports: [
     BrowserModule,
