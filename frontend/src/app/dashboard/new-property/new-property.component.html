@@ -2,7 +2,7 @@
   <div class="title-component">
     {{ isEditMode ? "Edit your property" : "Add your property" }}
   </div>
-  <form [formGroup]="myForm" (ngSubmit)="createNewProperty()">
+  <form [formGroup]="myForm" (ngSubmit)="submitForm()">
     <div class="location" formGroupName="location">
       <span class="p-float-label">
         <p-autoComplete

@@ -32,6 +32,7 @@ export class NewPropertyComponent implements OnInit {
       value: 'house',
     },
   ];
+  propertyId: string | undefined;
   constructor(
     private fb: FormBuilder,
     private helper: HelperService,
@@ -71,47 +72,46 @@ export class NewPropertyComponent implements OnInit {
   }
 
   editPropertyInit(property: Property): void {
-    if (property.id) {
-      this.isEditMode = true;
-      this.myForm
-        ?.get('location')
-        ?.get('number')
-        ?.setValue(property.location?.number ?? '');
-      this.myForm
-        ?.get('location')
-        ?.get('country')
-        ?.setValue(property.location?.country ?? '');
-      this.myForm
-        ?.get('location')
-        ?.get('city')
-        ?.setValue(property.location?.city ?? '');
-      this.myForm
-        ?.get('location')
-        ?.get('number')
-        ?.setValue(property.location?.number ?? '');
-      this.myForm
-        ?.get('location')
-        ?.get('street')
-        ?.setValue(
-          property.location?.street.substring(
-            0,
-            property.location?.street.lastIndexOf(' ')
-          ) ?? ''
-        );
-      this.myForm
-        ?.get('location')
-        ?.get('streetType')
-        ?.setValue(property.location?.street.split(' ').pop() ?? '');
-      this.myForm.controls['housingType'].setValue(property.housingType ?? '');
-      this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
-      this.myForm.controls['squareFootage'].setValue(
-        property.squareFootage ?? ''
+    this.propertyId = property.id;
+    this.isEditMode = true;
+    this.myForm
+      ?.get('location')
+      ?.get('number')
+      ?.setValue(property.location?.number ?? '');
+    this.myForm
+      ?.get('location')
+      ?.get('country')
+      ?.setValue(property.location?.country ?? '');
+    this.myForm
+      ?.get('location')
+      ?.get('city')
+      ?.setValue(property.location?.city ?? '');
+    this.myForm
+      ?.get('location')
+      ?.get('number')
+      ?.setValue(property.location?.number ?? '');
+    this.myForm
+      ?.get('location')
+      ?.get('street')
+      ?.setValue(
+        property.location?.street.substring(
+          0,
+          property.location?.street.lastIndexOf(' ')
+        ) ?? ''
       );
-      this.myForm.controls['pricePerDay'].setValue(property.pricePerDay ?? '');
-      this.myForm.controls['services'].setValue(property.services ?? '');
-      this.myForm.controls['constraints'].setValue(property.constraints ?? '');
-      this.myForm.controls['description'].setValue(property.description ?? '');
-    }
+    this.myForm
+      ?.get('location')
+      ?.get('streetType')
+      ?.setValue(property.location?.street.split(' ').pop() ?? '');
+    this.myForm.controls['housingType'].setValue(property.housingType ?? '');
+    this.myForm.controls['bedAmount'].setValue(property.bedAmount ?? '');
+    this.myForm.controls['squareFootage'].setValue(
+      property.squareFootage ?? ''
+    );
+    this.myForm.controls['pricePerDay'].setValue(property.pricePerDay ?? '');
+    this.myForm.controls['services'].setValue(property.services ?? []);
+    this.myForm.controls['constraints'].setValue(property.constraints ?? []);
+    this.myForm.controls['description'].setValue(property.description ?? '');
   }
 
   async createNewProperty() {
@@ -133,6 +133,35 @@ export class NewPropertyComponent implements OnInit {
         'There was a problem when trying to add your property.'
       );
     }
+  }
+
+  async editProperty() {
+    let property: any = JSON.parse(JSON.stringify(this.myForm.value));
+    property = this.cleanPropertyBeforeSubmit(property);
+
+    let propertyId: string | undefined = this.propertyId;
+
+    if (!this.propertyId) return;
+
+    let response = await this.webService.editPropertyById(
+      this.propertyId,
+      property
+    );
+    if (response.ok) {
+      this.helper.newNotification('Your property has been edited!');
+      //TODO clear form
+      this.dashboardService.refreshPropertyList();
+      this.dashboardService.scrollToId('propertyList');
+      this.initDefaultForm();
+    } else {
+      this.helper.newError(
+        'There was a problem when trying to edit your property.'
+      );
+    }
+  }
+
+  submitForm() {
+    this.isEditMode ? this.editProperty() : this.createNewProperty();
   }
 
   cleanPropertyBeforeSubmit(property: any): any {
@@ -176,5 +205,11 @@ export class NewPropertyComponent implements OnInit {
   }
   get pricePerDay() {
     return this.myForm?.get('pricePerDay');
+  }
+  get constraints() {
+    return this.myForm.get('constraints');
+  }
+  get services() {
+    return this.myForm?.get('services');
   }
 }

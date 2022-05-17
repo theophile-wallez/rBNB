@@ -46,6 +46,17 @@ export class WebService {
     });
   }
 
+  editPropertyById(propertyId: string, property: Property): Promise<Response> {
+    return fetch(this.URL + '/property/by-id?propertyId=' + propertyId, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(property),
+    });
+  }
+
   deletePropertyByUserId(propertyId: String): Promise<Response> {
     return fetch(this.URL + '/property/by-id?id=' + propertyId, {
       method: 'DELETE',
