@@ -114,6 +114,20 @@
         ></p-inputNumber>
       </div>
     </div>
+    <div class="form-content">
+      <p-chips
+        class="chip"
+        formControlName="services"
+        placeholder="Contract services"
+        [required]="true"
+      ></p-chips>
+      <p-chips
+        class="chip"
+        formControlName="constraints"
+        placeholder="Property constraints"
+        [required]="true"
+      ></p-chips>
+    </div>
     <span class="p-float-label">
       <textarea
         [rows]="2"

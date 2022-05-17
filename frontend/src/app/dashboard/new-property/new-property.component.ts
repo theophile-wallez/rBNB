@@ -65,6 +65,8 @@ export class NewPropertyComponent implements OnInit {
       bedAmount: null,
       squareFootage: [null, [Validators.required]],
       pricePerDay: [null, [Validators.required]],
+      services: [null, [Validators.required]],
+      constraints: [null, [Validators.required]],
     });
   }
 
@@ -106,6 +108,8 @@ export class NewPropertyComponent implements OnInit {
         property.squareFootage ?? ''
       );
       this.myForm.controls['pricePerDay'].setValue(property.pricePerDay ?? '');
+      this.myForm.controls['services'].setValue(property.services ?? '');
+      this.myForm.controls['constraints'].setValue(property.constraints ?? '');
       this.myForm.controls['description'].setValue(property.description ?? '');
     }
   }
