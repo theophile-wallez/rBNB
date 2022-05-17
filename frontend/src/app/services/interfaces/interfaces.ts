@@ -20,6 +20,8 @@ export interface Property {
   pricePerDay?: number;
   isListed?: boolean;
   isSelected?: boolean; //? for frontend behavior nly
+  services?: string[];
+  constraints?: string[];
 }
 
 export enum HousingType {

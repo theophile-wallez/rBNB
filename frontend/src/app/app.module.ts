@@ -34,6 +34,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { CalendarModule } from 'primeng/calendar';
     ConfirmPopupModule,
     ButtonModule,
     CalendarModule,
+    ChipsModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

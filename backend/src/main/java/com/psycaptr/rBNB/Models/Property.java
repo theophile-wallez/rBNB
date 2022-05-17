@@ -1,5 +1,7 @@
 package com.psycaptr.rBNB.Models;
 
+import java.util.List;
+
 public class Property {
     private String id;
     private String ownerId;
@@ -10,6 +12,25 @@ public class Property {
     private int squareFootage;
     private float pricePerDay;
     private boolean isListed;
+
+    public List<String> getServices() {
+        return services;
+    }
+
+    public void setServices(List<String> services) {
+        this.services = services;
+    }
+
+    public List<String> getConstraints() {
+        return constraints;
+    }
+
+    public void setConstraints(List<String> constraints) {
+        this.constraints = constraints;
+    }
+
+    private List<String> services;
+    private List<String> constraints;
 
     public Property(String id, String ownerId, HousingType housingType, Location location, String description, int bedAmount, int squareFootage, float pricePerDay) {
         this.id = id;
