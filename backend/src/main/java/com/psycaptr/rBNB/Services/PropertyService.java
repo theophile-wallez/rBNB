@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -116,5 +117,10 @@ public class PropertyService {
         DocumentReference propertyReference = FirestoreClient.getFirestore().collection("Properties").document(propertyId);
         ApiFuture<DocumentSnapshot> propertyQuery = propertyReference.get();
         return propertyQuery.get();
+    }
+
+        public ResponseEntity<HttpStatus> updatePropertyById(String propertyId, Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
+        db.collection("Properties").document(propertyId).update(newProperty);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

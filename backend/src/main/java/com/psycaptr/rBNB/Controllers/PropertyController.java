@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("api/property")
@@ -38,6 +39,11 @@ public class PropertyController {
     @GetMapping("/amount-by-user-id")
     public ResponseEntity<Integer> getPropertyAmountByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getPropertiesAmountByUserId(ownerId);
+    }
+
+    @PutMapping("/by-id")
+    public ResponseEntity<HttpStatus> updatePropertyById(@RequestParam(defaultValue = "") String propertyId, @RequestBody Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
+        return propertyService.updatePropertyById(propertyId, newProperty);
     }
 
 // TODO: Should be an update
