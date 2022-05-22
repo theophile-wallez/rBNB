@@ -66,8 +66,8 @@ export class NewPropertyComponent implements OnInit {
       bedAmount: null,
       squareFootage: [null, [Validators.required]],
       pricePerDay: [null, [Validators.required]],
-      services: [null, [Validators.required]],
-      constraints: [null, [Validators.required]],
+      services: null,
+      constraints: null,
     });
   }
 
