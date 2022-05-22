@@ -106,20 +106,29 @@ public class PropertyService {
     }
 
     public static boolean isPropertyListed(String propertyId) throws ExecutionException, InterruptedException {
-        DocumentSnapshot property = getPropertyById(propertyId);
+        DocumentSnapshot property = getPropertyByIdV2(propertyId);
         if(!property.exists()) {
             return false;
         }
         return Boolean.TRUE.equals(property.getBoolean("isListed"));
     }
 
-    private static DocumentSnapshot getPropertyById(String propertyId) throws ExecutionException, InterruptedException {
+    private static DocumentSnapshot getPropertyByIdV2(String propertyId) throws ExecutionException, InterruptedException {
         DocumentReference propertyReference = FirestoreClient.getFirestore().collection("Properties").document(propertyId);
         ApiFuture<DocumentSnapshot> propertyQuery = propertyReference.get();
         return propertyQuery.get();
     }
 
-        public ResponseEntity<HttpStatus> updatePropertyById(String propertyId, Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
+    public ResponseEntity<Property> getPropertyById(String propertyId) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("id",propertyId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.size()==0) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Property>(documents.get(0).toObject(Property.class),HttpStatus.OK);
+    }
+
+    public ResponseEntity<HttpStatus> updatePropertyById(String propertyId, Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
         db.collection("Properties").document(propertyId).update(newProperty);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -31,6 +31,11 @@ public class PropertyController {
         return propertyService.getAllProperties(ownerId);
     }
 
+    @GetMapping("/by-property-id")
+    public ResponseEntity<Property> getPropertyById(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
+        return propertyService.getPropertyById(propertyId);
+    }
+
     @GetMapping("/by-user-id")
     public ResponseEntity<List<Property>> getPropertiesByUserId(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getPropertiesByUserId(ownerId);
