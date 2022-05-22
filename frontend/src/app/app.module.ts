@@ -16,6 +16,7 @@ import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.comp
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewPropertyComponent } from './dashboard/new-property/new-property.component';
+import { RatingModule } from 'primeng/rating';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -74,6 +75,7 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
     ButtonModule,
     CalendarModule,
     ChipsModule,
+    RatingModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

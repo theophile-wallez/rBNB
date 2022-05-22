@@ -29,6 +29,9 @@ export class ListingComponent implements OnInit {
     this.properties = await response.json();
     this.properties.forEach((property) => {
       property.isSelected = false;
+      if (property.rating && property.rating.value) {
+        property.rating.value = Math.floor(property.rating.value / 20);
+      }
     });
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
   }

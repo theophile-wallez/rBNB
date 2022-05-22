@@ -4,12 +4,14 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.ContractService;
 import com.psycaptr.rBNB.Models.Contract;
+import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RequestMapping("api/contract")
@@ -18,6 +20,8 @@ public class ContractController {
 
     @Autowired
     private ContractService contractService;
+    @Autowired
+    private PropertyService propertyService;
 
 //    @GetMapping("/contract-by-id")
 //    public Contract getContractById(
@@ -49,6 +53,18 @@ public class ContractController {
     ) throws ExecutionException, InterruptedException {
         return contractService.updateIsAccepted(contractId, ownerId);
     }
+
+    @PutMapping("/rating")
+    public ResponseEntity<?> rateContract(
+            @RequestParam String contractId,
+            @RequestParam String propertyId,
+            @RequestParam int rating
+    ) throws ExecutionException, InterruptedException {
+        propertyService.updatePropertyRatingById(propertyId, rating);
+        return contractService.rateContract(contractId, rating);
+    }
+
+
 
 
     // (HANS) TO BE VERIFIED:

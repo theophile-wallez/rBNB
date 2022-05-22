@@ -4,7 +4,9 @@ import com.google.api.Http;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import com.psycaptr.rBNB.Models.Contract;
 import com.psycaptr.rBNB.Models.Property;
+import com.psycaptr.rBNB.Models.Rating;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -132,4 +134,19 @@ public class PropertyService {
         db.collection("Properties").document(propertyId).update(newProperty);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    public ResponseEntity<HttpStatus> updatePropertyRatingById(String propertyId, int rating) throws ExecutionException, InterruptedException {
+        Rating oldRating = getPropertyById(propertyId).getBody().getRating();
+        Rating newRating = calculateRatingValue(oldRating,rating);
+        db.collection("Properties").document(propertyId).update("rating.value",newRating.getValue());
+        db.collection("Properties").document(propertyId).update("rating.amount",newRating.getAmount());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private Rating calculateRatingValue(Rating oldRating, int rating) {
+        double newValue = (oldRating.getValue() * oldRating.getAmount() + rating*20)/(oldRating.getAmount()+1);
+        return new Rating(newValue,oldRating.getAmount()+1);
+    }
+
+
 }

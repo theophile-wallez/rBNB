@@ -1,5 +1,6 @@
 package com.psycaptr.rBNB.Controllers;
 
+import com.psycaptr.rBNB.Models.Contract;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
