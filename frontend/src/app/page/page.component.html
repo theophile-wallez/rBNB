@@ -1,4 +1,9 @@
-<div class="page" [ngClass]="{ dashboard: router.url === '/dashboard' }">
+<div
+  class="page"
+  [ngClass]="{
+    dashboard: router.url === '/dashboard' || router.url === '/contracts'
+  }"
+>
   <router-outlet></router-outlet>
 </div>
 <popup></popup>

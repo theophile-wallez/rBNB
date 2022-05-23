@@ -31,6 +31,21 @@
       </div>
       <div *ngIf="router.url === '/dashboard'" class="selected-span"></div>
     </div>
+
+    <div class="link" (click)="changeRoute('/contracts')">
+      <i
+        class="fa-solid fa-file-contract"
+        [ngClass]="{ selected: router.url === '/contracts' }"
+      ></i>
+
+      <div
+        class="link-content"
+        [ngClass]="{ selected: router.url === '/contracts' }"
+      >
+        Contracts
+      </div>
+      <div *ngIf="router.url === '/contracts'" class="selected-span"></div>
+    </div>
   </div>
   <connect-advertisment
     *ngIf="helper.currentUser.id === undefined"

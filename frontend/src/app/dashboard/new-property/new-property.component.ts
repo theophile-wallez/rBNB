@@ -66,8 +66,8 @@ export class NewPropertyComponent implements OnInit {
       bedAmount: null,
       squareFootage: [null, [Validators.required]],
       pricePerDay: [null, [Validators.required]],
-      services: null,
-      constraints: null,
+      services: [],
+      constraints: [],
     });
   }
 
@@ -138,8 +138,6 @@ export class NewPropertyComponent implements OnInit {
   async editProperty() {
     let property: any = JSON.parse(JSON.stringify(this.myForm.value));
     property = this.cleanPropertyBeforeSubmit(property);
-
-    let propertyId: string | undefined = this.propertyId;
 
     if (!this.propertyId) return;
 
