@@ -8,6 +8,9 @@
   font-family: $font;
   font-size: 1.01em;
   scroll-behavior: smooth;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
