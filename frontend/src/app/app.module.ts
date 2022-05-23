@@ -38,6 +38,15 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ContractsComponent } from './dashboard/contracts/contracts.component';
 
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from "../environments/environment";
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +85,13 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
     CalendarModule,
     ChipsModule,
     RatingModule,
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
