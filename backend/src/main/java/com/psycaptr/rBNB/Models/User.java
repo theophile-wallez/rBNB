@@ -17,6 +17,15 @@ public class User {
     private Password password;
     private List<String> propertiesId = new ArrayList<>();
     private List<String> contractsId = new ArrayList<>();
+    private boolean isAdmin = false;
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public User(String id, String firstName, String lastName, String email, Password password, List<String> propertiesId, List<String> contractsId) {
         this.id = id;
