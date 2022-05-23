@@ -13,6 +13,7 @@ export class ContractsComponent implements OnInit {
   user: User = {};
   waitingContracts: any[] = [];
   acceptedContracts: any[] = [];
+
   ngOnInit(): void {
     this.helper.userObservable.subscribe((user: User) => {
       if (user.id) {

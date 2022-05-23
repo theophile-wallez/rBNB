@@ -36,6 +36,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ContractsComponent } from './dashboard/contracts/contracts.component';
+import { SpeedDialModule } from 'primeng/speeddial';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
     ButtonModule,
     CalendarModule,
     ChipsModule,
+    SpeedDialModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
