@@ -43,6 +43,7 @@ export interface Contract {
   checkInDate?: string;
   checkOutDate?: string;
   propertyId?: string;
+  isAccepted?: boolean;
 }
 
 export interface Auth {

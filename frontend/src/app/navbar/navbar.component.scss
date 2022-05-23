@@ -48,6 +48,7 @@ nav {
         align-items: center;
         margin-left: 1.5em;
         margin-right: 1.5em;
+        min-width: 1.5em;
         &.selected {
           color: $color-primary;
         }
