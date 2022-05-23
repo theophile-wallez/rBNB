@@ -71,7 +71,13 @@
   </div>
 
   <div class="submit-container">
-    <div class="left-container">price</div>
+    <div class="info" *ngIf="property.pricePerDay">
+      <!-- <i class="info-icon fa-solid fa-euro-sign"></i> -->
+      <div class="info-content-container">
+        <div class="info-title">Estimated price</div>
+        <div class="info-value">{{ this.priceTotal + " €" }}</div>
+      </div>
+    </div>
     <div class="btn btn-contract" (click)="createNewContract()">Rent now</div>
   </div>
 </section>

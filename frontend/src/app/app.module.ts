@@ -37,6 +37,7 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ContractsComponent } from './dashboard/contracts/contracts.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
     CalendarModule,
     ChipsModule,
     RatingModule,
+    TooltipModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],
