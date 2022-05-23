@@ -65,6 +65,34 @@
             <div class="info-value">{{ property.squareFootage }} m²</div>
           </div>
         </div>
+        <div
+          class="info"
+          *ngIf="property.services && property.services.length > 0"
+          [pTooltip]="getServices(property)"
+          tooltipPosition="top"
+        >
+          <i class="info-icon fa-solid fa-user-check"></i>
+          <div class="info-content-container">
+            <div class="info-title">Services</div>
+            <div class="info-value">
+              {{ property.services.length + " services." }}
+            </div>
+          </div>
+        </div>
+        <div
+          class="info"
+          *ngIf="property.constraints && property.constraints.length > 0"
+          [pTooltip]="getConstraints(property)"
+          tooltipPosition="top"
+        >
+          <i class="info-icon fa-solid fa-triangle-exclamation"></i>
+          <div class="info-content-container">
+            <div class="info-title">Contraints</div>
+            <div class="info-value">
+              {{ property.constraints.length + " constraints." }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="rating-container">
