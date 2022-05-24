@@ -131,6 +131,11 @@ export class HelperService {
     this.alertObservable.next({});
   }
 
+  changeRoute(path: string): void {
+    this.closePopup();
+    this.router.navigate([path]);
+  }
+
   //? Click handler
   documentClickedTarget: Subject<HTMLElement> = new Subject<HTMLElement>();
 }

@@ -1,11 +1,14 @@
 package com.psycaptr.rBNB.Controllers;
 
+import com.google.firebase.auth.FirebaseAuthException;
 import com.psycaptr.rBNB.Models.User;
 import com.psycaptr.rBNB.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 
@@ -36,5 +39,10 @@ public class UserController {
     @DeleteMapping("/by-id")
     public ResponseEntity<String> deleteUserById(@RequestParam(value = "id") String id) throws ExecutionException, InterruptedException {
         return userService.deleteUserById(id);
+    }
+
+    @PutMapping("/by-id")
+    public ResponseEntity<HttpStatus> updateUserById(@RequestParam String userId, @RequestBody Map<String, Object> updatedUser) throws ExecutionException, InterruptedException, FirebaseAuthException {
+        return userService.updateUserById(userId, updatedUser);
     }
 }

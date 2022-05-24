@@ -12,8 +12,10 @@
     </div>
     <div class="popup" #popup [@openClose]="isPopupOpen ? 'open' : 'closed'">
       <div class="link-container">
-        <i class="fa-solid fa-gear"></i>
-        <div class="link">Profil settings</div>
+        <i class="fa-solid fa-user"></i>
+        <div class="link" (click)="changeRoute('user-profile')">
+          User Profile
+        </div>
       </div>
       <div class="link-container">
         <i class="fa-solid fa-right-from-bracket"></i>

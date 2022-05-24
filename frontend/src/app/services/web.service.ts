@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Property } from 'src/app/services/interfaces/interfaces';
+import { Property, User } from 'src/app/services/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +19,17 @@ export class WebService {
 
   async getAllProperties(): Promise<Response> {
     return await fetch(this.URL + '/property');
+  }
+
+  updateUser(upatedUser: User, userId: string) {
+    return fetch(this.URL + '/user/by-id?userId=' + userId, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(upatedUser),
+    });
   }
 
   switchIsListed(propertyId: string, isListed: boolean): Promise<Response> {

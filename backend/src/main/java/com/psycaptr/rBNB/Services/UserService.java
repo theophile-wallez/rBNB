@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -111,7 +112,11 @@ public class UserService {
         return !user.getContractsId().isEmpty();
     }
 
+    public ResponseEntity<HttpStatus> updateUserById(String id, Map<String, Object> updatedUser) {
+        db.collection("Users").document(id).update(updatedUser);
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
 //    public String savePatientDetails(Patient patient) throws InterruptedException, ExecutionException {

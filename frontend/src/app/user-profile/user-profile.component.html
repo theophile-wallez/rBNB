@@ -1,0 +1,57 @@
+<div class="profile-header">
+  <div class="picture-container">
+    <img src="../../assets/images/face.png" draggable="false" />
+  </div>
+  <div class="infos-container">
+    <div class="name">
+      {{ helper.currentUser.firstName + " " + helper.currentUser.lastName }}
+    </div>
+  </div>
+</div>
+<div class="edit-container">
+  <form class="form" [formGroup]="userEditForm" (ngSubmit)="applySubmit()">
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+      <input
+        required
+        formControlName="firstName"
+        type="text"
+        placeholder="First Name"
+      />
+    </div>
+
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+      <input
+        required
+        formControlName="lastName"
+        type="text"
+        placeholder="Last Name"
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-envelope"></i></div>
+      <input
+        required
+        formControlName="email"
+        type="email"
+        placeholder="email"
+      />
+    </div>
+    <div class="input-container">
+      <div class="input-icon"><i class="fa-solid fa-lock"></i></div>
+
+      <input
+        required
+        formControlName="password"
+        type="password"
+        placeholder="Enter password to confirm changes"
+      />
+    </div>
+    <div class="btn-container">
+      <button class="button" type="submit" [disabled]="userEditForm.invalid">
+        Apply
+      </button>
+    </div>
+  </form>
+</div>

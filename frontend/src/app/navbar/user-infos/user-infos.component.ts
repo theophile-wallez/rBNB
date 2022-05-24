@@ -45,6 +45,10 @@ export class UserInfosComponent implements OnInit {
     this.helper.disconnectUser();
   }
 
+  changeRoute(path: string): void {
+    this.helper.changeRoute(path);
+  }
+
   openPopup(): void {
     if (!this.clickSubscription?.closed) {
       this.clickSubscription?.unsubscribe();
