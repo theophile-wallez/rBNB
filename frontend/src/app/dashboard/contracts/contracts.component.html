@@ -3,13 +3,13 @@
     <div class="title-container">
       <div class="title">Your contracts</div>
       <div class="hello-message">
-        Your will find here all of your current contracts
+        Your will find here all your current contracts
       </div>
     </div>
     <div class="user-infos"></div>
   </header>
   <section class="content-section">
-    <div class="contracts-section">
+    <div class="contracts-section" *ngIf="waitingContracts.length > 0">
       <div class="title-component">Waiting contracts</div>
       <div class="contracts-container">
         <div class="contract" *ngFor="let contract of waitingContracts">
@@ -17,26 +17,87 @@
             <img src="../../assets/images/photo2.jpg" draggable="false" />
           </div>
           <div class="contract-content">
+            <div class="info-container">
+              <div class="info-title">Location</div>
+
+              <div class="property-adresse">
+                {{
+                  contract.property?.location?.number +
+                    " " +
+                    contract.property?.location?.street
+                }}
+              </div>
+            </div>
+
+            <div class="info-container">
+              <div class="info-title">
+                {{ contract.isUserThePropertyOwner ? "Tenant" : "Owner" }}
+              </div>
+              <div class="other-party-user-info">
+                {{
+                  contract.otherUser?.firstName +
+                    " " +
+                    contract.otherUser?.lastName
+                }}
+              </div>
+            </div>
+
+            <div class="info-container">
+              <div class="info-title">Dates</div>
+              <div class="dates-container">
+                <div class="date">
+                  {{ contract.checkInDate }}
+                </div>
+                <i class="fa-solid fa-angles-right"></i>
+                <div class="date">
+                  {{ contract.checkOutDate }}
+                </div>
+              </div>
+            </div>
+
             <div class="btn-container">
-              <div class="actions-btn-container">
+              <div
+                class="actions-btn-container"
+                *ngIf="contract.isUserThePropertyOwner"
+              >
                 <div
-                  class="btn btn-decline"
-                  pTooltip="Reject the contract"
-                  [showDelay]="0"
+                  class="btn btn-decline hvr-buzz-out"
+                  pTooltip="Decline contract"
+                  [showDelay]="tooltipDelay"
                   tooltipPosition="top"
+                  (click)="declineContract(contract)"
                 >
                   <i class="fa-solid fa-xmark"></i>
                 </div>
                 <div
-                  class="btn btn-accept"
-                  pTooltip="Accept the contract"
-                  [showDelay]="0"
+                  class="btn btn-accept hvr-bounce-in"
+                  pTooltip="Accept contract"
                   tooltipPosition="top"
+                  [showDelay]="tooltipDelay"
+                  (click)="acceptContract(contract)"
                 >
                   <i class="fa-solid fa-check"></i>
                 </div>
               </div>
-              <div class="btn-message-container">
+              <div
+                class="status-container"
+                *ngIf="!contract.isUserThePropertyOwner"
+              >
+                <div
+                  class="status pending"
+                  pTooltip="Waiting for owner's approval"
+                  tooltipPosition="top"
+                >
+                  pending
+                </div>
+              </div>
+              <div
+                class="btn-message-container"
+                [pTooltip]="'Contact ' + contract.otherUser?.firstName"
+                [showDelay]="tooltipDelay"
+                tooltipPosition="top"
+                (click)="contactOtherUser(contract)"
+              >
                 <img
                   src="../../assets/images/messenger.png"
                   draggable="false"
@@ -47,6 +108,94 @@
         </div>
       </div>
     </div>
-    <div class="separator"></div>
+    <div class="contracts-section">
+      <div class="title-component">Current contracts</div>
+      <div class="contracts-container">
+        <div class="contract" *ngFor="let contract of acceptedContracts">
+          <div class="property-picture">
+            <img src="../../assets/images/photo2.jpg" draggable="false" />
+          </div>
+          <div class="contract-content">
+            <div class="info-container">
+              <div class="info-title">Location</div>
+
+              <div class="property-adresse">
+                {{
+                  contract.property?.location?.number +
+                    " " +
+                    contract.property?.location?.street
+                }}
+              </div>
+            </div>
+
+            <div class="info-container">
+              <div class="info-title">
+                {{ contract.isUserThePropertyOwner ? "Tenant" : "Owner" }}
+              </div>
+              <div class="other-party-user-info">
+                {{
+                  contract.otherUser?.firstName +
+                    " " +
+                    contract.otherUser?.lastName
+                }}
+              </div>
+            </div>
+
+            <div class="info-container">
+              <div class="info-title">Dates</div>
+              <div class="dates-container">
+                <div class="date">
+                  {{ contract.checkInDate }}
+                </div>
+                <i class="fa-solid fa-angles-right"></i>
+                <div class="date">
+                  {{ contract.checkOutDate }}
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-container">
+              <div class="actions-btn-container">
+                <div class="rating" *ngIf="!contract.isUserThePropertyOwner">
+                  <p-rating
+                    [(ngModel)]="contract.rating"
+                    [cancel]="false"
+                    [readonly]="contract.rating ? contract.rating > 0 : false"
+                    [pTooltip]="
+                      contract.rating
+                        ? contract.rating > 0
+                          ? 'You can\'t modify your rating '
+                          : 'Rate the property'
+                        : 'Rate the property'
+                    "
+                    [showDelay]="tooltipDelay"
+                    tooltipPosition="bottom"
+                    (onRate)="rateProperty(contract)"
+                  ></p-rating>
+                </div>
+                <div
+                  class="status-container"
+                  *ngIf="contract.isUserThePropertyOwner"
+                >
+                  <div class="status active">active</div>
+                </div>
+              </div>
+              <div
+                class="btn-message-container"
+                [pTooltip]="'Contact ' + contract.otherUser?.firstName"
+                [showDelay]="tooltipDelay"
+                tooltipPosition="top"
+                (click)="contactOtherUser(contract)"
+              >
+                <img
+                  src="../../assets/images/messenger.png"
+                  draggable="false"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
