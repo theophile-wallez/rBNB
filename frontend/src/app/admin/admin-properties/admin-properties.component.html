@@ -3,8 +3,14 @@
     <div class="title-component">Properties</div>
     <!-- <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div> -->
   </div>
+  <input
+    pInputText
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="filterProperties()"
+    type="text"
+  />
 
-  <div class="my-property-container" *ngIf="properties !== []">
+  <div class="my-property-container" *ngIf="filteredProperties !== []">
     <table>
       <thead>
         <tr>
@@ -20,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let property of properties">
+        <tr *ngFor="let property of filteredProperties">
           <td>
             <p-inputSwitch
               [(ngModel)]="property.isListed"

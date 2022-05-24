@@ -12,7 +12,11 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class AdminPropertiesComponent implements OnInit {
   properties: Property[] = [];
+  filteredProperties: Property[] = [];
+
   user: User = {};
+
+  searchQuery: string = '';
 
   constructor(
     private helper: HelperService,
@@ -66,17 +70,28 @@ export class AdminPropertiesComponent implements OnInit {
     let response = await this.webService.getAllPropertiesAsAdmin();
     if (response.ok) {
       this.properties = await response.json();
-      return;
+      this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
+    } else {
+      this.helper.newError("Sorry, your properties couln't be retrieved.");
     }
-    this.helper.newError("Sorry, your properties couln't be retrieved.");
   }
 
-  scrollToPropertyForm() {
-    this.dashboardService.scrollToId('propertyForm');
-  }
-
-  editProperty(selectedProperty: Property) {
-    this.dashboardService.editProperty(selectedProperty);
+  filterProperties() {
+    this.filteredProperties = this.properties.filter((property) => {
+      let propertyInfo: string =
+        property.location?.street +
+        ' ' +
+        property.location?.city +
+        ' ' +
+        property.location?.country +
+        ' ' +
+        property.location?.number +
+        ' ' +
+        property.ownerId;
+      return propertyInfo
+        .toLocaleLowerCase()
+        .includes(this.searchQuery.toLocaleLowerCase());
+    });
   }
 
   // Delete
