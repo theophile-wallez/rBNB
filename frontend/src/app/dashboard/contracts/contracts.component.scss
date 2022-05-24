@@ -4,7 +4,7 @@ $header-height: 6em;
   scroll-margin: calc($header-height + 1.7em);
 }
 .separator {
-  margin: 2em 0em;
+  margin: 0.5em 0em;
 }
 .page {
   padding: 0;
@@ -83,40 +83,27 @@ $header-height: 6em;
   width: 100%;
   display: flex;
   .contract {
-    height: 20em;
-    width: 16em;
+    height: 23em;
+    width: 17em;
     margin-right: 2.5em;
     border-radius: 0.5em;
     position: relative;
     overflow: hidden;
     box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
-    // transform: scale(1);
     transition: all 0.2s;
     &:hover {
-      // transform: scale(1.01);
       box-shadow: rgba($color-primary-light, $alpha: 0.8) 4px 4px 15px 0px;
     }
 
-    // .message-icon {
-    //   position: absolute;
-    //   top: 0.4em;
-    //   right: 0.4em;
-    //   font-size: 1.5em;
-    //   color: rgba($color-primary-light, $alpha: 0.9);
-    //   cursor: pointer;
-    //   transform: scale(1);
-    //   transform-origin: center;
-    //   transition: all 0.2s;
-    //   &:hover {
-    //     transform: scale(1.1);
-    //   }
-    // }
-    $img-height: 7em;
+    $img-height: 7.5em;
     .property-picture {
       width: 100%;
       height: $img-height;
       overflow: hidden;
+
       img {
+        // transform: scale(1);
+        transition: all 0.5s ease;
         width: 100%;
       }
     }
@@ -125,6 +112,26 @@ $header-height: 6em;
       width: 100%;
       height: calc(100% - $img-height);
       position: relative;
+      box-sizing: border-box;
+      padding: 1em 1em;
+      color: $color-font-dark;
+
+      .info-title {
+        font-size: 0.7em;
+        color: $color-font-mid-plus;
+      }
+
+      .info-container {
+        margin-bottom: 0.9em;
+        color: $color-font-dark;
+      }
+
+      .dates-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
       .btn-container {
         position: absolute;
         bottom: 0.2em;
@@ -132,7 +139,8 @@ $header-height: 6em;
         height: 3em;
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        box-sizing: border-box;
         align-items: center;
         .actions-btn-container {
           width: 65%;
@@ -145,26 +153,22 @@ $header-height: 6em;
             width: 40%;
             height: 1.5em;
             border-radius: 0.4em;
-            transform: scale(1);
-            transition: all 0.2s;
+            transition: background-color color 0.2s;
             font-size: 1.4em;
             display: flex;
             align-items: center;
             justify-content: center;
-            &:hover {
-              transform: scale(1.02);
-            }
+            box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
           }
           .btn-accept {
-            background-color: #3498db;
+            background-color: #4337c9;
             &:hover {
-              background-color: #6c5ce7;
+              background-color: #3a30b0;
             }
           }
 
           .btn-decline {
             background-color: $color-background-over;
-            box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
             color: $color-font-mid;
             &:hover {
               background-color: $color-error;
@@ -195,5 +199,44 @@ $header-height: 6em;
         }
       }
     }
+  }
+}
+
+.contract:hover .property-picture img {
+  transform: scale(1.04);
+}
+
+.status-container {
+  width: 100%;
+  height: 100%;
+  margin-left: 1em;
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  $status-color: $color-font-mid;
+
+  .status {
+    &.active {
+      color: $color-green;
+      background-color: $color-green-light;
+    }
+    &.pending {
+      color: #636e72;
+      background-color: #f0f3f5;
+    }
+    display: flex;
+    user-select: none;
+    align-items: center;
+    // justify-content: center;
+    padding: 0.3em 0.7em;
+    font-weight: 600;
+    border-radius: 1em;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    // &:hover {
+    //   color: $color-background-over;
+    //   background-color: $status-color;
+    // }
   }
 }

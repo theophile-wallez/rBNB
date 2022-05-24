@@ -50,6 +50,21 @@ export interface Contract {
   checkOutDate?: string;
   propertyId?: string;
   isAccepted?: boolean;
+  rating?: number;
+}
+
+export interface RichContract {
+  id?: string;
+  ownerId?: string;
+  tenantId?: string;
+  checkInDate?: string;
+  checkOutDate?: string;
+  propertyId?: string;
+  isAccepted?: boolean;
+  rating?: number;
+  isUserThePropertyOwner?: boolean;
+  otherUser?: User;
+  property?: Property;
 }
 
 export interface Auth {

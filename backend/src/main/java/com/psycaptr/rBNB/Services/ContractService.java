@@ -138,7 +138,7 @@ public class ContractService {
 
 
 
-    public ResponseEntity<?> updateIsAccepted(String contractId, String ownerId) throws ExecutionException, InterruptedException {
+    public ResponseEntity<String> acceptContract(String contractId, String ownerId) throws ExecutionException, InterruptedException {
         DocumentReference documentReference = db.collection("Contracts").document(contractId);
         ApiFuture<DocumentSnapshot> query = documentReference.get();
         DocumentSnapshot document = query.get();
@@ -148,7 +148,7 @@ public class ContractService {
                     HttpStatus.NOT_FOUND
             );
         }
-        if (document.get("ownerId") != ownerId) {
+        if (!Objects.equals(Objects.requireNonNull(document.get("ownerId")).toString(), ownerId)) {
             return new ResponseEntity<>(
                     "The user ID provided does not match the ID expected.",
                     HttpStatus.NOT_ACCEPTABLE

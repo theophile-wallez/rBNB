@@ -114,12 +114,14 @@ mat-card {
   .info-content-container {
     margin-left: 1em;
     .info-title {
-      color: $color-font-mid;
+      color: $color-font-mid-plus;
       margin-bottom: 0.4em;
     }
     .info-value {
-      font-size: 1.2em;
-      color: $color-font-mid-plus;
+      font-size: 1.3em;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      color: $color-font-dark;
     }
   }
 }

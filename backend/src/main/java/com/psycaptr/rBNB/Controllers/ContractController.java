@@ -45,13 +45,12 @@ public class ContractController {
         return contractService.createNewContract(contract);
     }
 
-    // TODO: Should be an update
-    @GetMapping("/is-accepted")
-    public ResponseEntity<?> updateIsAccepted(
+    @PutMapping ("/accept")
+    public ResponseEntity<String> acceptContract(
             @RequestParam String contractId,
             @RequestParam String ownerId
     ) throws ExecutionException, InterruptedException {
-        return contractService.updateIsAccepted(contractId, ownerId);
+        return contractService.acceptContract(contractId, ownerId);
     }
 
     @PutMapping("/rating")

@@ -17,6 +17,10 @@ export class WebService {
     // this.properties = await data.json();
   }
 
+  getPropertyById(propertyId: string) {
+    return fetch(this.URL + '/property/by-id?propertyId=' + propertyId);
+  }
+
   async getAllProperties(): Promise<Response> {
     return await fetch(this.URL + '/property');
   }
@@ -148,5 +152,52 @@ export class WebService {
 
   getContractsByUserId(userId: string) {
     return fetch(this.URL + '/contract/by-user-id?userId=' + userId);
+  }
+
+  acceptContract(contractId: string, ownerId: string) {
+    return fetch(
+      this.URL +
+        '/contract/accept?contractId=' +
+        contractId +
+        '&ownerId=' +
+        ownerId,
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  }
+
+  declineContract(contractId: string) {
+    return fetch(this.URL + '/contract/by-id?id=' + contractId, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
+  rateProperty(contractId: string, propertyId: string, rating: number) {
+    return fetch(
+      this.URL +
+        '/contract/rating?contractId=' +
+        contractId +
+        '&propertyId=' +
+        propertyId +
+        '&rating=' +
+        rating,
+
+      {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+    );
   }
 }
