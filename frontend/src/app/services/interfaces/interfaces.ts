@@ -9,6 +9,11 @@ export interface User {
   rawPassword?: string;
 }
 
+export interface Rating {
+  value?: number;
+  amount?: number;
+}
+
 export interface Property {
   id?: string;
   ownerId?: string;
@@ -22,6 +27,7 @@ export interface Property {
   isSelected?: boolean; //? for frontend behavior nly
   services?: string[];
   constraints?: string[];
+  rating?: Rating;
 }
 
 export enum HousingType {
@@ -43,6 +49,7 @@ export interface Contract {
   checkInDate?: string;
   checkOutDate?: string;
   propertyId?: string;
+  isAccepted?: boolean;
 }
 
 export interface Auth {

@@ -8,6 +8,15 @@ public class Contract {
     private String checkOutDate;
     private String propertyId;
     private Boolean isAccepted = false;
+    private int rating = 0;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     public Contract(String ownerId, String tenantId, String checkInDate, String checkOutDate, String propertyId, String id) {
         this.id = id;

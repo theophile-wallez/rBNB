@@ -12,6 +12,18 @@ public class Property {
     private int squareFootage;
     private float pricePerDay;
     private boolean isListed;
+    private List<String> services;
+    private List<String> constraints;
+    private Rating rating = new Rating();
+
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
+    }
 
     public List<String> getServices() {
         return services;
@@ -28,9 +40,6 @@ public class Property {
     public void setConstraints(List<String> constraints) {
         this.constraints = constraints;
     }
-
-    private List<String> services;
-    private List<String> constraints;
 
     public Property(String id, String ownerId, HousingType housingType, Location location, String description, int bedAmount, int squareFootage, float pricePerDay) {
         this.id = id;

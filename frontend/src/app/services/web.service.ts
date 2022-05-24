@@ -156,4 +156,8 @@ export class WebService {
         propertyId
     );
   }
+
+  getContractsByUserId(userId: string) {
+    return fetch(this.URL + '/contract/by-user-id?userId=' + userId);
+  }
 }

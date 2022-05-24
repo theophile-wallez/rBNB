@@ -87,12 +87,9 @@ public class UserService {
     }
 
     public ResponseEntity<String> deleteUserById(String id) throws ExecutionException, InterruptedException {
-        //get user
         User user = getUserById(id).getBody();
-        //get properties id
         if(user == null)
-            return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
-
+            return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
         if(!userHasContract(user)){
             PropertyService propertyService = new PropertyService();
             List<String> propertiesId = user.getPropertiesId();
@@ -100,12 +97,9 @@ public class UserService {
                 propertyService.deletePropertyById(propertyId);
             }
             ApiFuture<WriteResult> writeResult = db.collection("Users").document(id).delete();
-            return new ResponseEntity<>("User successfully deleted",HttpStatus.OK);
+            return new ResponseEntity<>("User successfully deleted.",HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-        //remove properties by id
-        //same for contract
+        return new ResponseEntity<>("User not found",HttpStatus.NOT_FOUND);
     }
 
     public boolean userHasContract(User user){

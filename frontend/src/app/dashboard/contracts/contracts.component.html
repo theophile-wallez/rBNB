@@ -1,0 +1,52 @@
+<div class="page">
+  <header>
+    <div class="title-container">
+      <div class="title">Your contracts</div>
+      <div class="hello-message">
+        Your will find here all of your current contracts
+      </div>
+    </div>
+    <div class="user-infos"></div>
+  </header>
+  <section class="content-section">
+    <div class="contracts-section">
+      <div class="title-component">Waiting contracts</div>
+      <div class="contracts-container">
+        <div class="contract" *ngFor="let contract of waitingContracts">
+          <div class="property-picture">
+            <img src="../../assets/images/photo2.jpg" draggable="false" />
+          </div>
+          <div class="contract-content">
+            <div class="btn-container">
+              <div class="actions-btn-container">
+                <div
+                  class="btn btn-decline"
+                  pTooltip="Reject the contract"
+                  [showDelay]="0"
+                  tooltipPosition="top"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div
+                  class="btn btn-accept"
+                  pTooltip="Accept the contract"
+                  [showDelay]="0"
+                  tooltipPosition="top"
+                >
+                  <i class="fa-solid fa-check"></i>
+                </div>
+              </div>
+              <div class="btn-message-container">
+                <img
+                  src="../../assets/images/messenger.png"
+                  draggable="false"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="separator"></div>
+  </section>
+</div>

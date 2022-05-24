@@ -4,7 +4,9 @@ import com.google.api.Http;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import com.psycaptr.rBNB.Models.Contract;
 import com.psycaptr.rBNB.Models.Property;
+import com.psycaptr.rBNB.Models.Rating;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -106,21 +108,45 @@ public class PropertyService {
     }
 
     public static boolean isPropertyListed(String propertyId) throws ExecutionException, InterruptedException {
-        DocumentSnapshot property = getPropertyById(propertyId);
+        DocumentSnapshot property = getPropertyByIdV2(propertyId);
         if(!property.exists()) {
             return false;
         }
         return Boolean.TRUE.equals(property.getBoolean("isListed"));
     }
 
-    private static DocumentSnapshot getPropertyById(String propertyId) throws ExecutionException, InterruptedException {
+    private static DocumentSnapshot getPropertyByIdV2(String propertyId) throws ExecutionException, InterruptedException {
         DocumentReference propertyReference = FirestoreClient.getFirestore().collection("Properties").document(propertyId);
         ApiFuture<DocumentSnapshot> propertyQuery = propertyReference.get();
         return propertyQuery.get();
     }
 
-        public ResponseEntity<HttpStatus> updatePropertyById(String propertyId, Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
+    public ResponseEntity<Property> getPropertyById(String propertyId) throws ExecutionException, InterruptedException {
+        ApiFuture<QuerySnapshot> future = db.collection("Properties").whereEqualTo("id",propertyId).get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if(documents.size()==0) {
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Property>(documents.get(0).toObject(Property.class),HttpStatus.OK);
+    }
+
+    public ResponseEntity<HttpStatus> updatePropertyById(String propertyId, Map<String, Object> newProperty) throws ExecutionException, InterruptedException {
         db.collection("Properties").document(propertyId).update(newProperty);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    public ResponseEntity<HttpStatus> updatePropertyRatingById(String propertyId, int rating) throws ExecutionException, InterruptedException {
+        Rating oldRating = getPropertyById(propertyId).getBody().getRating();
+        Rating newRating = calculateRatingValue(oldRating,rating);
+        db.collection("Properties").document(propertyId).update("rating.value",newRating.getValue());
+        db.collection("Properties").document(propertyId).update("rating.amount",newRating.getAmount());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private Rating calculateRatingValue(Rating oldRating, int rating) {
+        double newValue = (oldRating.getValue() * oldRating.getAmount() + rating*20)/(oldRating.getAmount()+1);
+        return new Rating(newValue,oldRating.getAmount()+1);
+    }
+
+
 }

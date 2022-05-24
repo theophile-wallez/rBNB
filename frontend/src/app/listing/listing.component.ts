@@ -14,6 +14,12 @@ export class ListingComponent implements OnInit {
   properties: Property[] = [];
   filteredProperties: Property[] = [];
   selectedProperty!: Property;
+  displayMaximizable: boolean = false;
+
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+  }
+
   constructor(public helper: HelperService, private webService: WebService) {}
 
   ngOnInit(): void {
@@ -29,8 +35,31 @@ export class ListingComponent implements OnInit {
     this.properties = await response.json();
     this.properties.forEach((property) => {
       property.isSelected = false;
+      if (property.rating && property.rating.value) {
+        property.rating.value = Math.floor(property.rating.value / 20);
+      }
     });
     this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
+  }
+
+  getConstraints(property: Property): string {
+    let constraints: string = '';
+    property.constraints?.forEach((constraint) => {
+      constraints += constraint;
+      constraints += '.';
+      constraints += '\n';
+    });
+    return constraints;
+  }
+
+  getServices(property: Property): string {
+    let services: string = '';
+    property.services?.forEach((service) => {
+      services += service;
+      services += '.';
+      services += '\n';
+    });
+    return services;
   }
 
   getFilteredProperties() {

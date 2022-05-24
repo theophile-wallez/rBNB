@@ -1,5 +1,6 @@
 package com.psycaptr.rBNB.Controllers;
 
+import com.psycaptr.rBNB.Models.Contract;
 import com.psycaptr.rBNB.Models.Property;
 import com.psycaptr.rBNB.Services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class PropertyController {
     @GetMapping()
     public List<Property> getAllProperties(@RequestParam(defaultValue = "") String ownerId) throws ExecutionException, InterruptedException {
         return propertyService.getAllProperties(ownerId);
+    }
+
+    @GetMapping("/by-property-id")
+    public ResponseEntity<Property> getPropertyById(@RequestParam(defaultValue = "") String propertyId) throws ExecutionException, InterruptedException {
+        return propertyService.getPropertyById(propertyId);
     }
 
     @GetMapping("/by-user-id")

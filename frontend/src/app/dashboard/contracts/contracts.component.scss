@@ -1,0 +1,199 @@
+@import "../../../variables.scss";
+$header-height: 6em;
+* {
+  scroll-margin: calc($header-height + 1.7em);
+}
+.separator {
+  margin: 2em 0em;
+}
+.page {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 200vh;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  box-sizing: border-box;
+  .content-section {
+    width: 100%;
+    margin-top: calc($header-height + 1.9em);
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+  header {
+    top: 0;
+    position: fixed;
+    background-color: rgba($color-background-over, $alpha: 0.75);
+    width: calc(100% - 15.5em);
+    height: $header-height;
+    border-bottom: solid 1px $color-border;
+    display: flex;
+    z-index: 4;
+    justify-content: space-between;
+    backdrop-filter: blur(10px) saturate(140%);
+
+    .title-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left: 2em;
+      user-select: none;
+      .title {
+        font-size: 1.7em;
+        font-weight: 600;
+        color: $color-font-dark;
+        margin-bottom: 0.3em;
+      }
+      .hello-message {
+        color: $color-font-mid-plus;
+      }
+    }
+
+    .user-infos {
+      height: 100%;
+      // width: 5em;
+      // background: red;
+      margin-right: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .picture-container {
+        cursor: pointer;
+        width: 3em;
+        height: 3em;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-left: 0.5em;
+        margin-right: 0.7em;
+        background-color: $color-primary-light;
+        flex-shrink: 0;
+        position: relative;
+        img {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.contracts-container {
+  margin-bottom: 2em;
+  width: 100%;
+  display: flex;
+  .contract {
+    height: 20em;
+    width: 16em;
+    margin-right: 2.5em;
+    border-radius: 0.5em;
+    position: relative;
+    overflow: hidden;
+    box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
+    // transform: scale(1);
+    transition: all 0.2s;
+    &:hover {
+      // transform: scale(1.01);
+      box-shadow: rgba($color-primary-light, $alpha: 0.8) 4px 4px 15px 0px;
+    }
+
+    // .message-icon {
+    //   position: absolute;
+    //   top: 0.4em;
+    //   right: 0.4em;
+    //   font-size: 1.5em;
+    //   color: rgba($color-primary-light, $alpha: 0.9);
+    //   cursor: pointer;
+    //   transform: scale(1);
+    //   transform-origin: center;
+    //   transition: all 0.2s;
+    //   &:hover {
+    //     transform: scale(1.1);
+    //   }
+    // }
+    $img-height: 7em;
+    .property-picture {
+      width: 100%;
+      height: $img-height;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+
+    .contract-content {
+      width: 100%;
+      height: calc(100% - $img-height);
+      position: relative;
+      .btn-container {
+        position: absolute;
+        bottom: 0.2em;
+        left: 0;
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .actions-btn-container {
+          width: 65%;
+          height: 100%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+
+          .btn {
+            width: 40%;
+            height: 1.5em;
+            border-radius: 0.4em;
+            transform: scale(1);
+            transition: all 0.2s;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &:hover {
+              transform: scale(1.02);
+            }
+          }
+          .btn-accept {
+            background-color: #3498db;
+            &:hover {
+              background-color: #6c5ce7;
+            }
+          }
+
+          .btn-decline {
+            background-color: $color-background-over;
+            box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
+            color: $color-font-mid;
+            &:hover {
+              background-color: $color-error;
+              color: $color-background-over;
+            }
+          }
+        }
+        .btn-message-container {
+          height: 100%;
+          width: 25%;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          position: relative;
+          transform: scale(1);
+          transform-origin: center;
+          transition: all 0.2s ease;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.1);
+          }
+
+          img {
+            height: 80%;
+            margin: auto;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

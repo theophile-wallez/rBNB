@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Array;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -81,13 +78,6 @@ public class ContractService {
             );
         }
 
-        // TODO: Outdated
-//        if (isPropertyUnderContract(contract)) {
-//            return new ResponseEntity<>(
-//                    "The selected property is not available.",
-//                    HttpStatus.NOT_ACCEPTABLE
-//            );
-//        }
 
         if (!areDatesValid(contract.getPropertyId(),contract.getCheckInDate(), contract.getCheckOutDate())) {
             return new ResponseEntity<>("Dates are not valid",HttpStatus.NOT_ACCEPTABLE);
@@ -166,6 +156,12 @@ public class ContractService {
         }
         documentReference.update("isAccepted", true);
         return new ResponseEntity<>("The contract has been accepted!", HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<HttpStatus> rateContract(String contractId, int rating) throws ExecutionException, InterruptedException {
+        db.collection("Contracts").document(contractId).update("rating", rating);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private Boolean isPropertyUnderContract(Contract contract) throws ExecutionException, InterruptedException {

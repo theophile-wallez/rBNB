@@ -16,6 +16,7 @@ import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.comp
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewPropertyComponent } from './dashboard/new-property/new-property.component';
+import { RatingModule } from 'primeng/rating';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -36,6 +37,8 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ContractsComponent } from './dashboard/contracts/contracts.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ConnectAdvertismentComponent,
     UserInfosComponent,
     UserProfileComponent,
+    ContractsComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     ButtonModule,
     CalendarModule,
     ChipsModule,
+    RatingModule,
+    TooltipModule,
   ],
   providers: [CookieService, ConfirmationService],
   bootstrap: [AppComponent],

@@ -1,3 +1,4 @@
+import { PropertyRead } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Contract, Property } from 'src/app/services/interfaces/interfaces';
 import { HelperService } from '../../services/helper.service';
@@ -15,6 +16,8 @@ export class NewContractComponent implements OnInit {
   disabledDates: Date[] = [];
   rangeDates: Date[] = [];
   minDate = new Date();
+  priceTotal?: number = 0;
+  priceTotalShown?: string = '0 €';
 
   ngOnInit(): void {
     this.helper.selectedPropertyObservable.subscribe((property: Property) => {
@@ -26,11 +29,13 @@ export class NewContractComponent implements OnInit {
       if (property.ownerId) {
         this.getOwnerByOwnerId(property.ownerId);
       }
+      this.priceTotal = 0;
     });
   }
 
   resetInfos(): void {
     this.rangeDates = [];
+    this.priceTotalShown = '0 €';
   }
   //? DATES HANDLING
 
@@ -96,12 +101,22 @@ export class NewContractComponent implements OnInit {
   }
 
   onDateRangeChange(): void {
-    if (!this.rangeDates || this.rangeDates[1] === null) return;
+    if (!this.rangeDates || this.rangeDates[1] === null) {
+      this.priceTotal = 0;
+      return;
+    }
     if (this.getGapBetweenDates(this.rangeDates[0], this.rangeDates[1]) < 1) {
       this.rangeDates[1] = this.addDaysToDate(this.rangeDates[0], 1);
+      this.priceTotal = 0;
     }
     if (!this.isRangeDateValid()) {
       this.rangeDates = [];
+      this.priceTotal = 0;
+    }
+    if (this.property.pricePerDay) {
+      this.priceTotal =
+        this.property.pricePerDay *
+        this.getGapBetweenDates(this.rangeDates[0], this.rangeDates[1]);
     }
   }
 
