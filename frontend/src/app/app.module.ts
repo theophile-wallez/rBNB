@@ -38,6 +38,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ContractsComponent } from './dashboard/contracts/contracts.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { AdminComponent } from './admin/admin.component';
+import { AdminPropertiesComponent } from './admin/admin-properties/admin-properties.component';
+import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +58,9 @@ import { TooltipModule } from 'primeng/tooltip';
     ConnectAdvertismentComponent,
     UserInfosComponent,
     ContractsComponent,
+    AdminComponent,
+    AdminPropertiesComponent,
+    AdminUsersComponent,
   ],
   imports: [
     BrowserModule,

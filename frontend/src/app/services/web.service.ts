@@ -21,6 +21,20 @@ export class WebService {
     return await fetch(this.URL + '/property');
   }
 
+  async getAllPropertiesAsAdmin(): Promise<Response> {
+    return await fetch(this.URL + '/admin/property');
+  }
+
+  async getAllUsersAsAdmin(): Promise<Response> {
+    return await fetch(this.URL + '/admin/user');
+  }
+
+  async deleteUserByIdAsAdmin(userId: String): Promise<Response> {
+    return fetch(this.URL + '/admin/user/by-id?id=' + userId, {
+      method: 'DELETE',
+    });
+  }
+
   switchIsListed(propertyId: string, isListed: boolean): Promise<Response> {
     return fetch(
       this.URL +

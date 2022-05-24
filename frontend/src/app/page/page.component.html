@@ -1,7 +1,10 @@
 <div
   class="page"
   [ngClass]="{
-    dashboard: router.url === '/dashboard' || router.url === '/contracts'
+    dashboard:
+      router.url === '/dashboard' ||
+      router.url === '/contracts' ||
+      router.url === '/admin'
   }"
 >
   <router-outlet></router-outlet>

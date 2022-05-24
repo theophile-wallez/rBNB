@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="title-container">
+    <div class="title-component">Properties</div>
+    <!-- <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div> -->
+  </div>
+
+  <div class="my-property-container" *ngIf="properties !== []">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="1">Listed</th>
+          <th colspan="1">Address</th>
+          <th colspan="1">City</th>
+          <th colspan="1">Country</th>
+          <th colspan="1">Type</th>
+          <th colspan="1">Bed(s)</th>
+          <th colspan="1">Surface</th>
+          <th colspan="1">Price</th>
+          <th colspan="2">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let property of properties">
+          <td>
+            <p-inputSwitch
+              [(ngModel)]="property.isListed"
+              (onChange)="switchIsListed(property.id, property.isListed)"
+            ></p-inputSwitch>
+
+            <!-- <mat-slide-toggle
+                [(ngModel)]="property.isListed"
+                color="warn"
+                (toggleChange)="switchIsListed(property.id, !property.isListed)"
+              >
+              </mat-slide-toggle> -->
+          </td>
+          <td>
+            {{ property.location?.number + " " + property.location?.street }}
+          </td>
+          <td>
+            {{ property.location?.city ?? "The city" }}
+          </td>
+          <td>
+            {{ property.location?.country }}
+          </td>
+          <td>
+            {{ property.housingType }}
+          </td>
+          <td>
+            {{
+              (property.bedAmount ?? "0") +
+                (property["bedAmount"] && property["bedAmount"] > 1
+                  ? " beds"
+                  : " bed")
+            }}
+          </td>
+          <td>
+            {{ property.squareFootage + " m²" }}
+          </td>
+          <td>
+            {{ property.pricePerDay + "€ / day" }}
+          </td>
+          <!-- <td>
+            <i
+              class="fa-solid fa-pen-to-square"
+              (click)="editProperty(property)"
+            ></i>
+          </td> -->
+          <td>
+            <!-- TODO -->
+            <p-confirmPopup></p-confirmPopup>
+
+            <i
+              class="fa-solid fa-trash"
+              (click)="confirmDelete($event, property)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
