@@ -32,6 +32,20 @@ export class WebService {
     });
   }
 
+  getAllPropertiesAsAdmin(): Promise<Response> {
+    return fetch(this.URL + '/admin/property');
+  }
+
+  getAllUsersAsAdmin(): Promise<Response> {
+    return fetch(this.URL + '/admin/user');
+  }
+
+  deleteUserByIdAsAdmin(userId: String): Promise<Response> {
+    return fetch(this.URL + '/admin/user/by-id?id=' + userId, {
+      method: 'DELETE',
+    });
+  }
+
   switchIsListed(propertyId: string, isListed: boolean): Promise<Response> {
     return fetch(
       this.URL +

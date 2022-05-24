@@ -46,6 +46,20 @@
       </div>
       <div *ngIf="router.url === '/contracts'" class="selected-span"></div>
     </div>
+
+    <div *ngIf="user.isAdmin" class="link" (click)="changeRoute('/admin')">
+      <i
+        class="fa-solid fa-hammer"
+        [ngClass]="{ selected: router.url === '/admin' }"
+      ></i>
+      <div
+        class="link-content"
+        [ngClass]="{ selected: router.url === '/admin' }"
+      >
+        Admin
+      </div>
+      <div *ngIf="router.url === '/admin'" class="selected-span"></div>
+    </div>
   </div>
   <connect-advertisment
     *ngIf="helper.currentUser.id === undefined"

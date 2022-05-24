@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="title-container">
+    <div class="title-component">Users</div>
+    <!-- <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div> -->
+  </div>
+
+  <div class="my-property-container" *ngIf="users !== []">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="1">First Name</th>
+          <th colspan="1">Last Name</th>
+          <th colspan="1">Email</th>
+          <th colspan="1">Properties</th>
+          <th colspan="1">Contracts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>
+            {{ user.firstName }}
+          </td>
+          <td>
+            {{ user.lastName }}
+          </td>
+          <td>
+            {{ user.email }}
+          </td>
+          <td>
+            <!-- todo -->
+          </td>
+          <td>
+            <!-- todo -->
+          </td>
+          <!-- <td>
+              <i
+                class="fa-solid fa-pen-to-square"
+                (click)="editProperty(property)"
+              ></i>
+            </td> -->
+          <td>
+            <!-- TODO -->
+            <p-confirmPopup></p-confirmPopup>
+
+            <i
+              class="fa-solid fa-trash"
+              (click)="confirmDelete($event, user)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

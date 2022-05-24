@@ -6,11 +6,18 @@ import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'my-properties',
-  templateUrl: './my-properties.component.html',
-  styleUrls: ['./my-properties.component.scss'],
+  selector: 'admin-properties',
+  templateUrl: './admin-properties.component.html',
+  styleUrls: ['./admin-properties.component.scss'],
 })
-export class MyPropertiesComponent implements OnInit {
+export class AdminPropertiesComponent implements OnInit {
+  properties: Property[] = [];
+  filteredProperties: Property[] = [];
+
+  user: User = {};
+
+  searchQuery: string = '';
+
   constructor(
     private helper: HelperService,
     private dashboardService: DashboardService,
@@ -18,20 +25,17 @@ export class MyPropertiesComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {}
 
-  properties: Property[] = [];
-  user: User = {};
-
   ngOnInit(): void {
     this.helper.userObservable.subscribe((user: User) => {
       if (user.id) {
         this.user = user;
-        this.getPropertiesByUserId(user.id);
+        this.getAllPropertiesAsAdmin();
       }
     });
     this.dashboardService.doRefreshPropertyList.subscribe(
       (doRefresh: Boolean) => {
         if (this.user.id && doRefresh) {
-          this.getPropertiesByUserId(this.user.id);
+          this.getAllPropertiesAsAdmin();
         }
       }
     );
@@ -62,21 +66,32 @@ export class MyPropertiesComponent implements OnInit {
     );
   }
 
-  async getPropertiesByUserId(userId: string) {
-    let response = await this.webService.getPropertiesByUserId(userId);
+  async getAllPropertiesAsAdmin() {
+    let response = await this.webService.getAllPropertiesAsAdmin();
     if (response.ok) {
       this.properties = await response.json();
-      return;
+      this.filteredProperties = JSON.parse(JSON.stringify(this.properties));
+    } else {
+      this.helper.newError("Sorry, your properties couln't be retrieved.");
     }
-    this.helper.newError("Sorry, your properties couln't be retrieved.");
   }
 
-  scrollToPropertyForm() {
-    this.dashboardService.scrollToId('propertyForm');
-  }
-
-  editProperty(selectedProperty: Property) {
-    this.dashboardService.editProperty(selectedProperty);
+  filterProperties() {
+    this.filteredProperties = this.properties.filter((property) => {
+      let propertyInfo: string =
+        property.location?.street +
+        ' ' +
+        property.location?.city +
+        ' ' +
+        property.location?.country +
+        ' ' +
+        property.location?.number +
+        ' ' +
+        property.ownerId;
+      return propertyInfo
+        .toLocaleLowerCase()
+        .includes(this.searchQuery.toLocaleLowerCase());
+    });
   }
 
   // Delete
@@ -100,7 +115,7 @@ export class MyPropertiesComponent implements OnInit {
       this.helper.newNotification('Property successfully delete');
       setTimeout(() => {
         if (this.user.id) {
-          this.getPropertiesByUserId(this.user.id);
+          this.getAllPropertiesAsAdmin();
         }
       }, 500);
     } else {

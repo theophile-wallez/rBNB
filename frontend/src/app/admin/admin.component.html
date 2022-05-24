@@ -1,0 +1,21 @@
+<div class="page">
+  <header>
+    <div class="title-container">
+      <div class="title">Admin Board</div>
+      <div class="hello-message">
+        {{ "Hello " + helper.currentUser.firstName + ", here's your summary!" }}
+      </div>
+    </div>
+    <div class="user-infos">
+      <div class="picture-container">
+        <img src="../../assets/images/face.png" draggable="false" />
+      </div>
+    </div>
+  </header>
+  <section class="content-section">
+    <admin-properties id="propertyList"></admin-properties>
+    <div class="separator"></div>
+    <admin-users id="userList"></admin-users>
+    <!-- <new-property id="propertyForm"></new-property> -->
+  </section>
+</div>

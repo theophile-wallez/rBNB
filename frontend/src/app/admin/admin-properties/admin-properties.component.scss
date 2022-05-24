@@ -1,0 +1,74 @@
+@import "../../../variables.scss";
+
+.container {
+  width: 100%;
+  position: relative;
+  .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn {
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      i {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+      }
+    }
+  }
+  .my-property-container {
+    table {
+      margin-top: 1em;
+      // border-collapse: collapse;
+      border-spacing: 0em 1em;
+
+      width: 100%;
+      text-align: center;
+      color: $color-font-mid-plus;
+      thead tr {
+        height: 2em;
+        // background-color: $color-background;
+      }
+      tr {
+        height: 4em;
+        border-bottom: solid 1px $color-border;
+        &:last-child {
+          border: none;
+        }
+        &:hover td {
+          // background-color: $color-background;
+        }
+
+        td,
+        th {
+          &:first-child {
+            padding-left: 1em;
+            text-align: left;
+            vertical-align: middle;
+          }
+          &:last-child {
+            padding-right: 1em;
+          }
+        }
+        td {
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          box-shadow: rgba($color-primary-light, $alpha: 0.6) 4px 4px 15px 0px;
+          // box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+          border-radius: 1em;
+          &:hover {
+            box-shadow: rgba($color-primary-light, $alpha: 0.8) 4px 4px 15px 0px;
+          }
+        }
+      }
+    }
+  }
+}

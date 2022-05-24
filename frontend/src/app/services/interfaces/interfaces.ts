@@ -5,8 +5,8 @@ export interface User {
   email?: string;
   propertiesId?: string[];
   contractsId?: string[];
-  password?: string;
   rawPassword?: string;
+  isAdmin?: boolean;
 }
 
 export interface Rating {
