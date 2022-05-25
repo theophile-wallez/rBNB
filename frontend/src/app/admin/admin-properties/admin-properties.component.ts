@@ -4,6 +4,7 @@ import { WebService } from 'src/app/services/web.service';
 import { Property, User } from 'src/app/services/interfaces/interfaces';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ConfirmationService } from 'primeng/api';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'admin-properties',
@@ -22,7 +23,8 @@ export class AdminPropertiesComponent implements OnInit {
     private helper: HelperService,
     private dashboardService: DashboardService,
     private webService: WebService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private adminService: AdminService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,11 @@ export class AdminPropertiesComponent implements OnInit {
         }
       }
     );
+
+    this.adminService.searchyQueryObservable.subscribe((ownerId: string) => {
+      this.searchQuery = ownerId;
+      this.filterProperties();
+    });
   }
 
   async switchIsListed(
