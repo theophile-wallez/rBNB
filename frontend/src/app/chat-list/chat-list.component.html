@@ -1,0 +1,29 @@
+<div class="messages">
+
+  <table>
+  <div *ngIf="nbrConversations !== 0">
+     <tbody *ngFor="let conversation of allConversations">
+           <tr>
+             <td>contract : {{conversation.contractId}}</td>
+          </tr>
+          <tr>
+             <td>owner : {{conversation.ownerId}}</td>
+          </tr>
+          <tr>
+             <td>tenant : {{conversation.tenantId}}</td>
+           </tr>
+           <tr>
+              <td>date : {{conversation.date}}</td>
+            </tr>
+
+          <tr>
+            <button type="button"  (click)="seeConversation(conversation.contractId)">See full Conversation</button>
+            <br>
+          </tr>
+
+          <td>---------------</td>
+     </tbody>
+   </div>
+ </table>
+
+</div>

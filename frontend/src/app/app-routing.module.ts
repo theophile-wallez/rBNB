@@ -5,6 +5,7 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListingComponent } from './listing/listing.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'listing', pathMatch: 'full' },
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+  },
+  {
+    path: 'chat',
+    component: ChatPageComponent,
   },
   { path: '**', redirectTo: 'listing', pathMatch: 'full' },
 ];

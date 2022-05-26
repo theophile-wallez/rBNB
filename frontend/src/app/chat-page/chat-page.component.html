@@ -1,0 +1,63 @@
+<div class="messages">
+
+  <table>
+  <div *ngIf="messagesLength !== 0">
+     <tbody *ngFor="let message of allMessages">
+       <div class="messageContainer">
+         <div *ngIf="message.sender !== userId; else elseBlock">
+
+           <div class="left">
+             <tr>
+               <td>sender : {{message.sender}}</td>
+            </tr>
+            <tr>
+               <td>receiver : {{message.receiver}}</td>
+            </tr>
+            <tr>
+               <td>message : {{message.message}}</td>
+             </tr>
+             <tr>
+                <td>date : {{message.date}}</td>
+              </tr>
+           </div>
+         </div>
+         <ng-template #elseBlock>
+           <div class="right">
+             <tr>
+               <td>sender : {{message.sender}}</td>
+            </tr>
+            <tr>
+               <td>receiver : {{message.receiver}}</td>
+            </tr>
+            <tr>
+               <td>message : {{message.message}}</td>
+             </tr>
+             <tr>
+                <td>date : {{message.date}}</td>
+              </tr>
+           </div>
+         </ng-template>
+
+        </div>
+
+     </tbody>
+   </div>
+ </table>
+
+</div>
+<div class="inputs">
+    <div class="box">
+      <input type="text" placeholder="Message" name='messageInput' id="messageInput" #messageInput>
+      <br>
+      <input type="text" placeholder="sender" name='sender' id="sender" #sender>
+      <br>
+      <input type="text" placeholder="receveir" name='receveir' id="receveir" #receveir>
+    </div>
+
+    <br>
+    <button (click)="sendMessage(sender.value, receveir.value, messageInput.value)">Send Message</button>
+    <br>
+    <button (click)="getUsers()">Get Message</button>
+    <br>
+
+</div>
