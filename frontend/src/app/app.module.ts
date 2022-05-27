@@ -46,24 +46,15 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-<<<<<<< HEAD
+
 import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
-=======
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-
-import { environment } from "../environments/environment";
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
->>>>>>> 508ed21 (Add image and file saving function)
 
 @NgModule({
   declarations: [
@@ -82,15 +73,14 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     UserInfosComponent,
     UserProfileComponent,
     ContractsComponent,
-<<<<<<< HEAD
+
     AdminComponent,
     AdminPropertiesComponent,
     AdminUsersComponent,
     ChatPageComponent,
     ChatListComponent,
-=======
     ChatPageComponent,
->>>>>>> 508ed21 (Add image and file saving function)
+
   ],
   imports: [
     BrowserModule,

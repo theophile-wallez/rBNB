@@ -8,6 +8,7 @@ import {
 import { ChatService } from '../services/chat/chat.service';
 import { interval, Subscription } from 'rxjs';
 import { ChatInfos } from '../services/interfaces/interfaces';
+
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
@@ -16,7 +17,6 @@ import { ChatInfos } from '../services/interfaces/interfaces';
 export class ChatPageComponent implements OnInit, AfterViewInit {
   allMessages: any = {};
   messagesLength: number = 0;
-<<<<<<< HEAD
   messageContent: string = '';
 
   // userId = 'art';
@@ -27,21 +27,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     otherUserId: '',
     contractId: '',
   };
-=======
-  userId = "art";
-  hostId = "jack";
-  contractId: string = "0";
-  selectedFile: File = {} as File;
-
-  //mySubscription: Subscription;
-
-  constructor(private service: ChatService, private route: ActivatedRoute) {
-    let val = this.route.snapshot.paramMap.get('contractId');
-    console.log(val);
-    if(val !== null){
-        this.contractId = val;
-    }
->>>>>>> 508ed21 (Add image and file saving function)
 
   @ViewChild('messageInput') messageInput!: ElementRef;
 
@@ -96,7 +81,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     }
   }
 
-<<<<<<< HEAD
   async sendMessage(message: string) {
     await this.chatService.sendMessage(
       this.chatInfo.contractId,
@@ -105,25 +89,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       message
     );
     this.getUsers();
-=======
-  async sendMessage(sender: string, receiver: string, message: string) {
-
-    if(this.selectedFile.name != null){
-      //console.log(this.selectedFile.name);
-      let id = Math.random().toString(36).substring(2);
-      this.service.sendFile(this.contractId, sender, receiver, this.selectedFile, id); 
     }
 
-    if(message.length != 0){
-      await this.service.sendMessage(this.contractId, sender, receiver, message);
-    }
-
-  }
-
-  updateFile(event: any){
-    this.selectedFile = event.target.files[0];
->>>>>>> 508ed21 (Add image and file saving function)
-  }
 
   submitOnEnter(event: any) {
     if (event.which === 13) {
