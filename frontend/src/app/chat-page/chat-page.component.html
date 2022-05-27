@@ -1,5 +1,6 @@
 <div class="chat-container">
   <div *ngIf="messagesLength !== 0">
+<<<<<<< HEAD
     <div *ngFor="let message of allMessages" class="message-container">
       <div *ngIf="message.sender !== chatInfo.userId" class="message left">
         {{ message.message }}
@@ -7,6 +8,67 @@
       <div *ngIf="message.sender === chatInfo.userId" class="message right">
         {{ message.message }}
       </div>
+=======
+     <tbody *ngFor="let message of allMessages">
+       <div class="messageContainer">
+         <div *ngIf="message.sender !== userId; else elseBlock">
+
+           <div class="left">
+             <tr>
+               <td>sender : {{message.sender}}</td>
+            </tr>
+            <tr>
+               <td>receiver : {{message.receiver}}</td>
+            </tr>
+            <tr>
+               <td>message : {{message.message}}</td>
+             </tr>
+             <tr>
+                <td>date : {{message.date}}</td>
+              </tr>
+           </div>
+         </div>
+         <ng-template #elseBlock>
+           <div class="right">
+             <tr>
+               <td>sender : {{message.sender}}</td>
+            </tr>
+            <tr>
+               <td>receiver : {{message.receiver}}</td>
+            </tr>
+            <tr>
+               <td>message : {{message.message}}</td>
+             </tr>
+             <tr>
+                <td>date : {{message.date}}</td>
+              </tr>
+           </div>
+         </ng-template>
+
+        </div>
+
+     </tbody>
+   </div>
+ </table>
+
+</div>
+<div class="inputs">
+    <div class="box">
+      <input type="text" placeholder="Message" name='messageInput' id="messageInput" #messageInput>
+      <br>
+      <input type="text" placeholder="sender" name='sender' id="sender" #sender>
+      <br>
+      <input type="text" placeholder="receveir" name='receveir' id="receveir" #receveir>
+
+      <input type="file"
+       id="file"
+       #userPhoto
+       (change)="updateFile($event)"
+       name="image"
+       autocomplete="off"
+       accept=".png, .jpg"
+       />
+>>>>>>> 508ed21 (Add image and file saving function)
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { PageComponent } from './page/page.component';
 import { ListingComponent } from './listing/listing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
 import { NewContractComponent } from './popup/new-contract/new-contract.component';
 import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
@@ -46,6 +47,7 @@ import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+<<<<<<< HEAD
 import { environment } from '../environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -53,6 +55,15 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
+=======
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
+import { environment } from "../environments/environment";
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+>>>>>>> 508ed21 (Add image and file saving function)
 
 @NgModule({
   declarations: [
@@ -71,11 +82,15 @@ import { ChatListComponent } from './chat-list/chat-list.component';
     UserInfosComponent,
     UserProfileComponent,
     ContractsComponent,
+<<<<<<< HEAD
     AdminComponent,
     AdminPropertiesComponent,
     AdminUsersComponent,
     ChatPageComponent,
     ChatListComponent,
+=======
+    ChatPageComponent,
+>>>>>>> 508ed21 (Add image and file saving function)
   ],
   imports: [
     BrowserModule,
@@ -102,6 +117,7 @@ import { ChatListComponent } from './chat-list/chat-list.component';
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
