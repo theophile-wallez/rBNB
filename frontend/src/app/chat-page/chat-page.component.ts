@@ -15,11 +15,14 @@ export class ChatPageComponent implements OnInit {
   userId = "art";
   hostId = "jack";
   contractId: string = "0";
+  selectedFile: File = {} as File;
+
   //mySubscription: Subscription;
 
   constructor(private service: ChatService, private route: ActivatedRoute) {
     let val = this.route.snapshot.paramMap.get('contractId');
-    if(val != null){
+    console.log(val);
+    if(val !== null){
         this.contractId = val;
     }
 
@@ -54,7 +57,21 @@ export class ChatPageComponent implements OnInit {
   }
 
   async sendMessage(sender: string, receiver: string, message: string) {
-    await this.service.sendMessage(this.contractId, sender, receiver, message);
+
+    if(this.selectedFile.name != null){
+      //console.log(this.selectedFile.name);
+      let id = Math.random().toString(36).substring(2);
+      this.service.sendFile(this.contractId, sender, receiver, this.selectedFile, id); 
+    }
+
+    if(message.length != 0){
+      await this.service.sendMessage(this.contractId, sender, receiver, message);
+    }
+
+  }
+
+  updateFile(event: any){
+    this.selectedFile = event.target.files[0];
   }
 
 }

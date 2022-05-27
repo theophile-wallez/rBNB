@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase} from '@angular/fire/compat/database';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { DatePipe } from '@angular/common';
+import { map, finalize } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
 
   getAllData(dbPath: string) {
    return new Promise<any>((resolve)=> {
@@ -27,6 +29,7 @@ export class ChatService {
   }
 
   sendMessage(contrat:string, sender: string, receiver: string, message: string){
+    console.log("try sending message");
     let date = new Date(Date.now());
     let stringDate = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     //console.log(stringDate);
@@ -40,9 +43,27 @@ export class ChatService {
        }
      });
 
-
-
-
   }
+
+  sendFile(contractId: string, sender: string, receiver: string, file:File, id:string){
+    console.log("try saving file");
+    let ref = this.storage.ref('/'+id);
+    let task = ref.put(file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        ref.getDownloadURL().subscribe(downloadURL => {
+          let url = downloadURL;
+          console.log("url: "+url);
+          this.sendMessage(contractId, sender, receiver, url);
+        });
+      })
+    ).subscribe();
+
+    
+
+    
+  }
+
 
 }

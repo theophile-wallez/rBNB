@@ -52,6 +52,15 @@
       <input type="text" placeholder="sender" name='sender' id="sender" #sender>
       <br>
       <input type="text" placeholder="receveir" name='receveir' id="receveir" #receveir>
+
+      <input type="file"
+       id="file"
+       #userPhoto
+       (change)="updateFile($event)"
+       name="image"
+       autocomplete="off"
+       accept=".png, .jpg"
+       />
     </div>
 
     <br>

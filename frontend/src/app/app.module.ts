@@ -11,6 +11,7 @@ import { PageComponent } from './page/page.component';
 import { ListingComponent } from './listing/listing.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PopupComponent } from './popup/popup.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
 import { NewContractComponent } from './popup/new-contract/new-contract.component';
 import { SignInAndUpComponent } from './popup/sign-in-and-up/sign-in-and-up.component';
 import { MyPropertiesComponent } from './dashboard/my-properties/my-properties.component';
@@ -41,6 +42,8 @@ import { ContractsComponent } from './dashboard/contracts/contracts.component';
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { environment } from "../environments/environment";
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
@@ -63,6 +66,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     ConnectAdvertismentComponent,
     UserInfosComponent,
     ContractsComponent,
+    ChatPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +92,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
