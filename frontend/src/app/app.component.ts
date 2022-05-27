@@ -3,8 +3,8 @@ import { CookieService } from 'ngx-cookie-service';
 /* Importing the environment file. */
 import { environment } from 'src/environments/environment';
 import { User } from 'src/app/services/interfaces/interfaces';
-import { HelperService } from './services/helper.service';
-import { WebService } from './services/web.service';
+import { HelperService } from './services/helper/helper.service';
+import { WebService } from './services/web/web.service';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({

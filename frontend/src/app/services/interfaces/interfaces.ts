@@ -76,3 +76,9 @@ export interface Alert {
   isError?: boolean;
   content?: string;
 }
+
+export interface ChatInfos {
+  userId: string;
+  otherUserId: string;
+  contractId: string;
+}

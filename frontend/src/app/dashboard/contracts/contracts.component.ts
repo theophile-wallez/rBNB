@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/services/helper.service';
+import { ChatService } from 'src/app/services/chat/chat.service';
+import { HelperService } from 'src/app/services/helper/helper.service';
 import {
+  ChatInfos,
   Contract,
   Property,
   RichContract,
   User,
 } from 'src/app/services/interfaces/interfaces';
-import { WebService } from 'src/app/services/web.service';
+import { WebService } from 'src/app/services/web/web.service';
 
 @Component({
   selector: 'contracts',
@@ -14,7 +16,11 @@ import { WebService } from 'src/app/services/web.service';
   styleUrls: ['./contracts.component.scss'],
 })
 export class ContractsComponent implements OnInit {
-  constructor(private helper: HelperService, private webService: WebService) {}
+  constructor(
+    private helper: HelperService,
+    private webService: WebService,
+    private chatService: ChatService
+  ) {}
   user: User = {};
   waitingContracts: RichContract[] = [];
   acceptedContracts: RichContract[] = [];
@@ -180,5 +186,14 @@ export class ContractsComponent implements OnInit {
     }
   }
 
-  contactOtherUser(contract: RichContract) {}
+  contactOtherUser(contract: RichContract) {
+    let chatInfos: ChatInfos = {
+      userId: this.user.id ?? '',
+      otherUserId: contract.otherUser?.id ?? '',
+      contractId: contract.id ?? '',
+    };
+    this.chatService.changeChatInfos(chatInfos);
+
+    this.helper.changeRoute('/chat');
+  }
 }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { Property } from 'src/app/services/interfaces/interfaces';
-import { HelperService } from '../../services/helper.service';
-import { WebService } from '../../services/web.service';
+import { HelperService } from '../../services/helper/helper.service';
+import { WebService } from '../../services/web/web.service';
 
 interface HousingType {
   name: string;

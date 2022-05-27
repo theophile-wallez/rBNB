@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from 'src/app/services/helper.service';
-import { WebService } from 'src/app/services/web.service';
+import { HelperService } from 'src/app/services/helper/helper.service';
+import { WebService } from 'src/app/services/web/web.service';
 import { Property, User } from 'src/app/services/interfaces/interfaces';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ConfirmationService } from 'primeng/api';

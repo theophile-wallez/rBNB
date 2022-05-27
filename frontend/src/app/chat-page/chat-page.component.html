@@ -1,63 +1,40 @@
-<div class="messages">
-
-  <table>
+<div class="chat-container">
   <div *ngIf="messagesLength !== 0">
-     <tbody *ngFor="let message of allMessages">
-       <div class="messageContainer">
-         <div *ngIf="message.sender !== userId; else elseBlock">
-
-           <div class="left">
-             <tr>
-               <td>sender : {{message.sender}}</td>
-            </tr>
-            <tr>
-               <td>receiver : {{message.receiver}}</td>
-            </tr>
-            <tr>
-               <td>message : {{message.message}}</td>
-             </tr>
-             <tr>
-                <td>date : {{message.date}}</td>
-              </tr>
-           </div>
-         </div>
-         <ng-template #elseBlock>
-           <div class="right">
-             <tr>
-               <td>sender : {{message.sender}}</td>
-            </tr>
-            <tr>
-               <td>receiver : {{message.receiver}}</td>
-            </tr>
-            <tr>
-               <td>message : {{message.message}}</td>
-             </tr>
-             <tr>
-                <td>date : {{message.date}}</td>
-              </tr>
-           </div>
-         </ng-template>
-
-        </div>
-
-     </tbody>
-   </div>
- </table>
-
-</div>
-<div class="inputs">
-    <div class="box">
-      <input type="text" placeholder="Message" name='messageInput' id="messageInput" #messageInput>
-      <br>
-      <input type="text" placeholder="sender" name='sender' id="sender" #sender>
-      <br>
-      <input type="text" placeholder="receveir" name='receveir' id="receveir" #receveir>
+    <div *ngFor="let message of allMessages" class="message-container">
+      <div *ngIf="message.sender !== chatInfo.userId" class="message left">
+        {{ message.message }}
+      </div>
+      <div *ngIf="message.sender === chatInfo.userId" class="message right">
+        {{ message.message }}
+      </div>
     </div>
+  </div>
+</div>
 
-    <br>
-    <button (click)="sendMessage(sender.value, receveir.value, messageInput.value)">Send Message</button>
-    <br>
-    <button (click)="getUsers()">Get Message</button>
-    <br>
+<div class="actions-container">
+  <div class="actions-container-relative">
+    <form class="grow-wrap" (ngSubmit)="sendMessage(messageInput.value)">
+      <textarea
+        rows="1"
+        placeholder="Aa"
+        onInput="this.parentNode.dataset.replicatedValue = this.value"
+        #messageInput
+        [(ngModel)]="messageContent"
+      ></textarea>
+    </form>
+    <div class="fb-pouce-container" (click)="sendMessage('👍')">
+      <svg viewBox="0 0 22 23" height="20" width="20" class="crt8y2ji">
+        <path
+          d="M10.987 0c1.104 0 3.67.726 3.67 5.149 0 1.232-.123 2.001-.209 2.534a16.11 16.11 0 00-.048.314l-.001.005a.36.36 0 00.362.406c4.399 0 6.748 1.164 6.748 2.353 0 .533-.2 1.02-.527 1.395a.11.11 0 00.023.163 2.13 2.13 0 01.992 1.79c0 .86-.477 1.598-1.215 1.943a.11.11 0 00-.046.157c.207.328.329.713.329 1.128 0 .946-.547 1.741-1.406 2.029a.109.109 0 00-.068.137c.061.184.098.38.098.584 0 1.056-1.776 1.913-5.95 1.913-3.05 0-5.154-.545-5.963-.936-.595-.288-1.276-.81-1.276-2.34v-6.086c0-1.72.958-2.87 1.911-4.014C9.357 7.49 10.3 6.36 10.3 4.681c0-1.34-.091-2.19-.159-2.817-.039-.368-.07-.66-.07-.928 0-.527.385-.934.917-.936zM3.5 11h-2C.5 11 0 13.686 0 17s.5 6 1.5 6h2a1 1 0 001-1V12a1 1 0 00-1-1z"
+          fill="#0084ff"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <!-- <div class="input-container">
+    <input type="text" placeholder="Message" #messageInput />
+  </div>
 
+  <button (click)="sendMessage(messageInput.value)">Send Message</button> -->
+  <!-- <button (click)="getUsers()">Get Message</button> -->
 </div>

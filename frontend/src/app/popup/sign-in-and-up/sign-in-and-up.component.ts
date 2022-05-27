@@ -7,8 +7,8 @@ import {
   ValidatorFn,
   AbstractControl,
 } from '@angular/forms';
-import { HelperService } from 'src/app/services/helper.service';
-import { WebService } from 'src/app/services/web.service';
+import { HelperService } from 'src/app/services/helper/helper.service';
+import { WebService } from 'src/app/services/web/web.service';
 import { User } from 'src/app/services/interfaces/interfaces';
 
 @Component({

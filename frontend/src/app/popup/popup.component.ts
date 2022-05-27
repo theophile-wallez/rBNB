@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { HelperService } from '../services/helper.service';
+import { HelperService } from '../services/helper/helper.service';
 
 @Component({
   selector: 'popup',

@@ -51,6 +51,8 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { ChatPageComponent } from './chat-page/chat-page.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     AdminComponent,
     AdminPropertiesComponent,
     AdminUsersComponent,
+    ChatPageComponent,
+    ChatListComponent,
   ],
   imports: [
     BrowserModule,

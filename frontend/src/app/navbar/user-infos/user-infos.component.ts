@@ -7,7 +7,7 @@ import {
 } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { HelperService } from 'src/app/services/helper.service';
+import { HelperService } from 'src/app/services/helper/helper.service';
 
 @Component({
   selector: 'user-infos',

@@ -7,9 +7,9 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { HelperService } from '../services/helper.service';
+import { HelperService } from '../services/helper/helper.service';
 import { User } from '../services/interfaces/interfaces';
-import { WebService } from '../services/web.service';
+import { WebService } from '../services/web/web.service';
 
 @Component({
   selector: 'user-profile',

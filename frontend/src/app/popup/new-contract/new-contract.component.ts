@@ -1,8 +1,8 @@
 import { PropertyRead } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Contract, Property } from 'src/app/services/interfaces/interfaces';
-import { HelperService } from '../../services/helper.service';
-import { WebService } from '../../services/web.service';
+import { HelperService } from '../../services/helper/helper.service';
+import { WebService } from '../../services/web/web.service';
 
 @Component({
   selector: 'new-contract',

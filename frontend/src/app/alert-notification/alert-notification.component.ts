@@ -1,7 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Alert } from 'src/app/services/interfaces/interfaces';
-import { HelperService } from '../services/helper.service';
+import { HelperService } from '../services/helper/helper.service';
 
 @Component({
   selector: 'alert-notification',
