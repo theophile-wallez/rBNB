@@ -34,6 +34,8 @@ export class ContractsComponent implements OnInit {
         if (user.contractsId && user.contractsId.length > 0) {
           this.getUserContracts(user.id);
         }
+      } else {
+        this.helper.changeRoute('/listing');
       }
     });
   }

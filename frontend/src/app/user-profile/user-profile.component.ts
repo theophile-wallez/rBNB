@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ValidationErrors,
-  FormGroup,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from '../services/helper/helper.service';
 import { User } from '../services/interfaces/interfaces';
 import { WebService } from '../services/web/web.service';
@@ -27,8 +20,12 @@ export class UserProfileComponent implements OnInit {
   user: User = {};
   ngOnInit(): void {
     this.helper.userObservable.subscribe((user: User) => {
-      this.user = user;
-      this.initUserForm();
+      if (user.id) {
+        this.user = user;
+        this.initUserForm();
+      } else {
+        this.helper.changeRoute('/listing');
+      }
     });
   }
 

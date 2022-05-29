@@ -17,7 +17,7 @@
       <div *ngIf="router.url === '/listing'" class="selected-span"></div>
     </div>
 
-    <div class="link" (click)="changeRoute('/dashboard')">
+    <div *ngIf="user.id" class="link" (click)="changeRoute('/dashboard')">
       <i
         class="fa-solid fa-gauge-high"
         [ngClass]="{ selected: router.url === '/dashboard' }"
@@ -32,7 +32,7 @@
       <div *ngIf="router.url === '/dashboard'" class="selected-span"></div>
     </div>
 
-    <div class="link" (click)="changeRoute('/contracts')">
+    <div *ngIf="user.id" class="link" (click)="changeRoute('/contracts')">
       <i
         class="fa-solid fa-file-contract"
         [ngClass]="{ selected: router.url === '/contracts' }"

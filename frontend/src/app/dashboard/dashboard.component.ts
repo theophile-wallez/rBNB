@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard/dashboard.service';
 import { HelperService } from '../services/helper/helper.service';
+import { User } from '../services/interfaces/interfaces';
 
 @Component({
   selector: 'dashboard',
@@ -13,5 +14,11 @@ export class DashboardComponent implements OnInit {
     public helper: HelperService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.helper.userBehaviorSubject.subscribe((user: User) => {
+      if (!user.id) {
+        this.helper.changeRoute('/listing');
+      }
+    });
+  }
 }
