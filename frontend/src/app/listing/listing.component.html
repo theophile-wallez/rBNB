@@ -24,9 +24,20 @@
     </div>
     <div class="content-container">
       <div class="title-container">
-        <div class="property-title">
-          {{ property.location?.number + " " + property.location?.street }}
+        <div class="title-and-ratin-container">
+          <div class="property-title">
+            {{ property.location?.number + " " + property.location?.street }}
+          </div>
+          <div class="rating-container">
+            <p-rating
+              [ngModel]="property.rating?.value"
+              [readonly]="true"
+              [stars]="5"
+              [cancel]="false"
+            ></p-rating>
+          </div>
         </div>
+
         <div class="location-container">
           <i class="fa-regular fa-map"></i>
           <div class="location">
@@ -94,14 +105,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="rating-container">
-      <p-rating
-        [ngModel]="property.rating?.value"
-        [readonly]="true"
-        [stars]="5"
-        [cancel]="false"
-      ></p-rating>
     </div>
   </div>
 </div>
