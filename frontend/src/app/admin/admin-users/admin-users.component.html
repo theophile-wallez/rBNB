@@ -12,7 +12,6 @@
           <th colspan="1">Last Name</th>
           <th colspan="1">Email</th>
           <th colspan="1">Properties</th>
-          <th colspan="1">Contracts</th>
         </tr>
       </thead>
       <tbody>
@@ -27,17 +26,8 @@
             {{ user.email }}
           </td>
           <td>
-            <!-- todo -->
+            <button (click)="onSelectUser(user)"></button>
           </td>
-          <td>
-            <!-- todo -->
-          </td>
-          <!-- <td>
-              <i
-                class="fa-solid fa-pen-to-square"
-                (click)="editProperty(property)"
-              ></i>
-            </td> -->
           <td>
             <!-- TODO -->
             <p-confirmPopup></p-confirmPopup>

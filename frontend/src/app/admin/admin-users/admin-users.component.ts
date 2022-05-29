@@ -4,6 +4,7 @@ import { WebService } from 'src/app/services/web/web.service';
 import { Property, User } from 'src/app/services/interfaces/interfaces';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
 import { ConfirmationService } from 'primeng/api';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'admin-users',
@@ -19,7 +20,8 @@ export class AdminUsersComponent implements OnInit {
     private helper: HelperService,
     private dashboardService: DashboardService,
     private webService: WebService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private adminService: AdminService
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +77,10 @@ export class AdminUsersComponent implements OnInit {
         'There has been an error when trying to delete the user.'
       );
     }
+  }
+
+  onSelectUser(owner: User) {
+    if (!owner.id) return;
+    this.adminService.onSelectUser(owner.id);
   }
 }
