@@ -10,7 +10,7 @@ import { WebService } from '../services/web/web.service';
 })
 export class ListingComponent implements OnInit {
   searchQuery: string = '';
-  placeholder: string = 'Search for company, provider, user etc.';
+  placeholder: string = 'Search a property by city or street name';
   properties: Property[] = [];
   filteredProperties: Property[] = [];
   selectedProperty!: Property;
@@ -63,11 +63,13 @@ export class ListingComponent implements OnInit {
   }
 
   getFilteredProperties() {
-    this.filteredProperties = this.properties.filter((property) =>
-      property.location?.street
+    this.filteredProperties = this.properties.filter((property) => {
+      let searchString: string =
+        property.location?.street + ' ' + property.location?.city;
+      return searchString
         .toLocaleLowerCase()
-        .includes(this.searchQuery.toLocaleLowerCase())
-    );
+        .includes(this.searchQuery.toLocaleLowerCase());
+    });
   }
 
   setSelectedProperty(selectedProperty: Property) {
