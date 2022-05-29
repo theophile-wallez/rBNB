@@ -12,6 +12,7 @@
           <th colspan="1">Last Name</th>
           <th colspan="1">Email</th>
           <th colspan="1">Properties</th>
+          <th colspan="1">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +27,7 @@
             {{ user.email }}
           </td>
           <td>
-            <button (click)="onSelectUser(user)"></button>
+            <i class="fa-solid fa-house" (click)="onSelectUser(user)"></i>
           </td>
           <td>
             <!-- TODO -->

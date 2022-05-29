@@ -82,5 +82,6 @@ export class AdminUsersComponent implements OnInit {
   onSelectUser(owner: User) {
     if (!owner.id) return;
     this.adminService.onSelectUser(owner.id);
+    window.scrollTo(0, 0);
   }
 }

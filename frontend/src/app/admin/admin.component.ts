@@ -7,6 +7,7 @@ import {
   User,
 } from 'src/app/services/interfaces/interfaces';
 import { DashboardService } from 'src/app/services/dashboard/dashboard.service';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'admin',
@@ -24,5 +25,11 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
   contracts: Contract[] = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.helper.userBehaviorSubject.subscribe((user: User) => {
+      if (!user.isAdmin) {
+        this.helper.changeRoute('/listing');
+      }
+    });
+  }
 }
