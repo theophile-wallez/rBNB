@@ -18,9 +18,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   messagesLength: number = 0;
   messageContent: string = '';
 
-  // userId = 'art';
-  // hostId = 'jack';
-  // contractId: string = '0';
   chatInfo: ChatInfos = {
     userId: '',
     otherUserId: '',
@@ -29,13 +26,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   @ViewChild('messageInput') messageInput!: ElementRef;
 
-  // mySubscription: Subscription;
+  mySubscription: Subscription;
 
   constructor(private chatService: ChatService) {
-    // this.mySubscription = interval(2000).subscribe((x) => {
-    //   console.log('refresh message');
-    //   this.getUsers();
-    // });
+    this.mySubscription = interval(2000).subscribe((x) => {
+      console.log('refresh message');
+      this.getUsers();
+    });
   }
   ngOnInit(): void {
     this.chatService.chatInfosBehaviorSubject.subscribe(
@@ -56,6 +53,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     );
   }
 
+  ngOnDestroy() {
+    this.mySubscription.unsubscribe();
+  }
+
   async getUsers() {
     console.log('this.chatInfo.contractId: ', this.chatInfo.contractId);
     let allMessages = await this.chatService.getAllData(
@@ -74,9 +75,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       );
       this.messagesLength = Object.keys(this.allMessages).length;
       // console.log(this.allMessages);
-      setTimeout(() => {
-        window.scrollTo(0, document.body.scrollHeight);
-      }, 50);
     }
   }
 
@@ -87,7 +85,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       this.chatInfo.otherUserId,
       message
     );
+    this.clearMessageInput();
     this.getUsers();
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 10);
   }
 
   submitOnEnter(event: any) {
@@ -95,7 +97,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       event.target.form.dispatchEvent(
         new Event('submit', { cancelable: true })
       );
-      event.preventDefault(); // Prevents the addition of a new line in the text field (not needed in a lot of cases)
+      event.preventDefault();
     }
+  }
+
+  clearMessageInput() {
+    this.messageInput.nativeElement.value = '';
   }
 }
