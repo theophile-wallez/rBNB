@@ -28,7 +28,7 @@ public class RBnbApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")
+                        .allowedOrigins("http://localhost:4200","https://rbnb-project.herokuapp.com")
                         .allowedMethods("GET", "POST","PUT", "DELETE");
             }
         };
@@ -46,7 +46,7 @@ public class RBnbApplication {
 
     private ApiInfo apiDetails() {
         return new ApiInfoBuilder().title("Airbnb API").version("1.0.0")
-                .description("Swagger for the Airbnb API")
+                .description("Airbnb API's Swagger")
                 .build();
     }
 }
