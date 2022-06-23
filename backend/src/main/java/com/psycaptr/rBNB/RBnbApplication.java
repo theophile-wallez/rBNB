@@ -46,7 +46,7 @@ public class RBnbApplication {
 
     private ApiInfo apiDetails() {
         return new ApiInfoBuilder().title("Airbnb API").version("1.0.0")
-                .description("Swagger for the Airbnb API")
+                .description("Airbnb API's Swagger")
                 .build();
     }
 }
