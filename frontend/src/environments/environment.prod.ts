@@ -11,5 +11,6 @@ export const environment = {
     messagingSenderId: '1082054594138',
   },
   production: true,
-  URL: 'https://rbnb-backend.herokuapp.com/api',
+  // URL: 'https://rbnb-backend.herokuapp.com/api',
+  URL: 'https://rbnb-backend.up.railway.app/api',
 };
