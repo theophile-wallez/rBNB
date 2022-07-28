@@ -23,5 +23,28 @@ ng serve -o
 The backend is made with **Spring**. To run the backend, open the `backend` folder in your favorite IDE, install the **Maven** dependencies and run the program.
 
 
+## About the project
+### Listing
+This *listing* shows all current properties available on the market. A search bar can sort properties by name, city or country. <br/>
+A *contract* popup opens when a property is selected. It allows the user to rent the property by selecting the wished dates. <br/> <br/>
+ <img width="1426" alt="Listing" src="https://user-images.githubusercontent.com/66305625/181637378-34d2d5e7-4a25-4a63-9a81-17a4e32f006d.png">
+***
+ 
+### Dashboard
+ 
+The dashboard allows the user to add, edit or delete its properties. As well as list, or unlist a property on the global market using a toggle. <br/>
+ 
+ <img width="1426" alt="Dashboard" src="https://user-images.githubusercontent.com/66305625/181638423-6caa1fd7-8910-4fe6-abad-78e2281f36ae.png">
+***
+ 
+ ### Contracts
+ The *contract* page allows the user to manage its incoming or current contract. Each contract is also linked to a message room.  <br/>
+ 
 
+<img width="1428" alt="Contracts" src="https://user-images.githubusercontent.com/66305625/181639562-c84b519f-2bf0-479e-a5a6-f038ee80615d.png">
+***
+ 
+ ### Message room
+ The *message* room allows the owner and the tenant to have exchange informations about the contract. It is made with Firebase.<br/>
 
+<img width="1426" alt="Message" src="https://user-images.githubusercontent.com/66305625/181639820-805aa15c-ab42-4bcc-8787-80148eac1978.png">
