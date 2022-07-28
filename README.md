@@ -8,13 +8,13 @@
 ### <img src="https://user-images.githubusercontent.com/66305625/181633397-8188e71d-2db2-471f-bb81-14aadf90745d.svg" width="15" height="15"> Frontend
 The frontend of the web application is made with **Angular**. To open the website locally, you need to install <a href="https://nodejs.org/en/" >Node.js<a/> and the <a href="https://angular.io/cli" >Angular CLI<a/>.
 Then, in your terminal, open the `frontend` folder and do the following command: <br/><br/>
-*To install the required Node modules:*
+*install the required Node modules:*
 ```sh
 npm i
 ```
 <br/>
 
-*To open the website in your favorite browser:*
+*open the website in your favorite browser:*
 ```sh
 ng serve -o
 ```
