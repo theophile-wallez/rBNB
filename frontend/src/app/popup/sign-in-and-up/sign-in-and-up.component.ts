@@ -69,6 +69,25 @@ export class SignInAndUpComponent implements OnInit {
     );
   }
 
+  async signInAsAGuest() {
+    let guestInfos = {
+      email: 'john.doe@email.com',
+      password: '7B@#2C6eh%5%',
+    };
+    let response = await this.webService.postSignInForms(guestInfos);
+    if (response.ok) {
+      let user = await response.json();
+      this.helper.setCurrentUser(user);
+      this.helper.closePopup();
+
+      this.helper.newNotification(
+        'Hello ' + user.firstName + ", you've successfully logged in!"
+      );
+    } else {
+      this.helper.newError(await response.text());
+    }
+  }
+
   async signInSubmit() {
     if (this.signIn.valid) {
       let response = await this.webService.postSignInForms(this.signIn.value);
