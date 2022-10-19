@@ -55,6 +55,6 @@ The dashboard allows the user to add, edit or delete its properties. As well as 
  ***
  
  ### Message room
- The *message* room allows the owner and the tenant to have exchange informations about the contract. It is made with Firebase.<br/>
+ The *message* room allows the owner and the tenant to exchange informations about the contract. It is made with Firebase.<br/>
 
 <img width="1426" alt="Message" src="https://user-images.githubusercontent.com/66305625/181639820-805aa15c-ab42-4bcc-8787-80148eac1978.png">
