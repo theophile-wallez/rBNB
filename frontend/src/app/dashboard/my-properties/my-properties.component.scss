@@ -72,3 +72,20 @@
     }
   }
 }
+
+.empty-container {
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  background-color: #e7e5ff;
+  color: $color-font-mid-plus;
+  font-weight: 600;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  background-color: $color-background;
+  span {
+    color: $color-primary;
+    cursor: pointer;
+  }
+}

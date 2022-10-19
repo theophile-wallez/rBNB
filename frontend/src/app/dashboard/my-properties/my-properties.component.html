@@ -4,7 +4,13 @@
     <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div>
   </div>
 
-  <div class="my-property-container" *ngIf="properties !== []">
+  <div class="empty-container" *ngIf="properties.length === 0">
+    <div class="message">
+      You don't have any listed properties yet, add one to get started!
+    </div>
+    <!-- <div class="btn" (click)="scrollToPropertyForm()">Add a new property</div> -->
+  </div>
+  <div class="my-property-container" *ngIf="properties.length > 0">
     <table>
       <thead>
         <tr>
