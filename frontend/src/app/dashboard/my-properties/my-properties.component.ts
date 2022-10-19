@@ -64,11 +64,13 @@ export class MyPropertiesComponent implements OnInit {
 
   async getPropertiesByUserId(userId: string) {
     let response = await this.webService.getPropertiesByUserId(userId);
-    if (response.ok) {
-      this.properties = await response.json();
-      return;
-    }
-    this.helper.newError("Sorry, your properties couln't be retrieved.");
+    try {
+      if (response.ok) {
+        this.properties = await response.json();
+        return;
+      }
+      this.helper.newError("Sorry, your properties couldn't be retrieved.");
+    } catch (error) {}
   }
 
   scrollToPropertyForm() {
